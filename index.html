@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reverential — Audio, Video, Lighting & Acoustics Integration</title>
+<meta name="description" content="Precision audiovisual and acoustic systems for churches, auditoriums and gathering spaces. Designed around measurement. Proven before handover.">
+<link rel="canonical" href="https://www.reverentialav.in/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0B0B0B;
+  --gold: #C6A13A;
+  --gold-text: #856A20;
+  --gold-light: #D6B355;
+  --ww: #F1F0EC;
+  --surface: #E9E8E4;
+  --hairline: #DFDEDA;
+  --body: #4A4A4A;
+  --muted: #6B6A67;
+  --slate: #4F6F9C;
+}
+
+* { box-sizing: border-box; }
+*::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ww);
+  color: var(--body);
+  font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  font-size: clamp(15px, 14.5px + 0.12vw, 16.5px);
+  line-height: 1.66;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  margin: 0;
+  color: var(--black);
+}
+
+p { margin: 0 0 0.9rem; }
+a { color: var(--gold-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img, svg { max-width: 100%; display: block; }
+
+.rev-wrap {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: clamp(1.15rem, 4vw, 3rem);
+}
+
+.rev-band {
+  padding-block: clamp(2.75rem, 6vw, 5rem);
+}
+
+/* Header */
+header {
+  background: var(--black);
+  color: var(--ww);
+  border-bottom: 1px solid #1a1a1a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header .rev-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 0.75rem;
+  gap: 1.5rem;
+}
+
+header img {
+  height: clamp(28px, 2.2vw, 36px);
+  width: auto;
+}
+
+header nav {
+  display: flex;
+  gap: clamp(1rem, 2vw, 2rem);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+header a {
+  color: var(--gold-light);
+  display: block;
+}
+
+/* Hero */
+.hero { background: var(--black); color: var(--ww); }
+.hero h1 {
+  font-size: clamp(1.8rem, 1.2rem + 2.5vw, 3.2rem);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  color: var(--ww);
+}
+
+.hero-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 1rem;
+}
+
+.hero-lede {
+  font-family: 'Spectral', serif;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+  line-height: 1.55;
+  color: #B4B0A6;
+  max-width: 56ch;
+  margin-bottom: 1.5rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  align-items: center;
+}
+
+@media (min-width: 1000px) {
+  .hero-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+}
+
+/* Sections */
+section {
+  border-top: 1px solid var(--hairline);
+}
+
+section.dark {
+  background: var(--black);
+  color: var(--ww);
+  border-top-color: #292927;
+}
+
+section h2 {
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2rem);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+section.dark h2 { color: var(--ww); }
+
+.lede {
+  font-family: 'Spectral', serif;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+  line-height: 1.55;
+  max-width: 56ch;
+  margin-bottom: 1.5rem;
+}
+
+section.dark .lede { color: #B4B0A6; }
+
+/* Disciplines grid */
+.disciplines {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--hairline);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.disciplines > div {
+  background: var(--ww);
+  padding: clamp(1.2rem, 2.2vw, 1.6rem);
+  border-right: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.disciplines > div:nth-child(2n) { border-right: 0; }
+.disciplines > div:nth-child(n+3) { border-bottom: 0; }
+
+@media (min-width: 900px) {
+  .disciplines { grid-template-columns: repeat(4, 1fr); }
+  .disciplines > div { border-bottom: 0; border-right: 1px solid var(--hairline); }
+  .disciplines > div:last-child { border-right: 0; }
+}
+
+.disciplines h3 {
+  font-family: 'Spectral', serif;
+  font-size: 1.08rem;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 0.25rem;
+}
+
+.disciplines p {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 26ch;
+}
+
+/* Two-column explainer */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  margin-top: 2rem;
+}
+
+.two-col > div {
+  background: var(--ww);
+  padding: clamp(1.2rem, 2.2vw, 1.6rem);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.two-col > div:nth-child(n+2) { border-bottom: 0; }
+
+@media (min-width: 700px) {
+  .two-col { grid-template-columns: 1fr 1fr; }
+  .two-col > div { border-bottom: 0; border-right: 1px solid var(--hairline); }
+  .two-col > div:last-child { border-right: 0; }
+}
+
+.two-col h3 {
+  font-family: 'Spectral', serif;
+  font-size: 1.12rem;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 0.375rem;
+}
+
+.two-col p {
+  font-size: 15px;
+  color: var(--body);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 44ch;
+}
+
+/* Sector tabs */
+.sector-tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+  margin-top: 2rem;
+}
+
+@media (max-width: 420px) {
+  .sector-tabs { grid-template-columns: 1fr 1fr; }
+}
+
+.tab-btn {
+  padding: 10px 12px;
+  border: 1px solid var(--hairline);
+  background: var(--ww);
+  color: var(--body);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.18s ease;
+}
+
+.tab-btn:hover {
+  border-color: var(--gold);
+  background: var(--surface);
+}
+
+.tab-btn.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #120D03;
+}
+
+/* Sector panel */
+.sector-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  background: var(--ww);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+@media (min-width: 840px) {
+  .sector-panel { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+}
+
+.sector-panel-l {
+  padding: clamp(1.4rem, 2.6vw, 2rem);
+  border-bottom: 1px solid var(--hairline);
+}
+
+@media (min-width: 840px) {
+  .sector-panel-l { border-bottom: 0; border-right: 1px solid var(--hairline); }
+}
+
+.sector-panel-r {
+  padding: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.sector-line {
+  font-family: 'Spectral', serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--black);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.sector-pains {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sector-pains li {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--hairline);
+  font-size: 15px;
+  color: var(--body);
+  line-height: 1.5;
+}
+
+.sector-pains li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.sector-avl {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hairline);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+/* Method accordion */
+.method-items {
+  margin-top: 2rem;
+}
+
+.method-item {
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  background: var(--ww);
+  overflow: hidden;
+}
+
+.method-head {
+  padding: clamp(1.2rem, 2.2vw, 1.6rem);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--ww);
+  border: none;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--body);
+  width: 100%;
+  text-align: left;
+  transition: all 0.18s ease;
+}
+
+.method-head:hover {
+  background: var(--surface);
+}
+
+.method-head.open {
+  background: var(--gold);
+  color: #120D03;
+}
+
+.method-n {
+  font-family: 'Spectral', serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 2.2rem;
+}
+
+.method-head.open .method-n { color: #120D03; }
+
+.method-title {
+  flex: 1;
+}
+
+.method-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.method-body.open {
+  max-height: 500px;
+}
+
+.method-content {
+  padding: 0 clamp(1.2rem, 2.2vw, 1.6rem) clamp(1.2rem, 2.2vw, 1.6rem);
+}
+
+.you-receive {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  margin-bottom: 0.5rem;
+}
+
+.method-content p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--body);
+}
+
+/* Credentials */
+.creds-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin-top: 2rem;
+}
+
+@media (min-width: 760px) {
+  .creds-grid { grid-template-columns: minmax(0, 16rem) minmax(0, 1fr); gap: 6px 2.4rem; }
+}
+
+.cred-item {
+  display: grid;
+  grid-template-columns: subgrid;
+  border-bottom: 1px solid var(--hairline);
+  padding: 1rem 0;
+  gap: 6px 2.4rem;
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 760px) {
+  .cred-item {
+    padding: 1.2rem 0;
+  }
+}
+
+.cred-title {
+  font-weight: 600;
+  color: var(--black);
+  font-size: 15px;
+}
+
+.cred-desc {
+  font-size: 15px;
+  color: var(--body);
+  line-height: 1.65;
+  max-width: 58ch;
+}
+
+/* FAQ */
+.faq-items {
+  margin-top: 2rem;
+}
+
+.faq-item {
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  margin-bottom: 0.8rem;
+  background: var(--ww);
+  overflow: hidden;
+}
+
+.faq-q {
+  padding: clamp(1.2rem, 2.2vw, 1.6rem);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--ww);
+  border: none;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--body);
+  width: 100%;
+  text-align: left;
+  transition: all 0.18s ease;
+}
+
+.faq-q:hover { background: var(--surface); }
+.faq-q.open { background: var(--gold); color: #120D03; }
+
+.faq-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-body.open { max-height: 600px; }
+
+.faq-content {
+  padding: 0 clamp(1.2rem, 2.2vw, 1.6rem) clamp(1.2rem, 2.2vw, 1.6rem);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--body);
+}
+
+.faq-content p {
+  margin-bottom: 0.6rem;
+}
+
+.faq-content p:last-child { margin-bottom: 0; }
+
+/* Booking section */
+.book-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.2rem, 4vw, 3rem);
+  margin-top: 2rem;
+}
+
+@media (min-width: 960px) {
+  .book-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 520px) {
+  .form-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.form-full { grid-column: 1 / -1; }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--body);
+  margin-bottom: 4px;
+  display: none;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 11px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  background: var(--ww);
+  color: var(--body);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  transition: all 0.18s ease;
+}
+
+.form-group input::placeholder,
+.form-group select,
+.form-group textarea::placeholder {
+  color: var(--muted);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(198, 161, 58, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.form-submit {
+  padding: 12px 24px;
+  background: var(--black);
+  color: var(--ww);
+  border: 1px solid var(--black);
+  border-radius: 2px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: center;
+}
+
+.form-submit:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #120D03;
+}
+
+/* CTA block */
+.cta-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cta-side h3 {
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+  margin-bottom: 0.6rem;
+}
+
+.cta-side p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  max-width: 60ch;
+}
+
+.cta-links {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cta-links a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: var(--gold-text);
+  display: inline-block;
+}
+
+/* Footer */
+footer {
+  background: var(--black);
+  color: var(--ww);
+  border-top: 1px solid #292927;
+  margin-top: 2.4rem;
+}
+
+footer .rev-wrap {
+  padding-block: clamp(2rem, 4vw, 3rem);
+}
+
+.foot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: clamp(1.5rem, 3vw, 1.9rem);
+}
+
+.foot-col h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold-light);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.foot-col p, .foot-col a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.foot-col a { color: var(--gold-light); }
+
+.foot-col a:hover { text-decoration: underline; }
+
+.foot-note {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #292927;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* Buttons */
+button, .btn {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 11px 22px;
+  border-radius: 2px;
+  border: 1px solid;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+button.primary, .btn.primary {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--ww);
+}
+
+button.primary:hover, .btn.primary:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #120D03;
+}
+
+button.secondary, .btn.secondary {
+  background: transparent;
+  border-color: var(--black);
+  color: var(--black);
+}
+
+button.secondary:hover, .btn.secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* Print styles */
+@media print {
+  body { background: #fff; font-size: 10.5pt; }
+  header { display: none; }
+  section { break-inside: avoid; page-break-inside: avoid; }
+  .method-body, .faq-body { max-height: none; }
+  .method-body.open, .faq-body.open { max-height: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="top">
+  <div class="rev-wrap">
+    <img src="data:image/png;base64,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" alt="Reverential — Audio, Video, Lighting & Acoustics">
+    <nav>
+      <a href="#disciplines">Disciplines</a>
+      <a href="#sectors">Spaces</a>
+      <a href="#method">Method</a>
+      <a href="#faq">FAQ</a>
+      <a href="#book">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="dark hero" id="top">
+  <div class="rev-wrap rev-band">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-eyebrow">Reverential™ — Audio, Video, Lighting & Acoustics</p>
+        <h1>They can hear the sound. They can't understand the words.</h1>
+        <p class="hero-lede">We design and deploy audiovisual, acoustic and lighting systems. We measure the space with calibrated instruments to find out what is actually going wrong, engineer the solution that fixes it, and prove the finished system works before we hand it over.</p>
+        <div style="margin-top: 1.5rem;">
+          <a href="#book" class="btn primary">Start with a free consultation</a>
+        </div>
+      </div>
+      <div style="min-height: 300px; background: rgba(255,255,255,0.05); border-radius: 2px; display: flex; align-items: center; justify-content: center;">
+        <!-- RT60 Chart placeholder - implement as needed -->
+        <p style="color: #B4B0A6; text-align: center;">Decay Curve Chart Area</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Disciplines -->
+<section id="disciplines">
+  <div class="rev-wrap rev-band">
+    <h2>Audio, video, lighting and acoustics, as one system.</h2>
+    <p class="lede">We specialise in all four. They are designed together and delivered by one team, so the picture, the light and the sound answer to the same room rather than to four separate contracts.</p>
+    <div class="disciplines">
+      <div>
+        <h3>Audio</h3>
+        <p>Design, installation and measured commissioning.</p>
+      </div>
+      <div>
+        <h3>Video</h3>
+        <p>Displays, projection, camera and streaming.</p>
+      </div>
+      <div>
+        <h3>Lighting</h3>
+        <p>Stage and architectural, with our production partners.</p>
+      </div>
+      <div>
+        <h3>Acoustics</h3>
+        <p>Measurement, treatment and noise control.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Direct vs Reflected -->
+<section id="direct-reflected">
+  <div class="rev-wrap rev-band">
+    <h2>Two sounds reach every listener.</h2>
+    <p class="lede">Nearly every speech problem in a room comes down to the balance between them.</p>
+    <div class="two-col">
+      <div>
+        <h3>Direct sound</h3>
+        <p>Travels straight from the loudspeaker to the ear. It carries the words, and it weakens the further back you sit.</p>
+      </div>
+      <div>
+        <h3>Reflected sound</h3>
+        <p>The same sound returning off walls, ceiling and floor as hundreds of overlapping copies, arriving slightly late. It stays strong everywhere in the room.</p>
+      </div>
+    </div>
+    <p style="margin-top: 1.5rem;">At the back, the direct sound has faded but the reflections have not, so one word smears into the next. Turning up the volume raises both together. The fix is in the room and in the system design.</p>
+  </div>
+</section>
+
+<!-- Failure Modes -->
+<section id="failure-modes">
+  <div class="rev-wrap rev-band">
+    <h2>The problems are predictable.</h2>
+    <p class="lede">They appear in nearly every room the moment a system is expected to work.</p>
+    <ul style="list-style: none; padding: 0; margin: 1.5rem 0 0;">
+      <li style="padding: 0.85rem 0; border-bottom: 1px solid var(--hairline); display: flex; gap: 0.75rem;">
+        <span style="flex-shrink: 0; color: var(--gold); font-weight: 600;">•</span>
+        <span style="color: var(--body);">The system only works when it is turned up enough that feedback becomes a problem</span>
+      </li>
+      <li style="padding: 0.85rem 0; border-bottom: 1px solid var(--hairline); display: flex; gap: 0.75rem;">
+        <span style="flex-shrink: 0; color: var(--gold); font-weight: 600;">•</span>
+        <span style="color: var(--body);">Speech is clear at the front of the room but becomes indistinct at the back, and the operator is blamed</span>
+      </li>
+      <li style="padding: 0.85rem 0; border-bottom: 1px solid var(--hairline); display: flex; gap: 0.75rem;">
+        <span style="flex-shrink: 0; color: var(--gold); font-weight: 600;">•</span>
+        <span style="color: var(--body);">The room rings at a particular frequency no amount of equipment will fix</span>
+      </li>
+      <li style="padding: 0.85rem 0; display: flex; gap: 0.75rem;">
+        <span style="flex-shrink: 0; color: var(--gold); font-weight: 600;">•</span>
+        <span style="color: var(--body);">The system only works when the one person trained on it is there</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Sectors / Spaces -->
+<section id="sectors">
+  <div class="rev-wrap rev-band">
+    <h2>Spaces we work in.</h2>
+    <p class="lede">The problems are similar across building types. The solutions account for the differences.</p>
+
+    <div class="sector-tabs" id="sector-tabs">
+      <button class="tab-btn active" data-sector="0">Churches</button>
+      <button class="tab-btn" data-sector="1">Auditoriums</button>
+      <button class="tab-btn" data-sector="2">Education</button>
+      <button class="tab-btn" data-sector="3">Corporate</button>
+      <button class="tab-btn" data-sector="4">Hospitality</button>
+      <button class="tab-btn" data-sector="5">Studios</button>
+      <button class="tab-btn" data-sector="6">Residential</button>
+    </div>
+
+    <div class="sector-panel" id="sector-panel">
+      <div class="sector-panel-l">
+        <h3 class="sector-line" id="sector-title">From full contemporary worship bands to cathedral organs and hymns, the words have to reach the back row.</h3>
+      </div>
+      <div class="sector-panel-r">
+        <p style="text-transform: uppercase; font-size: 10px; color: var(--gold-text); letter-spacing: 0.1em; margin-bottom: 0.75rem; font-family: 'IBM Plex Mono', monospace;">Key challenges</p>
+        <ul class="sector-pains" id="sector-pains">
+          <li>The band is loud but the vocals get lost underneath it</li>
+          <li>Clear in the front rows, echo at the back, whatever the equipment cost</li>
+          <li>Stone walls and a high ceiling ring for seconds, which suits the organ and defeats the sermon</li>
+          <li>The worship team cannot hear themselves on stage</li>
+          <li>Feedback at the pulpit that nobody can permanently cure</li>
+          <li>The production room grew piece by piece, so streaming and presentation fail mid service</li>
+          <li>The system only works when one particular volunteer is on the desk</li>
+        </ul>
+        <p class="sector-avl" id="sector-avl">Also delivered here: camera, switching and streaming video, presentation and lyric playback for the tech team, and stage lighting that suits a band set and a traditional service equally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method -->
+<section id="method">
+  <div class="rev-wrap rev-band">
+    <h2>How the work is sequenced.</h2>
+    <p class="lede">Each phase builds on the one before. The outcome is documentation and a system that a capable person can run without mystery.</p>
+
+    <div class="method-items">
+      <div class="method-item">
+        <button class="method-head" data-method="0">
+          <span class="method-n">01</span>
+          <span class="method-title">Measured assessment</span>
+        </button>
+        <div class="method-body">
+          <div class="method-content">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--gold-text); letter-spacing: 0.1em; margin-bottom: 0.5rem;">You receive</p>
+            <p>A written site survey delivered by the engineer who took the measurements, with photographs, a room schematic and a clear description of what is acoustically or operationally wrong.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-item">
+        <button class="method-head" data-method="1">
+          <span class="method-n">02</span>
+          <span class="method-title">Acoustic simulation</span>
+        </button>
+        <div class="method-body">
+          <div class="method-content">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--gold-text); letter-spacing: 0.1em; margin-bottom: 0.5rem;">You receive</p>
+            <p>A model of the space showing reverberation time, predicted system response and the effect of proposed acoustic treatments.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-item">
+        <button class="method-head" data-method="2">
+          <span class="method-n">03</span>
+          <span class="method-title">System design</span>
+        </button>
+        <div class="method-body">
+          <div class="method-content">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--gold-text); letter-spacing: 0.1em; margin-bottom: 0.5rem;">You receive</p>
+            <p>A block diagram showing every component, its connection, the calculated signal flow, and the loading on every amplifier and processor.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-item">
+        <button class="method-head" data-method="3">
+          <span class="method-n">04</span>
+          <span class="method-title">Physical integration</span>
+        </button>
+        <div class="method-body">
+          <div class="method-content">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--gold-text); letter-spacing: 0.1em; margin-bottom: 0.5rem;">You receive</p>
+            <p>Rigging to load-rated standards with written load calculations. All cable runs documented and labelled. All amplifier locations and heat-load analysis calculated.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-item">
+        <button class="method-head" data-method="4">
+          <span class="method-n">05</span>
+          <span class="method-title">Tuning and verification</span>
+        </button>
+        <div class="method-body">
+          <div class="method-content">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--gold-text); letter-spacing: 0.1em; margin-bottom: 0.5rem;">You receive</p>
+            <p>Real-time measurements from the positions your audience occupies. A comparison of actual versus predicted performance. Any gap smaller than the prediction is documented and signed off.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-item">
+        <button class="method-head" data-method="5">
+          <span class="method-n">06</span>
+          <span class="method-title">Documentation and training</span>
+        </button>
+        <div class="method-body">
+          <div class="method-content">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; color: var(--gold-text); letter-spacing: 0.1em; margin-bottom: 0.5rem;">You receive</p>
+            <p>A complete system manual showing signal flow, gain structure, every processing step, and the reasoning behind it. Written hand-over training with the team that will operate the system daily.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Credentials -->
+<section id="credentials">
+  <div class="rev-wrap rev-band">
+    <h2>Who is doing the work.</h2>
+    <p class="lede">Experience earned on live sound systems and delivered through permanent installations.</p>
+    
+    <p style="margin-top: 2rem;">Before founding Reverential, that expertise was earned on large scale live sound systems across three countries. It ranges from the Chennai club and band circuit, intimate acoustic sessions and institutional annual day productions, through multi-tier stadium audio for a regional cricket league in the UAE, brand launches staged at a skydive drop zone, in open desert and at a waterfront island development, and production audio in five star and above hotel properties, to a four acre open air entertainment zone in Saudi Arabia running a 250 tower distributed loudspeaker system over Dante and RedNet, and principal audio for a high profile international economic forum. A live sound system engineer walks into an unfamiliar room, measures it, aligns the system to it and makes it work before doors open. A permanent installation asks for that same judgement, held to a standard that has to last a decade and be run by people who were not there when it was built.</p>
+
+    <div class="creds-grid">
+      <div class="cred-item">
+        <span class="cred-title">Smaart v9</span>
+        <span class="cred-desc">Rational Acoustics certified. Real-time measurement and system analysis.</span>
+      </div>
+      <div class="cred-item">
+        <span class="cred-title">Diploma in Audio Engineering</span>
+        <span class="cred-desc">AAT College Chennai, formerly SAE.</span>
+      </div>
+      <div class="cred-item">
+        <span class="cred-title">Architectural Acoustics</span>
+        <span class="cred-desc">SWAYAM/NPTEL, in progress 2026.</span>
+      </div>
+      <div class="cred-item">
+        <span class="cred-title">CTS</span>
+        <span class="cred-desc">AVIXA certified, in progress November 2026.</span>
+      </div>
+      <div class="cred-item">
+        <span class="cred-title">Networking</span>
+        <span class="cred-desc">Dante Level 2, NETGEAR AV, Q-SYS Architect.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="rev-wrap rev-band">
+    <h2>Questions we are asked.</h2>
+    <p class="lede">The answers that matter most come first.</p>
+
+    <div class="faq-items">
+      <div class="faq-item">
+        <button class="faq-q" data-faq="0">
+          <span class="faq-icon">⊕</span>
+          <span>How do we start, and what does it cost?</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-content">
+            <p>Start with a free twenty minute call. During the call we ask about your space, your audience size, what you are trying to fix and what you have tried before.</p>
+            <p>If it makes sense to go further, a site survey costs ₹2,000+GST for the discovery call outcome. A full measured site survey is ₹6,000 for the first ten clients (normally ₹8,000), adjusted in full against any project that follows. Travel and stay outside Chennai and Bengaluru is additional.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" data-faq="1">
+          <span class="faq-icon">⊕</span>
+          <span>What will a full project cost?</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-content">
+            <p>Cost depends entirely on room size, what is to be solved, and the standard of equipment selected. A small to medium auditorium usually starts at ₹35 lakhs for a complete system that has been measured and tuned. Complex buildings, high-frequency noise treatment, and multiple zones cost more. We deliver a fixed-price proposal with the site survey.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" data-faq="2">
+          <span class="faq-icon">⊕</span>
+          <span>We have a full band. Do you understand contemporary worship?</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-content">
+            <p>We understand the specific problems it creates. A band on stage generates a high sound pressure level that reflects off walls and masking the vocals. The solution is not to make the microphone louder; it is in delay system design, time alignment and low frequency management so that clarity at the back equals clarity at the front.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" data-faq="3">
+          <span class="faq-icon">⊕</span>
+          <span>Do you handle video and lighting as well as sound?</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-content">
+            <p>Yes. Displays, projection, cameras, streaming, lighting control and stage lighting are all delivered as part of a single integrated system. We work with production partners for lighting design, but the audio, video and control all answer to the same system plan.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" data-faq="4">
+          <span class="faq-icon">⊕</span>
+          <span>We already have a tech team. Are you replacing them?</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-content">
+            <p>No. We design and install a system that they can confidently operate without mystery. Part of the project cost is training your team and delivering documentation that makes the system repeatable whether the original operator is present or not.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" data-faq="5">
+          <span class="faq-icon">⊕</span>
+          <span>Where do you work?</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-content">
+            <p>Currently based in Chennai and Bengaluru. We regularly work across Tamil Nadu and Karnataka, with clients in Coimbatore, Trichy, Madurai, and the Kanniyakumari district. We also service projects in Hyderabad and regularly consult across the Gulf region. For distant projects we can work with your local contractors on installation and commissioning supervision.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Booking / Contact -->
+<section class="dark" id="book">
+  <div class="rev-wrap rev-band">
+    <h2 style="color: var(--ww);">Start with a free consultation.</h2>
+    <p class="lede">Twenty minutes, no obligation. We will ask about your space and what you are trying to solve.</p>
+
+    <div class="book-grid">
+      <div>
+        <form class="form-grid" id="contact-form">
+          <div class="form-group">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="organisation">Organisation</label>
+            <input type="text" id="organisation" name="organisation" placeholder="Organisation or place of worship" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+91 ...">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="space">Type of space</label>
+            <select id="space" name="space" required>
+              <option value="">Select...</option>
+              <option value="churches">Churches</option>
+              <option value="auditoriums">Auditoriums</option>
+              <option value="education">Education</option>
+              <option value="corporate">Corporate</option>
+              <option value="hospitality">Hospitality</option>
+              <option value="studios">Studios</option>
+              <option value="residential">Residential</option>
+            </select>
+          </div>
+
+          <div class="form-group form-full">
+            <label for="message">Tell us about your space</label>
+            <textarea id="message" name="message" placeholder="Tell us about your space and what you're trying to solve"></textarea>
+          </div>
+
+          <div class="form-group form-full">
+            <label for="checklist-email">Where should we send the 12-point checklist?</label>
+            <input type="email" id="checklist-email" name="checklist-email" placeholder="Where should we send the 12-point checklist?">
+          </div>
+
+          <button type="submit" class="form-submit form-full">Send</button>
+        </form>
+      </div>
+
+      <div class="cta-side">
+        <h3>Can't talk now?</h3>
+        <p>We also offer quick responses on WhatsApp and email.</p>
+        <div class="cta-links">
+          <a href="https://wa.me/919962232223">WhatsApp: +91 99622 32223</a>
+          <a href="tel:+919962232223">Call: +91 99622 32223</a>
+          <a href="mailto:hello@reverentialav.in">Email: hello@reverentialav.in</a>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 13px; color: #B4B0A6;">Or download the <a href="https://www.reverentialav.in/reverential-sound-check.html" style="color: var(--gold-light);">12-point sound system check</a> to run before you call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="rev-wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h4>Company</h4>
+        <p><a href="https://www.reverentialav.in">Reverential AV Integration</a></p>
+        <p>Private Limited</p>
+        <p>Chennai & Bengaluru</p>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <p><a href="mailto:hello@reverentialav.in">hello@reverentialav.in</a></p>
+        <p><a href="https://wa.me/919962232223">+91 99622 32223</a></p>
+        <p><a href="https://www.reverentialav.in">www.reverentialav.in</a></p>
+      </div>
+      <div class="foot-col">
+        <h4>Service areas</h4>
+        <p>Chennai, Bengaluru</p>
+        <p>Tamil Nadu, Karnataka</p>
+        <p>Hyderabad & Gulf</p>
+      </div>
+      <div class="foot-col">
+        <h4>Disciplines</h4>
+        <p>Audio Engineering</p>
+        <p>Video & Streaming</p>
+        <p>Lighting Control</p>
+        <p>Acoustics</p>
+      </div>
+    </div>
+
+    <div class="foot-note">
+      <p>Reverential AV Integration Private Limited | <a href="https://www.reverentialav.in">www.reverentialav.in</a> | <a href="mailto:hello@reverentialav.in">hello@reverentialav.in</a> | +91 99622 32223</p>
+      <p style="margin-top: 0.8rem;">REVERENTIAL and REVERENTIAL AV are trade marks of Reverential AV Integration Private Limited. Trade mark applications pending in India.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Sector tabs
+document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // Update panel content based on index
+    console.log('Sector tab clicked:', idx);
+  });
+});
+
+// Method accordion
+document.querySelectorAll('.method-head').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const body = this.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.method-body').forEach(b => {
+      b.classList.remove('open');
+    });
+    document.querySelectorAll('.method-head').forEach(b => {
+      b.classList.remove('open');
+    });
+    if (!isOpen) {
+      body.classList.add('open');
+      this.classList.add('open');
+    }
+  });
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const body = this.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.faq-body').forEach(b => {
+      b.classList.remove('open');
+    });
+    document.querySelectorAll('.faq-q').forEach(b => {
+      b.classList.remove('open');
+    });
+    if (!isOpen) {
+      body.classList.add('open');
+      this.classList.add('open');
+    }
+  });
+});
+
+// Form submission
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const accessKey = '06c67d2a-e95e-4b5c-ae30-6a26c28491a4';
+  if (accessKey.includes('FILL')) {
+    alert('Form is not yet configured. Please check back shortly.');
+    return;
+  }
+  // Form submission to Web3Forms would happen here
+  console.log('Form submitted');
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
