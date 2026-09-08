@@ -1,0 +1,156 @@
+================================================================================
+REVERENTIAL LANDING PAGE — WHAT TO DO NOW
+================================================================================
+
+You have:
+✓ index.html       — Production landing page, fully self-contained, 51 KB
+✓ README.md        — Setup and editing instructions
+✓ .gitignore       — Git ignore rules
+✓ DEPLOYMENT_GUIDE — Step-by-step Cloudflare + Spaceship walkthrough
+
+================================================================================
+IMMEDIATE ACTIONS (next 15 minutes)
+================================================================================
+
+1. CREATE GITHUB ACCOUNT (if you don't have one)
+   → https://github.com/sign-up
+
+2. CREATE GITHUB REPOSITORY
+   → Repository name: reverential-landing
+   → Visibility: Public
+   → Do NOT initialize with README
+
+3. PUSH FILES TO GITHUB
+   Follow the commands in README.md section "Editing Content"
+
+4. SIGN UP FOR WEB3FORMS (form submission)
+   → https://web3forms.com
+   → Copy your Access Key
+   → Edit index.html and replace [FILL: WEB3FORMS ACCESS KEY]
+   → Push to GitHub again
+
+5. CREATE CLOUDFLARE ACCOUNT (if needed)
+   → https://dash.cloudflare.com/sign-up
+
+6. CONNECT GITHUB TO CLOUDFLARE PAGES
+   Follow Part 2 of DEPLOYMENT_GUIDE.md
+
+7. UPDATE DNS IN SPACESHIP
+   Follow Part 3 of DEPLOYMENT_GUIDE.md
+   Replace nameservers with:
+   - eva.ns.cloudflare.com
+   - noah.ns.cloudflare.com
+
+8. WAIT FOR DNS PROPAGATION
+   Typically 5–10 minutes (max 48 hours)
+   Check status: https://dnschecker.org
+
+9. TEST YOUR SITE
+   Visit https://www.reverentialav.in
+   Test tabs, accordions, form
+
+================================================================================
+WHAT IS LOCKED (DO NOT CHANGE STRUCTURE)
+================================================================================
+
+✓ All 9 section IDs (#top, #disciplines, #direct-reflected, etc.)
+✓ All 7 form fields (name, email, space, message, etc.)
+✓ All responsive breakpoints (mobile, tablet, desktop)
+✓ Brand colours (13 CSS variables in :root)
+✓ Typography families (Spectral, IBM Plex Sans/Mono)
+✓ Logo and brand assets (embedded as base64)
+✓ Section headings and hierarchy
+
+================================================================================
+WHAT IS EDITABLE (CHANGE TEXT ANYTIME)
+================================================================================
+
+✓ All copy (hero headline, descriptions, FAQs, etc.)
+✓ Contact details (email, phone, WhatsApp)
+✓ Form placeholders and labels
+✓ Colour values (in :root CSS variables)
+✓ Font sizes and spacing (CSS values)
+
+To edit:
+1. Open index.html in any text editor
+2. Find and replace text
+3. git add . && git commit -m "Update [section]" && git push
+4. Cloudflare auto-redeploys
+
+================================================================================
+KEY CONTACTS & RESOURCES
+================================================================================
+
+Your domain:         reverentialav.in (at Spaceship)
+GitHub:              https://github.com
+Cloudflare:          https://dash.cloudflare.com
+Web3Forms:           https://web3forms.com
+DNS checker:         https://dnschecker.org
+
+Your email:          hello@reverentialav.in
+Support:             Contact your registrar (Spaceship) or Cloudflare
+
+================================================================================
+FILES IN THIS FOLDER
+================================================================================
+
+index.html                  → The live website (51 KB, all-in-one)
+README.md                   → Setup, editing, troubleshooting guide
+.gitignore                  → Git ignore configuration
+DEPLOYMENT_GUIDE.md         → Detailed step-by-step walkthrough
+LOCKED_INVENTORY.txt        → Asset reference (for your records)
+NEXT_STEPS.txt             → This file
+
+================================================================================
+TIMELINE
+================================================================================
+
+Now:
+  - Create GitHub repo and push files (5 min)
+  - Sign up for Web3Forms and add access key (3 min)
+  - Connect to Cloudflare Pages (5 min)
+
+Within 5–10 minutes:
+  - Update DNS in Spaceship
+  - Check propagation at dnschecker.org
+
+Within 48 hours (usually much faster):
+  - DNS fully propagates
+  - Site live at www.reverentialav.in
+
+================================================================================
+IMPORTANT REMINDERS
+================================================================================
+
+1. Web3Forms access key is REQUIRED for contact form to work
+   - Without it, form shows error message
+   - Get at https://web3forms.com (free)
+   - Replace [FILL: WEB3FORMS ACCESS KEY] in index.html
+
+2. Nameservers in Spaceship MUST point to Cloudflare
+   - eva.ns.cloudflare.com
+   - noah.ns.cloudflare.com
+   - Not GoDaddy, not Bluehost, not any other service
+
+3. DNS propagation is not instant
+   - Can take 5 min to 48 hours (rarely)
+   - Use dnschecker.org to see real-time status
+   - If still showing old site, clear browser cache
+
+4. Cloudflare Email Routing (hello@reverentialav.in) is already set up
+   - No action needed
+   - Will continue working after nameserver change
+
+5. All files are self-contained
+   - No external dependencies
+   - No build step required
+   - Works as-is
+
+================================================================================
+
+Ready to go live? Start with Step 1 above.
+
+Questions? See DEPLOYMENT_GUIDE.md for detailed walkthrough.
+
+Generated: September 8, 2026
+================================================================================
