@@ -10,10 +10,15 @@ TONIGHT, GOING LIVE (about 10 minutes)
 
 1. UPLOAD TO GITHUB
    Repository: reverential-av-landing
-   Add file -> Upload files -> drag in all six:
+   Add file -> Upload files -> drag in all eleven:
 
        index.html
        src.jsx
+       utilities.css
+       shell.html
+       build.mjs
+       package.json
+       entry.jsx
        README.md
        DEPLOYMENT_GUIDE.md
        NEXT_STEPS.txt
@@ -72,7 +77,6 @@ WHILE YOU SLEEP
 Being built:
 
    - Hugo blog, brand palette locked to the site
-   - One-command build script, so editing copy stops being fiddly
    - Keyword research across Chennai, Kanniyakumari, Trichy, Coimbatore,
      rest of Tamil Nadu, Cochin, Trivandrum, rest of Kerala, Bangalore,
      rest of Karnataka, then Hyderabad, Andhra, Telangana, pan-India
@@ -113,9 +117,27 @@ EDITING LATER
 -------------
 
    index.html is compiled and minified. Do not edit it directly.
-   All copy is in src.jsx. Edit there, rebuild, push both.
+   All copy is in src.jsx. Edit there, run  npm run build , push both.
    See DEPLOYMENT_GUIDE.md for the build command and a map of where
    each piece of copy lives.
+
+
+IF THE PAGE WILL NOT LOAD
+-------------------------
+
+   Console says "Script error." with no file or line:
+   that is a cross origin script message. The page script is inline, so
+   the usual cause is Cloudflare Rocket Loader.
+
+       Cloudflare -> your domain -> Speed -> Optimization
+       -> Content Optimization -> turn Rocket Loader OFF
+
+   Both script tags already carry data-cfasync="false" to opt out, but
+   turning it off is the reliable fix. Brave Shields and other blockers
+   cause the same symptom, so test with those disabled too.
+
+   If the app fails to mount it now prints the real error on screen with
+   your phone and email, instead of going blank. Screenshot that.
 
 
 CONTACT

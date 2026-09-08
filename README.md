@@ -9,8 +9,15 @@ Live site for **www.reverentialav.in**
 | File | Purpose |
 |---|---|
 | `index.html` | The live site. Self-contained: fonts from Google, everything else inline. Deploy this. |
-| `src.jsx` | The source component. All copy, colours and layout live here. |
+| `src.jsx` | The source component. All copy and colours live here. |
+| `utilities.css` | Layout stylesheet the component depends on. |
+| `shell.html` | Page head, meta tags and schema. |
+| `build.mjs` | The build. Run with `npm run build`. |
+| `package.json` | Pinned dependency versions. |
+| `entry.jsx` | Mounts the component. |
 | `README.md` | This file. |
+| `DEPLOYMENT_GUIDE.md` | Going live, editing, and troubleshooting. |
+| `NEXT_STEPS.txt` | The running task list. |
 | `.gitignore` | Standard ignores. |
 
 `index.html` is a **compiled artifact** built from `src.jsx`. Do not hand-edit it , 
@@ -70,15 +77,11 @@ Common edits and where to find them:
 ### Rebuilding after an edit
 
 ```bash
-npm install react react-dom lucide-react esbuild
-npx esbuild entry.jsx --bundle --minify --format=iife --target=es2018 \
-  --loader:.jsx=jsx --jsx=automatic --outfile=bundle.js \
-  --define:process.env.NODE_ENV='"production"'
+npm install
+npm run build
 ```
 
-Then inline `bundle.js` into the `<script>` tag at the bottom of `index.html`.
-
-A proper build script is being added so this becomes a single command.
+That regenerates `index.html`. Push it together with your edited `src.jsx`.
 
 ---
 

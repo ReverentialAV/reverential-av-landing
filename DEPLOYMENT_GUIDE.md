@@ -19,11 +19,16 @@ Nothing needs to be installed. No build step runs on Cloudflare.
 
 ## Step 1, Put the files on GitHub
 
-Upload these six files to the root of `reverential-av-landing`:
+Upload these eleven files to the root of `reverential-av-landing`:
 
 ```
 index.html            the live site, deploy this
-src.jsx               the editable source, keep it here
+src.jsx               the editable source, all copy lives here
+utilities.css         layout stylesheet the component depends on
+shell.html            page head, meta tags and schema
+build.mjs             the build, run with: npm run build
+package.json          pinned dependency versions
+entry.jsx             mounts the component
 README.md             what this repo is and how to edit it
 DEPLOYMENT_GUIDE.md   this file
 NEXT_STEPS.txt        the running task list
@@ -112,17 +117,20 @@ All copy lives in `src.jsx`. To change text:
 2. Rebuild:
 
 ```bash
-npm install react react-dom lucide-react esbuild
-npx esbuild entry.jsx --bundle --minify --format=iife --target=es2018 \
-  --loader:.jsx=jsx --jsx=automatic --outfile=bundle.js \
-  --define:process.env.NODE_ENV='"production"'
+npm install
+npm run build
 ```
 
-3. Replace the contents of the `<script>` tag at the bottom of `index.html`
-   with the new `bundle.js`
-4. Push `index.html` and `src.jsx`
+`package.json` pins the exact versions of React, lucide and esbuild that this
+site is known to build with. Do not replace those pins with ranges. A future
+major release of React would otherwise be installed silently and break the
+build with no record of what used to work.
 
-A single-command build script is being added so this becomes one step.
+3. Push the regenerated `index.html` along with your edited `src.jsx`
+
+`build.mjs` compiles `src.jsx`, injects `utilities.css` and the page shell,
+and writes `index.html`. It refuses to write a broken file, so if it prints
+an error, nothing was overwritten.
 
 Where things live in `src.jsx`:
 
@@ -173,6 +181,22 @@ the address the account was created with.
 
 **The site looks wrong after an edit.** You probably edited `index.html`
 directly. Restore it from the previous commit and edit `src.jsx` instead.
+
+**The browser console says "Script error." with no file or line.** That is the
+message browsers give for a script they treat as cross origin. The page script
+is inline, so the usual cause is **Cloudflare Rocket Loader**, which rewrites
+inline scripts and re-serves them from Cloudflare's own domain.
+
+Go to the domain in Cloudflare, then **Speed**, **Optimization**, **Content
+Optimization**, and confirm **Rocket Loader** is off. Both script tags in
+`index.html` already carry `data-cfasync="false"`, which instructs Rocket
+Loader to leave them alone, but turning it off is the reliable fix. Brave
+Shields and other content blockers can produce the same symptom, so test with
+them disabled before concluding the build is at fault.
+
+If the page fails to mount for any reason, it now replaces itself with the
+actual error message and your phone and email, rather than showing a blank
+screen. Screenshot that message, it names the real cause.
 
 ---
 

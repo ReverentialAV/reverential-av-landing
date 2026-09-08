@@ -338,7 +338,7 @@ const FAQS = [
   ["We already have a tech team. Are you replacing them?",
    "No. Your team knows your services, your musicians and your building, and none of that transfers. Our job is to give them a system that behaves the same way every week and documentation that survives a handover, then train them on it."],
   ["Where do you work?",
-   "Based in Chennai and Bengaluru, we work across Tamil Nadu and Karnataka, from the capital cities down through Coimbatore, Trichy, Madurai and the Nagercoil and Kanniyakumari belt, and across the wider South India region including Hyderabad. Gulf projects taken on merit. Travel and stay are quoted separately and openly."],
+   "Based in Chennai and Bengaluru, we work across Tamil Nadu, Kerala and Karnataka, from the capital cities down through Coimbatore, Trichy, Madurai and the Nagercoil and Kanniyakumari belt, and across Kochi, Thiruvananthapuram and the wider Kerala coast. Andhra Pradesh, Telangana and Hyderabad are covered from Bengaluru. Projects elsewhere in India are taken on merit, as are Gulf projects. Travel and stay are quoted separately and openly."],
 ];
 
 /* ------------------------------------------------------------------ page */
@@ -765,17 +765,24 @@ export default function Reverential() {
 
         <p className="mt-8" style={{ color: C.body, maxWidth: "72ch" }}>
           Before founding Reverential, that expertise was earned on large scale live sound systems
-          across three countries. It ranges from the Chennai club and band circuit, intimate
-          acoustic sessions and institutional annual day productions, through multi-tier stadium
-          audio for a regional cricket league in the UAE, brand launches staged at a skydive drop
-          zone, in open desert and at a waterfront island development, and production audio in five
-          star and above hotel properties, to a four acre open air entertainment zone in Saudi
-          Arabia running a 250 tower distributed loudspeaker system over Dante and RedNet, and
-          principal audio for a high profile international economic forum. A live sound system
-          engineer walks into an unfamiliar room, measures it, aligns the system to it and makes it
-          work before doors open. A permanent installation asks for that same judgement, held to a
-          standard that has to last a decade and be run by people who were not there when it was
-          built.
+          across three countries. It began on the Chennai club and band circuit, in intimate
+          acoustic sessions and in institutional annual day productions.
+        </p>
+
+        <p className="mt-4" style={{ color: C.body, maxWidth: "72ch" }}>
+          It grew through multi-tier stadium audio for a regional cricket league in the UAE, brand
+          launches staged at a skydive drop zone, in open desert and at a waterfront island
+          development, and production audio in five star and above hotel properties. In Saudi
+          Arabia it reached a four acre open air entertainment zone running a 250 tower distributed
+          loudspeaker system over Dante and RedNet, and principal audio for a high profile
+          international economic forum.
+        </p>
+
+        <p className="mt-4" style={{ color: C.body, maxWidth: "72ch" }}>
+          A live sound system engineer walks into an unfamiliar room, measures it, aligns the system
+          to it and makes it work before doors open. A permanent installation asks for that same
+          judgement, held to a standard that has to last a decade and be run by people who were not
+          there when it was built.
         </p>
       </Section>
 
@@ -997,8 +1004,9 @@ export default function Reverential() {
                 Based in
               </h4>
               <p style={{ fontSize: 13.5, color: "#B4B0A6", maxWidth: "30ch", margin: 0 }}>
-                Chennai and Bengaluru, working across Tamil Nadu, Karnataka and the wider South
-                India region. Gulf projects taken on merit.
+                Chennai and Bengaluru, working across Tamil Nadu, Kerala and Karnataka, with
+                Andhra Pradesh and Telangana covered from Bengaluru. Projects elsewhere in India
+                and in the Gulf taken on merit.
               </p>
             </div>
           </div>
