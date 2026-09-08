@@ -1,314 +1,193 @@
-# Deployment Guide: Reverential Landing Page
+# Deployment Guide for reverentialav.in
 
-**Live URL:** www.reverentialav.in  
-**Domain Registrar:** Spaceship  
-**Hosting:** Cloudflare Pages (free)  
-**Email:** Cloudflare Email Routing (configured for hello@reverentialav.in, thomas@reverentialav.in)
+Everything needed to take this repository live on Cloudflare Pages.
 
 ---
 
-## Overview
+## Before you start
 
-This guide walks through:
-1. Creating a GitHub repository
-2. Setting up Cloudflare Pages
-3. Configuring DNS in Spaceship
-4. Testing the live site
+You already have:
 
-**Total time:** ~15 minutes (DNS propagation 5 mins to 48 hours)
+- The domain `reverentialav.in` on Cloudflare nameservers (Active, Free plan)
+- Email routing configured, `hello@reverentialav.in` forwarding to Gmail
+- A GitHub repository named `reverential-av-landing`
+- A Web3Forms account with the access key already embedded in `index.html`
+
+Nothing needs to be installed. No build step runs on Cloudflare.
 
 ---
 
-## Part 1: Create a GitHub Repository
+## Step 1, Put the files on GitHub
 
-### Step 1.1: Create a GitHub account (if you don't have one)
+Upload these six files to the root of `reverential-av-landing`:
 
-1. Go to https://github.com
-2. Click **Sign up**
-3. Follow the onscreen prompts
-4. Verify your email
-
-### Step 1.2: Create a new repository
-
-1. On GitHub, click the **+** icon (top right) → **New repository**
-2. Repository name: `reverential-landing`
-3. Description: "Landing page for Reverential AV Integration"
-4. Visibility: **Public** (recommended for SEO and static sites)
-5. **Do NOT** initialize with README (we have one)
-6. Click **Create repository**
-
-### Step 1.3: Push your files to GitHub
-
-On your computer, open Terminal or Command Prompt and run:
-
-```bash
-# Navigate to your project folder
-cd path/to/reverential-landing
-
-# Initialize Git
-git init
-
-# Add all files
-git add .
-
-# Create first commit
-git commit -m "Initial commit: landing page with Web3Forms integration"
-
-# Add remote (replace YOUR_USERNAME)
-git remote add origin https://github.com/YOUR_USERNAME/reverential-landing.git
-
-# Push to GitHub
-git branch -M main
-git push -u origin main
+```
+index.html            the live site, deploy this
+src.jsx               the editable source, keep it here
+README.md             what this repo is and how to edit it
+DEPLOYMENT_GUIDE.md   this file
+NEXT_STEPS.txt        the running task list
+.gitignore            standard ignores
 ```
 
-**Done.** Your files are now on GitHub.
+Via the browser, no software needed:
+
+1. Open the repository on github.com
+2. **Add file** → **Upload files**
+3. Drag all five files in
+4. Commit message: `Landing page, Web3Forms wired, SEO groundwork`
+5. **Commit changes**
+
+If a file already exists, uploading it again replaces it. That is expected.
 
 ---
 
-## Part 2: Connect Cloudflare Pages to GitHub
+## Step 2, Create the Cloudflare Pages project
 
-### Step 2.1: Create a Cloudflare account (if needed)
+1. Cloudflare Dashboard → **Workers & Pages** → **Create** → **Pages**
+2. **Connect to Git**
+3. Authorise GitHub if prompted, then select `reverential-av-landing`
+4. Build settings:
 
-1. Go to https://dash.cloudflare.com/sign-up
-2. Sign up with email
-3. Accept Cloudflare's terms
-4. Verify email
+   | Field | Value |
+   |---|---|
+   | Framework preset | **None** |
+   | Build command | *leave empty* |
+   | Build output directory | `/` |
+   | Root directory | *leave empty* |
 
-### Step 2.2: Create a Cloudflare Pages project
+5. **Save and Deploy**
 
-1. In Cloudflare Dashboard, go to **Pages** (left sidebar)
-2. Click **Create a project**
-3. Click **Connect to Git**
-4. Authorize Cloudflare to access your GitHub account
-5. Select your `reverential-landing` repository
-6. Click **Begin setup**
+The first deploy takes under a minute. You will get a URL such as
+`reverential-av-landing.pages.dev`. Open it and confirm the site loads.
 
-### Step 2.3: Configure build settings
-
-In the build configuration screen:
-
-| Setting | Value |
-|---------|-------|
-| **Framework** | None |
-| **Build command** | (leave blank) |
-| **Build output directory** | `.` (dot, current directory) |
-| **Environment variables** | (none needed) |
-
-Click **Save and Deploy**.
-
-**Status:** Cloudflare will deploy your site. It may show a Cloudflare-generated URL like `reverential-landing-abc123.pages.dev`.
+**Do not set a build command.** `index.html` is already compiled. A build
+command will fail the deploy.
 
 ---
 
-## Part 3: Configure DNS in Spaceship
+## Step 3, Attach the domain
 
-### Step 3.1: Log in to Spaceship
+In the Pages project → **Custom domains** → **Set up a custom domain**
 
-1. Go to https://www.spaceship.com
-2. Log in with your account
-3. Find your domain `reverentialav.in` in the dashboard
+Add both, one at a time:
 
-### Step 3.2: Note Cloudflare's nameservers
+1. `www.reverentialav.in`
+2. `reverentialav.in`
 
-Before changing DNS, get Cloudflare's nameservers:
+Cloudflare creates the DNS records itself. Because the nameservers already
+point at Cloudflare, activation is immediate rather than the usual wait.
 
-1. In Cloudflare Dashboard, go to your domain page
-2. Look for **Nameservers** (usually shown as a yellow banner when you first connect a domain)
-3. You should see two nameservers:
-   - `eva.ns.cloudflare.com`
-   - `noah.ns.cloudflare.com`
-
-(These are standard Cloudflare nameservers. Exact names may vary.)
-
-### Step 3.3: Update nameservers in Spaceship
-
-1. In Spaceship, find your domain `reverentialav.in`
-2. Click **DNS** or **Nameservers** (exact wording varies)
-3. Look for **Custom Nameservers** or **Change Nameservers**
-4. Replace all nameservers with Cloudflare's:
-   - Remove existing nameservers
-   - Add `eva.ns.cloudflare.com`
-   - Add `noah.ns.cloudflare.com`
-5. Click **Save** or **Confirm**
-
-**Note:** Your current Cloudflare Email Routing is configured on these nameservers, so the change will not affect your email aliases.
-
-### Step 3.4: Wait for DNS propagation
-
-DNS changes propagate over time:
-- **Fast path:** 5–10 minutes (most cases)
-- **Full propagation:** 48 hours (maximum)
-
-You can check status at https://dnschecker.org:
-1. Enter `reverentialav.in`
-2. Select **NS** record type
-3. Check propagation across multiple DNS servers
+Adding both means the apex and the www address both resolve. Cloudflare
+serves the site on each.
 
 ---
 
-## Part 4: Connect your domain in Cloudflare
+## Step 4, Check it works
 
-Once DNS nameservers are updated in Spaceship, tell Cloudflare about your domain:
+Open `https://www.reverentialav.in` and confirm:
 
-### Step 4.1: Add domain to Cloudflare
+- [ ] The page loads, dark header, warm white body
+- [ ] The decay curve chart draws, and its toggles switch the curves
+- [ ] The seven sector tabs change the panel content when clicked
+- [ ] The six method phases expand and collapse
+- [ ] The FAQ entries open
+- [ ] The WhatsApp button opens a chat to +91 99622 32223
+- [ ] The consultation form sends, and the button reports success
+- [ ] The checklist email form sends
+- [ ] It reads correctly on your phone
 
-1. In Cloudflare Dashboard, go to **Websites**
-2. Click **Add a domain**
-3. Enter `reverentialav.in`
-4. Click **Continue**
-5. Choose **Free** plan
-6. Review DNS records (should be minimal)
-7. Click **Complete setup**
-
-Cloudflare will check for nameserver changes in Spaceship and automatically activate once detected.
-
-### Step 4.2: Configure Pages domain
-
-1. Go back to **Pages**
-2. Select your `reverential-landing` project
-3. Go to **Custom domain**
-4. Click **Set up custom domain**
-5. Enter `www.reverentialav.in`
-6. Click **Continue**
-7. Verify the CNAME record and click **Activate domain**
-
-Cloudflare will create the required DNS records automatically.
-
-### Step 4.3: (Optional) Redirect reverentialav.in to www
-
-To make both `reverentialav.in` and `www.reverentialav.in` work:
-
-1. In Cloudflare Pages project settings
-2. Go to **Custom domains**
-3. Add `reverentialav.in` as well
-4. Let Cloudflare create the redirect
+Send yourself a test submission through the form. It should arrive at the
+address registered on your Web3Forms account. Check spam on the first one.
 
 ---
 
-## Part 5: Test the live site
+## Editing the site later
 
-### Step 5.1: Wait for propagation
+`index.html` is compiled and minified. Do not edit it directly.
 
-After updating nameservers in Spaceship:
-- Wait 5–10 minutes for fast propagation
-- Check status at https://dnschecker.org if you're unsure
+All copy lives in `src.jsx`. To change text:
 
-### Step 5.2: Visit your site
-
-Open a browser and go to:
-- https://www.reverentialav.in
-- https://reverentialav.in
-
-Both should load the landing page.
-
-### Step 5.3: Test interactivity
-
-1. Click sector tabs — they should switch
-2. Click method accordion — it should expand
-3. Click FAQ — it should expand
-4. Fill out the contact form and submit
-
-**Note:** Form submission requires Web3Forms access key (see Part 1 of README.md).
-
----
-
-## Configuring Web3Forms
-
-Your form will not work until you add a Web3Forms access key:
-
-1. Go to https://web3forms.com
-2. Sign up (free)
-3. Create a new form and copy the **Access Key**
-4. Edit `index.html` locally
-5. Find: `const accessKey = '[FILL: WEB3FORMS ACCESS KEY]';`
-6. Replace with: `const accessKey = 'your_actual_key_here';`
-7. Commit and push:
-   ```bash
-   git add index.html
-   git commit -m "Add Web3Forms access key"
-   git push origin main
-   ```
-8. Cloudflare automatically redeploys
-
-Form submissions will now arrive in your Web3Forms inbox.
-
----
-
-## Troubleshooting
-
-### DNS not propagating?
-
-- **Check in Spaceship:** Verify nameservers are exactly `eva.ns.cloudflare.com` and `noah.ns.cloudflare.com`
-- **Use DNS checker:** https://dnschecker.org to see propagation status
-- **Wait longer:** DNS can take up to 48 hours in rare cases
-- **Clear browser cache:** Ctrl+Shift+Delete (or Cmd+Shift+Delete on Mac)
-
-### Cloudflare shows "Error 521 — Web server is down"
-
-This means Cloudflare can't reach the Pages project. Usually fixed by:
-- Waiting 5 minutes for initial deployment
-- Checking Cloudflare Pages project status (should show "Deployed")
-- Redeploying: Go to **Pages** → **Deployments** → **Retry**
-
-### Form submissions not arriving
-
-- Check Web3Forms dashboard (https://web3forms.com) for submission logs
-- Verify access key is correct (no `[FILL]` placeholder)
-- Check spam folder
-- Test Web3Forms directly at https://web3forms.com/test
-
-### Site shows "Waiting for nameserver changes"
-
-This appears if Cloudflare hasn't detected the nameserver change yet:
-- Wait 5–10 minutes and refresh
-- Manually verify nameservers in Spaceship DNS settings
-- Use https://dnschecker.org to confirm propagation
-
----
-
-## Making Updates
-
-Once live, updating the site is simple:
+1. Edit `src.jsx`
+2. Rebuild:
 
 ```bash
-# Edit index.html locally
-nano index.html  (or use any text editor)
-
-# Commit and push
-git add index.html
-git commit -m "Update [section name]"
-git push origin main
+npm install react react-dom lucide-react esbuild
+npx esbuild entry.jsx --bundle --minify --format=iife --target=es2018 \
+  --loader:.jsx=jsx --jsx=automatic --outfile=bundle.js \
+  --define:process.env.NODE_ENV='"production"'
 ```
 
-Cloudflare automatically redeploys on every push to `main`.
+3. Replace the contents of the `<script>` tag at the bottom of `index.html`
+   with the new `bundle.js`
+4. Push `index.html` and `src.jsx`
+
+A single-command build script is being added so this becomes one step.
+
+Where things live in `src.jsx`:
+
+| To change | Search for |
+|---|---|
+| Headline | `They can hear the sound` |
+| Hero paragraph | `We design and deploy audiovisual` |
+| Sector tabs and pain points | `const SECTORS` |
+| The six method phases | `const PHASES` |
+| FAQ questions and answers | `const FAQS` |
+| Credentials and track record | `Before founding Reverential` |
+| Phone, email, WhatsApp | `PHONE_DISPLAY`, `EMAIL`, `WHATSAPP` |
+| Brand colours | `const C = {` |
 
 ---
 
-## Support
+## The contact forms
 
-- **Cloudflare docs:** https://developers.cloudflare.com/pages/
-- **GitHub docs:** https://docs.github.com/
-- **Web3Forms:** https://web3forms.com/docs
-- **Your email:** hello@reverentialav.in
+Both post to Web3Forms. The access key is embedded in `index.html`.
 
----
+- **Consultation form** sends name, organisation, type of space, phone,
+  email and message. Name and email are required.
+- **Checklist form** sends the email address and a note that the 12-point
+  check was requested. Sending the PDF is manual for now.
 
-## Summary Checklist
+The button reports sending, success and failure. If a submission fails the
+visitor is told to use WhatsApp instead.
 
-- [ ] GitHub repository created and files pushed
-- [ ] Cloudflare Pages project connected
-- [ ] Nameservers updated in Spaceship to Cloudflare's
-- [ ] DNS propagation verified (5 mins–48 hours)
-- [ ] Domain added to Cloudflare
-- [ ] Custom domain configured in Pages
-- [ ] Site loads at www.reverentialav.in
-- [ ] Sector tabs, accordions, form fields tested
-- [ ] Web3Forms access key added for contact form
-- [ ] Form submission tested
+To change where submissions arrive, update the address on your Web3Forms
+account rather than the site.
 
 ---
 
-**Status:** Ready to go live.
+## If something goes wrong
 
-Deployed: September 2026
+**The deploy fails.** Check that the build command is empty and the output
+directory is `/`. Anything else will fail on a repository with no build.
+
+**The page is blank.** JavaScript is required. Check the browser console.
+Confirm `index.html` uploaded completely, it should be roughly 295 KB.
+
+**The domain shows a Cloudflare error.** Give it a few minutes. Confirm the
+custom domain is listed as Active in the Pages project, not just in DNS.
+
+**Form submissions do not arrive.** Check spam. Confirm the key in
+`index.html` matches your Web3Forms dashboard. Web3Forms only delivers to
+the address the account was created with.
+
+**The site looks wrong after an edit.** You probably edited `index.html`
+directly. Restore it from the previous commit and edit `src.jsx` instead.
+
+---
+
+## Still to be done
+
+These are not blockers for going live.
+
+- [ ] Add CIN and GSTIN to the footer once issued
+- [ ] Open Graph image, 1200 x 630, so shared links preview properly
+- [ ] `robots.txt` and `sitemap.xml`
+- [ ] Blog, being set up now
+- [ ] Google Search Console verification
+- [ ] Google Business Profile for Chennai and Bengaluru
+
+---
+
+Reverential AV Integration Private Limited
+hello@reverentialav.in / +91 99622 32223

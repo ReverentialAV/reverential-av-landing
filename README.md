@@ -1,205 +1,108 @@
-# Reverential Landing Page
+# Reverential AV Integration Landing Page
 
-Production landing page for Reverential AV Integration Private Limited.
-
-**Status:** Ready for deployment to Cloudflare Pages.
+Live site for **www.reverentialav.in**
 
 ---
 
-## Quick Start
+## What is in this repo
 
-### 1. Clone this repo
+| File | Purpose |
+|---|---|
+| `index.html` | The live site. Self-contained: fonts from Google, everything else inline. Deploy this. |
+| `src.jsx` | The source component. All copy, colours and layout live here. |
+| `README.md` | This file. |
+| `.gitignore` | Standard ignores. |
+
+`index.html` is a **compiled artifact** built from `src.jsx`. Do not hand-edit it , 
+the JavaScript inside is minified. Edit `src.jsx` and rebuild.
+
+---
+
+## Deploying to Cloudflare Pages
+
+1. Cloudflare Dashboard → **Pages** → **Create a project** → **Connect to Git**
+2. Select the `reverential-av-landing` repository
+3. Build settings:
+   - Framework preset: **None**
+   - Build command: *(leave empty)*
+   - Build output directory: `/`
+4. **Save and Deploy**
+5. Project → **Custom domains** → **Set up a custom domain** → `www.reverentialav.in`
+
+The domain already runs on Cloudflare nameservers, so activation is immediate.
+Add `reverentialav.in` as a second custom domain so the apex redirects to www.
+
+Every push to `main` redeploys automatically.
+
+---
+
+## Contact form
+
+Wired to **Web3Forms**. Access key is already embedded and live.
+
+Two forms post to it:
+- The consultation request (name, organisation, space type, phone, email, message)
+- The 12-point checklist request (email only)
+
+Submissions arrive at the address registered on your Web3Forms account.
+Name and email are required on the consultation form; the button reports
+sending, success and failure states.
+
+---
+
+## Editing the site
+
+Text, colours and layout are all in `src.jsx`.
+
+Common edits and where to find them:
+
+| To change | Search `src.jsx` for |
+|---|---|
+| Headline | `They can hear the sound` |
+| Hero paragraph | `We design and deploy audiovisual` |
+| Sector tabs and pain points | `const SECTORS` |
+| The six method phases | `const PHASES` |
+| FAQ questions and answers | `const FAQS` |
+| Credentials paragraph | `Before founding Reverential` |
+| Phone, email, WhatsApp | `PHONE_DISPLAY`, `EMAIL`, `WHATSAPP` |
+| Brand colours | `const C = {` |
+
+### Rebuilding after an edit
+
 ```bash
-git clone https://github.com/your-username/reverential-landing.git
-cd reverential-landing
+npm install react react-dom lucide-react esbuild
+npx esbuild entry.jsx --bundle --minify --format=iife --target=es2018 \
+  --loader:.jsx=jsx --jsx=automatic --outfile=bundle.js \
+  --define:process.env.NODE_ENV='"production"'
 ```
 
-### 2. Set up Web3Forms (required for contact form)
+Then inline `bundle.js` into the `<script>` tag at the bottom of `index.html`.
 
-The contact form requires a Web3Forms API key to function. This is free and takes 2 minutes:
-
-1. Visit https://web3forms.com and create a free account
-2. Create a new form and copy the **Access Key**
-3. In `index.html`, find the line:
-   ```javascript
-   const accessKey = '[FILL: WEB3FORMS ACCESS KEY]';
-   ```
-4. Replace `[FILL: WEB3FORMS ACCESS KEY]` with your actual access key
-5. Save the file
-
-### 3. Deploy to Cloudflare Pages
-
-**Option A: Via GitHub (Recommended)**
-
-1. Push your local changes to GitHub:
-   ```bash
-   git add .
-   git commit -m "Add Web3Forms access key"
-   git push origin main
-   ```
-
-2. In Cloudflare Dashboard:
-   - Go to **Pages**
-   - Click **Create a project** → **Connect to Git**
-   - Select this GitHub repo
-   - Framework: **None**
-   - Build command: (leave empty)
-   - Build output directory: `.` (current directory)
-   - Click **Save and Deploy**
-
-3. Cloudflare will automatically deploy on every push to `main`
-
-**Option B: Direct Upload**
-
-1. In Cloudflare Dashboard:
-   - Go to **Pages**
-   - Click **Upload assets**
-   - Drag and drop `index.html`
-   - Click **Deploy**
-
-### 4. Point your domain to Cloudflare Pages
-
-In **Spaceship** (your domain registrar):
-
-1. Go to your domain settings
-2. Find **Nameservers** (or **DNS** settings)
-3. Replace current nameservers with Cloudflare's:
-   - `eva.ns.cloudflare.com`
-   - `noah.ns.cloudflare.com`
-4. Save changes (may take up to 48 hours to propagate, usually 5–10 minutes)
-
-Once DNS propagates, `www.reverentialav.in` and `reverentialav.in` will serve the site.
+A proper build script is being added so this becomes a single command.
 
 ---
 
-## File Structure
+## SEO already in place
 
-```
-reverential-landing/
-├── index.html          Production landing page (fully self-contained)
-├── README.md           This file
-├── .gitignore          Git ignore rules
-└── LOCKED_INVENTORY    Asset coordinate reference (for reference only)
-```
+- Title and meta description targeting churches and auditoriums
+- Canonical URL, robots directives, theme colour
+- Open Graph and Twitter card tags
+- `LocalBusiness` schema with services, areas served and contact details
+- Areas served: Chennai, Coimbatore, Tiruchirappalli, Nagercoil, Kochi,
+  Thiruvananthapuram, Bengaluru, Hyderabad, plus Tamil Nadu, Kerala,
+  Karnataka and India
 
----
-
-## Editing Content
-
-The site is locked for structure and design, but all text is editable:
-
-1. **Hero section:** Search for "They can hear the sound" in `index.html`
-2. **Sector content:** Search for "Churches" section in the HTML
-3. **FAQ answers:** Search for "How do we start" in the HTML
-4. **Contact details:** Replace `hello@reverentialav.in`, `+91 99622 32223`, `wa.me/919962232223`
-
-After editing, commit and push to GitHub — Cloudflare will auto-deploy:
-```bash
-git add index.html
-git commit -m "Update [section name]"
-git push origin main
-```
+Still to add: `sitemap.xml`, `robots.txt`, an Open Graph image, and the blog.
 
 ---
 
-## Colour Palette (Locked)
+## Structure and design are locked
 
-Edit the CSS variables in `index.html` if brand colours change:
-
-```css
-:root {
-  --black: #0B0B0B;
-  --gold: #C6A13A;
-  --gold-text: #856A20;
-  --ww: #F1F0EC;        /* warm white */
-  --surface: #E9E8E4;
-  --body: #4A4A4A;
-  --muted: #6B6A67;
-}
-```
+Section order, layout, colour palette, typography and the interaction model
+are fixed. Copy is editable. Any structural change should be made in `src.jsx`
+and verified before deployment.
 
 ---
 
-## Typography (Locked)
-
-- **Serif:** Spectral (headings, display)
-- **Sans:** IBM Plex Sans (body, UI)
-- **Mono:** IBM Plex Mono (labels, tags, data)
-
-Imported from Google Fonts. Fallbacks included.
-
----
-
-## Responsive Breakpoints
-
-Tested at:
-- Mobile: 320px, 420px
-- Tablet: 540px, 760px, 840px
-- Desktop: 900px, 960px, 1000px+
-
-No changes needed unless design direction changes.
-
----
-
-## Form Submission
-
-The contact form submits to Web3Forms. You will receive emails at the address configured in your Web3Forms account.
-
-Form fields:
-- Name (required)
-- Organisation (required)
-- Phone (optional)
-- Email (required)
-- Space type (required, 7 options)
-- Message (optional)
-- Checklist email (optional — for 12-point PDF distribution)
-
----
-
-## Support & Troubleshooting
-
-**Form not working?**
-- Check that Web3Forms access key is correctly inserted (no `[FILL]` placeholder remaining)
-- Test at https://web3forms.com to ensure your key is valid
-
-**Domain not resolving?**
-- DNS changes in Spaceship can take up to 48 hours
-- Verify nameservers changed in Spaceship admin panel
-- Use https://dnschecker.org to check propagation status
-
-**Build failing on Cloudflare?**
-- No build step is required. If you see errors, ensure no build command is set in Pages settings
-- The site is a static HTML file with no dependencies
-
----
-
-## 12-Point Sound System Check
-
-A companion PDF is available at `/reverential-sound-check.pdf` (separate asset).
-
-Link on the site: `https://www.reverentialav.in/reverential-sound-check.html`
-
----
-
-## Assets & Branding
-
-- **Logo:** Embedded as base64 data URI (no external file required)
-- **Fonts:** Google Fonts (included via CDN)
-- **Icons:** CSS-only or Unicode characters
-- **Performance:** ~51 KB total size, fully self-contained
-
----
-
-## License
-
-Private site for Reverential AV Integration Private Limited. Do not redistribute without permission.
-
----
-
-## Created
-
-September 2026
-
----
-
-For questions or updates, contact **hello@reverentialav.in**
+Reverential AV Integration Private Limited / Chennai and Bengaluru
+hello@reverentialav.in / +91 99622 32223
