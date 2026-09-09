@@ -782,6 +782,55 @@ export default function Reverential() {
         </div>
       </Section>
 
+      {/* ---------------- credentials ---------------- */}
+      <Section bg={C.surface} id="credentials">
+        <H2>Who is doing the work</H2>
+        <Lede>
+          Reverential is led by Thomas Jeffrin, an audio engineer with a decade in live sound system
+          engineering behind him, now working full time in acoustic design and system deployment.
+          Each qualification is listed with what it lets us deliver for you.
+        </Lede>
+
+        <div className="mt-8" style={{ borderTop: `1px solid ${C.line}` }}>
+          {CREDENTIALS.map(([name, issuer, delivers]) => (
+            <div key={name} className="rev-cred">
+              <div>
+                <span style={{ fontFamily: F.serif, fontSize: "1.06rem", color: C.ink, display: "block" }}>
+                  {name}
+                </span>
+                <span style={{ fontFamily: F.mono, fontSize: 11, color: C.goldText,
+                               display: "block", marginTop: 3 }}>{issuer}</span>
+              </div>
+              <div>
+                <p style={{ margin: 0, fontSize: 15, color: C.body, maxWidth: "58ch" }}>{delivers}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-8" style={{ color: C.body, maxWidth: "72ch" }}>
+          Before founding Reverential, that expertise was earned on large scale live sound systems
+          across three countries. It began on the Chennai club and band circuit, in intimate
+          acoustic sessions and in institutional annual day productions.
+        </p>
+
+        <p className="mt-4" style={{ color: C.body, maxWidth: "72ch" }}>
+          It grew through multi-tier stadium audio for a regional cricket league in the UAE, brand
+          launches staged at a skydive drop zone, in open desert and at a waterfront island
+          development, and production audio in five star and above hotel properties. In Saudi
+          Arabia it reached a four acre open air entertainment zone running a 250 tower distributed
+          loudspeaker system over Dante and RedNet, and principal audio for a high profile
+          international economic forum.
+        </p>
+
+        <p className="mt-4" style={{ color: C.body, maxWidth: "72ch" }}>
+          A live sound system engineer walks into an unfamiliar room, measures it, aligns the system
+          to it and makes it work before doors open. A permanent installation asks for that same
+          judgement, held to a standard that has to last a decade and be run by people who were not
+          there when it was built.
+        </p>
+      </Section>
+
       {/* ---------------- after handover ---------------- */}
       <Section id="care">
         <Eyebrow>Optional · annual · cancel any time</Eyebrow>
@@ -835,55 +884,6 @@ export default function Reverential() {
           The final figure depends on the scale of the system and the travel involved. Ask about it
           on the consultation call and we will put a number against your building rather than a
           bracket.
-        </p>
-      </Section>
-
-      {/* ---------------- credentials ---------------- */}
-      <Section bg={C.surface} id="credentials">
-        <H2>Who is doing the work</H2>
-        <Lede>
-          Reverential is led by Thomas Jeffrin, an audio engineer with a decade in live sound system
-          engineering behind him, now working full time in acoustic design and system deployment.
-          Each qualification is listed with what it lets us deliver for you.
-        </Lede>
-
-        <div className="mt-8" style={{ borderTop: `1px solid ${C.line}` }}>
-          {CREDENTIALS.map(([name, issuer, delivers]) => (
-            <div key={name} className="rev-cred">
-              <div>
-                <span style={{ fontFamily: F.serif, fontSize: "1.06rem", color: C.ink, display: "block" }}>
-                  {name}
-                </span>
-                <span style={{ fontFamily: F.mono, fontSize: 11, color: C.goldText,
-                               display: "block", marginTop: 3 }}>{issuer}</span>
-              </div>
-              <div>
-                <p style={{ margin: 0, fontSize: 15, color: C.body, maxWidth: "58ch" }}>{delivers}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <p className="mt-8" style={{ color: C.body, maxWidth: "72ch" }}>
-          Before founding Reverential, that expertise was earned on large scale live sound systems
-          across three countries. It began on the Chennai club and band circuit, in intimate
-          acoustic sessions and in institutional annual day productions.
-        </p>
-
-        <p className="mt-4" style={{ color: C.body, maxWidth: "72ch" }}>
-          It grew through multi-tier stadium audio for a regional cricket league in the UAE, brand
-          launches staged at a skydive drop zone, in open desert and at a waterfront island
-          development, and production audio in five star and above hotel properties. In Saudi
-          Arabia it reached a four acre open air entertainment zone running a 250 tower distributed
-          loudspeaker system over Dante and RedNet, and principal audio for a high profile
-          international economic forum.
-        </p>
-
-        <p className="mt-4" style={{ color: C.body, maxWidth: "72ch" }}>
-          A live sound system engineer walks into an unfamiliar room, measures it, aligns the system
-          to it and makes it work before doors open. A permanent installation asks for that same
-          judgement, held to a standard that has to last a decade and be run by people who were not
-          there when it was built.
         </p>
       </Section>
 
@@ -961,9 +961,10 @@ export default function Reverential() {
                   <div className="flex" style={{ gap: 8 }}>
                     <select aria-label="Country dialling code" name="dial_code"
                             value={dial} onChange={(e) => setDial(e.target.value)}
-                            style={{ ...inputStyle, width: "auto", flex: "0 0 auto", paddingRight: 8 }}>
+                            style={{ ...inputStyle, width: 86, flex: "0 0 86px",
+                                     paddingLeft: 10, paddingRight: 6 }}>
                       {DIAL_CODES.map(([code, place]) => (
-                        <option key={code} value={code}>{code} {place}</option>
+                        <option key={code} value={code} title={place}>{code}</option>
                       ))}
                     </select>
                     <input id="rv-phone" name="phone" type="tel" required
