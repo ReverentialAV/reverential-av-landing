@@ -27,6 +27,18 @@ const SITE = "www.reverentialav.in";
 const EMAIL = "hello@reverentialav.in";
 const W3F_KEY = "06c67d2a-e95e-4b5c-ae30-6a26c28491a4";
 
+const DIAL_CODES = [
+  ["+91", "India"], ["+971", "UAE"], ["+966", "Saudi Arabia"], ["+65", "Singapore"],
+  ["+60", "Malaysia"], ["+94", "Sri Lanka"], ["+44", "UK"], ["+1", "US"], ["+61", "Australia"],
+];
+
+const SOCIALS = [
+  ["Facebook", "https://www.facebook.com/share/18JnPFbRnB/"],
+  ["Instagram", "https://www.instagram.com/reverential_av"],
+  ["LinkedIn", "https://www.linkedin.com/company/reverential_av/"],
+  ["YouTube", "https://youtube.com/@reverentialav"],
+];
+
 /* ------------------------------------------------------------------ nav */
 const scrollTo = (e, id) => {
   e.preventDefault();
@@ -54,7 +66,7 @@ const Lede = ({ children, onDark }) => (
               color: onDark ? "#B4B0A6" : C.body, maxWidth: "56ch" }}>{children}</p>
 );
 
-const Btn = ({ children, variant = "solid", onDark = false, href, target, onClick }) => {
+const Btn = ({ children, variant = "solid", onDark = false, href, target, onClick, disabled = false }) => {
   const base = {
     fontFamily: F.sans, fontSize: 14, fontWeight: 500, borderRadius: 2,
     padding: "11px 22px", cursor: "pointer", border: "1px solid",
@@ -77,7 +89,8 @@ const Btn = ({ children, variant = "solid", onDark = false, href, target, onClic
       </a>
     );
   }
-  return <button style={s} onClick={onClick}>{children}</button>;
+  const ds = disabled ? { ...s, opacity: 0.45, cursor: "not-allowed" } : s;
+  return <button style={ds} onClick={onClick} disabled={disabled}>{children}</button>;
 };
 
 const Section = ({ children, bg = C.ground, id, topRule = true }) => (
@@ -349,11 +362,35 @@ export default function Reverential() {
   const [form, setForm] = useState({
     name: "", org: "", space: "Church or house of worship", phone: "", email: "", message: "",
   });
+  const [dial, setDial] = useState("+91");
+  const [attempted, setAttempted] = useState(false);
+  const [checklistAttempted, setChecklistAttempted] = useState(false);
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [failed, setFailed] = useState(false);
   const [checklistEmail, setChecklistEmail] = useState("");
   const [checklistSent, setChecklistSent] = useState(false);
+
+  const emailLooksValid = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+  const errors = {
+    name: !form.name.trim() ? "Please tell us your name." : "",
+    phone: !form.phone.trim()
+      ? "We need a number to reach you on."
+      : !/^[0-9][0-9\s-]{5,14}$/.test(form.phone.trim())
+      ? "Enter the number without the country code."
+      : "",
+    email: !form.email.trim()
+      ? "Please add an email address."
+      : !emailLooksValid(form.email)
+      ? "That email address does not look right."
+      : "",
+  };
+  const hasErrors = Boolean(errors.name || errors.phone || errors.email);
+  const checklistError = !checklistEmail.trim()
+    ? "Please add an email address."
+    : !emailLooksValid(checklistEmail)
+    ? "That email address does not look right."
+    : "";
 
   const postToWeb3Forms = async (payload) => {
     const res = await fetch("https://api.web3forms.com/submit", {
@@ -368,14 +405,15 @@ export default function Reverential() {
 
   const submitConsultation = async () => {
     if (sending) return;
-    if (!form.name.trim() || !form.email.trim()) { setFailed(true); return; }
+    setAttempted(true);
+    if (hasErrors) { setFailed(false); return; }
     setSending(true); setFailed(false);
     try {
       await postToWeb3Forms({
         subject: "New consultation request — reverentialav.in",
         from_name: "Reverential website",
         name: form.name, organisation: form.org, space: form.space,
-        phone: form.phone, email: form.email, message: form.message,
+        phone: `${dial} ${form.phone.trim()}`, email: form.email, message: form.message,
       });
       setSent(true);
     } catch (err) { setFailed(true); }
@@ -383,7 +421,8 @@ export default function Reverential() {
   };
 
   const submitChecklist = async () => {
-    if (!checklistEmail.trim()) return;
+    setChecklistAttempted(true);
+    if (checklistError) return;
     try {
       await postToWeb3Forms({
         subject: "12-point checklist request — reverentialav.in",
@@ -404,6 +443,9 @@ export default function Reverential() {
     width: "100%", outline: "none",
   };
   const labelStyle = { fontFamily: F.sans, fontSize: 13, color: "#8E8375", marginBottom: 5, display: "block" };
+  const Req = () => <span style={{ color: C.goldLight, marginLeft: 3 }} aria-hidden="true">*</span>;
+  const errStyle = { fontFamily: F.sans, fontSize: 12, color: "#D98B7A", margin: "5px 0 0" };
+  const fieldStyle = (bad) => (bad ? { ...inputStyle, borderColor: "#9E4B38" } : inputStyle);
 
   const pickSector = (e, id) => { setSector(id); scrollTo(e, "sectors"); };
 
@@ -414,6 +456,7 @@ export default function Reverential() {
         * { box-sizing: border-box; }
         input:focus, textarea:focus, select:focus { border-color: ${C.gold} !important; }
         .rev-nav a:hover { color: ${C.goldText} !important; }
+        .rev-social:hover { border-color: ${C.gold} !important; color: ${C.goldLight} !important; }
 
         /* fluid container: padding and width scale with the viewport */
         .rev-wrap { max-width: 1180px; margin-inline: auto;
@@ -461,6 +504,8 @@ export default function Reverential() {
         @media (min-width: 960px) {
           .rev-book { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
         }
+        .rev-care { display: grid; grid-template-columns: 1fr; gap: 1.1rem; }
+        @media (min-width: 760px) { .rev-care { grid-template-columns: 1fr 1fr; } }
         .rev-form { display: grid; grid-template-columns: 1fr; gap: 0.9rem; margin-top: 1.75rem; }
         @media (min-width: 540px) { .rev-form { grid-template-columns: 1fr 1fr; } }
         .rev-form-full { grid-column: 1 / -1; }
@@ -737,6 +782,62 @@ export default function Reverential() {
         </div>
       </Section>
 
+      {/* ---------------- after handover ---------------- */}
+      <Section id="care">
+        <Eyebrow>Optional · annual · cancel any time</Eyebrow>
+        <H2>We do not disappear at handover.</H2>
+        <Lede>
+          The person who signs the contract is rarely the person running the system on a Sunday
+          three years later. A system drifts, staff change, firmware moves on. If you want us to
+          stay involved, we offer two retainers. Neither is a condition of any project.
+        </Lede>
+
+        <div className="rev-care mt-8">
+          {[
+            ["Reverential Care", "Standard", "from ₹12,500 + GST a year", [
+              "One annual measurement check, reverberation, gain structure and coverage compared against the handover figures",
+              "Firmware and DSP updates applied and documented",
+              "One remote support call each quarter",
+              "Priority response when something fails",
+            ]],
+            ["Reverential Care", "Extended", "from ₹22,500 + GST a year", [
+              "Everything in Standard",
+              "Two on site visits a year",
+              "Retraining whenever your operating team changes",
+              "Written equipment condition report with photographs",
+            ]],
+          ].map(([brand, tier, price, points]) => (
+            <div key={tier} style={{ border: `1px solid ${C.line}`, borderRadius: 2, padding: 24 }}>
+              <p className="uppercase" style={{ fontFamily: F.mono, fontSize: 10.5,
+                                                letterSpacing: "0.09em", color: C.goldText, margin: 0 }}>
+                {brand}
+              </p>
+              <h3 style={{ fontFamily: F.serif, fontWeight: 400, fontSize: "1.5rem",
+                           color: C.ink, margin: "6px 0 2px" }}>{tier}</h3>
+              <p style={{ fontFamily: F.mono, fontSize: 13, color: C.body, margin: "0 0 16px" }}>
+                {price}
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                {points.map((t) => (
+                  <li key={t} className="flex" style={{ gap: 11, padding: "9px 0",
+                                                        borderTop: `1px solid ${C.line}` }}>
+                    <Check size={14} strokeWidth={2} color={C.gold} style={{ flexShrink: 0, marginTop: 5 }} />
+                    <span style={{ color: C.body, fontSize: 14.5 }}>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-6" style={{ fontFamily: F.mono, fontSize: 12.5, lineHeight: 1.9,
+                                     color: C.muted, maxWidth: "70ch" }}>
+          The final figure depends on the scale of the system and the travel involved. Ask about it
+          on the consultation call and we will put a number against your building rather than a
+          bracket.
+        </p>
+      </Section>
+
       {/* ---------------- credentials ---------------- */}
       <Section bg={C.surface} id="credentials">
         <H2>Who is doing the work</H2>
@@ -829,16 +930,22 @@ export default function Reverential() {
 
               <div className="rev-form">
                 <div>
-                  <label style={labelStyle}>Your name</label>
-                  <input style={inputStyle} value={form.name} onChange={set("name")} />
+                  <label htmlFor="rv-name" style={labelStyle}>Your name<Req /></label>
+                  <input id="rv-name" name="name" required autoComplete="name"
+                         aria-invalid={attempted && !!errors.name}
+                         style={fieldStyle(attempted && errors.name)}
+                         value={form.name} onChange={set("name")} />
+                  {attempted && errors.name && <p style={errStyle}>{errors.name}</p>}
                 </div>
                 <div>
-                  <label style={labelStyle}>Church or organisation</label>
-                  <input style={inputStyle} value={form.org} onChange={set("org")} />
+                  <label htmlFor="rv-org" style={labelStyle}>Church or organisation</label>
+                  <input id="rv-org" name="organisation" autoComplete="organization"
+                         style={inputStyle} value={form.org} onChange={set("org")} />
                 </div>
                 <div className="rev-form-full">
-                  <label style={labelStyle}>Type of space</label>
-                  <select style={inputStyle} value={form.space} onChange={set("space")}>
+                  <label htmlFor="rv-space" style={labelStyle}>Type of space<Req /></label>
+                  <select id="rv-space" name="space" required style={inputStyle}
+                          value={form.space} onChange={set("space")}>
                     <option>Church or house of worship</option>
                     <option>Auditorium or convention centre</option>
                     <option>School, college or training room</option>
@@ -850,23 +957,43 @@ export default function Reverential() {
                   </select>
                 </div>
                 <div>
-                  <label style={labelStyle}>Phone or WhatsApp</label>
-                  <input style={inputStyle} value={form.phone} onChange={set("phone")} />
+                  <label htmlFor="rv-phone" style={labelStyle}>Phone or WhatsApp<Req /></label>
+                  <div className="flex" style={{ gap: 8 }}>
+                    <select aria-label="Country dialling code" name="dial_code"
+                            value={dial} onChange={(e) => setDial(e.target.value)}
+                            style={{ ...inputStyle, width: "auto", flex: "0 0 auto", paddingRight: 8 }}>
+                      {DIAL_CODES.map(([code, place]) => (
+                        <option key={code} value={code}>{code} {place}</option>
+                      ))}
+                    </select>
+                    <input id="rv-phone" name="phone" type="tel" required
+                           inputMode="numeric" autoComplete="tel-national"
+                           aria-invalid={attempted && !!errors.phone}
+                           className="flex-1"
+                           style={fieldStyle(attempted && errors.phone)}
+                           value={form.phone} onChange={set("phone")} />
+                  </div>
+                  {attempted && errors.phone && <p style={errStyle}>{errors.phone}</p>}
                 </div>
                 <div>
-                  <label style={labelStyle}>Email</label>
-                  <input style={inputStyle} value={form.email} onChange={set("email")} />
+                  <label htmlFor="rv-email" style={labelStyle}>Email<Req /></label>
+                  <input id="rv-email" name="email" type="email" required autoComplete="email"
+                         aria-invalid={attempted && !!errors.email}
+                         style={fieldStyle(attempted && errors.email)}
+                         value={form.email} onChange={set("email")} />
+                  {attempted && errors.email && <p style={errStyle}>{errors.email}</p>}
                 </div>
                 <div className="rev-form-full">
-                  <label style={labelStyle}>What is happening in the space?</label>
-                  <textarea style={{ ...inputStyle, minHeight: 92, resize: "vertical" }}
+                  <label htmlFor="rv-message" style={labelStyle}>What is happening in the space?</label>
+                  <textarea id="rv-message" name="message"
+                            style={{ ...inputStyle, minHeight: 92, resize: "vertical" }}
                             value={form.message} onChange={set("message")}
                             placeholder="For example: the band is loud but the vocals get lost, and the back rows only hear echo." />
                 </div>
               </div>
 
               <div className="flex flex-wrap items-center mt-5" style={{ gap: 12 }}>
-                <Btn onDark onClick={submitConsultation}>
+                <Btn onDark onClick={submitConsultation} disabled={sending || (attempted && hasErrors)}>
                   {sending ? "Sending..." : sent ? "Request received" : "Request my free consultation"}
                 </Btn>
                 <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hello Reverential, I'd like to book the free 20 minute consultation.")}`}
@@ -884,9 +1011,11 @@ export default function Reverential() {
               <p className="mt-4" style={{ fontSize: 13, color: sent ? C.goldLight : "#8E8375", maxWidth: "48ch" }}>
                 {sent
                   ? "Thank you. Your request has reached us and we reply within one working day."
+                  : attempted && hasErrors
+                  ? "Please complete the fields marked with an asterisk."
                   : failed
-                  ? "That did not send. Please check your name and email, or reach us on WhatsApp."
-                  : "We reply within one working day. We do not pass your details to equipment suppliers."}
+                  ? "That did not send. Please try again, or reach us on WhatsApp."
+                  : "Fields marked * are required. We reply within one working day and we do not pass your details to equipment suppliers."}
               </p>
 
               <p style={{ fontFamily: F.mono, fontSize: 13, color: "#B4B0A6", margin: "20px 0 0" }}>
@@ -909,10 +1038,14 @@ export default function Reverential() {
                 </p>
                 <div className="mt-5" style={{ display: "grid", gap: 12, maxWidth: 380 }}>
                   <div>
-                    <label style={labelStyle}>Email</label>
-                    <input style={inputStyle} placeholder="you@example.com" type="email"
+                    <label htmlFor="rv-checklist-email" style={labelStyle}>Email<Req /></label>
+                    <input id="rv-checklist-email" name="checklist_email" type="email" required
+                           autoComplete="email" placeholder="you@example.com"
+                           aria-invalid={checklistAttempted && !!checklistError}
+                           style={fieldStyle(checklistAttempted && checklistError)}
                            value={checklistEmail}
                            onChange={(e) => setChecklistEmail(e.target.value)} />
+                    {checklistAttempted && checklistError && <p style={errStyle}>{checklistError}</p>}
                   </div>
                   <div><Btn onDark variant="ghost" onClick={submitChecklist}>
                     {checklistSent ? "On its way" : "Send me the checklist"}
@@ -998,6 +1131,18 @@ export default function Reverential() {
                 <a href={`https://${SITE}`} target="_blank" rel="noreferrer"
                    style={{ color: "#B4B0A6", textDecoration: "none" }}>{SITE}</a>
               </p>
+              <div className="flex flex-wrap items-center mt-4" style={{ gap: 8 }}>
+                {SOCIALS.map(([name, url]) => (
+                  <a key={name} href={url} target="_blank" rel="noreferrer noopener"
+                     aria-label={`Reverential on ${name}`}
+                     className="rev-social inline-flex items-center uppercase"
+                     style={{ fontFamily: F.mono, fontSize: 10.5, letterSpacing: "0.09em",
+                              padding: "6px 10px", borderRadius: 2, textDecoration: "none",
+                              border: `1px solid ${C.lineDark}`, color: "#B4B0A6" }}>
+                    {name}
+                  </a>
+                ))}
+              </div>
             </div>
             <div>
               <h4 style={{ fontFamily: F.sans, fontWeight: 600, fontSize: 13.5, color: C.ground, marginBottom: 8 }}>
