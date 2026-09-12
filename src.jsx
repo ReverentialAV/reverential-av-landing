@@ -254,49 +254,49 @@ const SECTORS = [
             "Feedback at the pulpit that nobody can permanently cure",
             "The production room grew piece by piece, so streaming and presentation fail mid service",
             "The system only works when one particular volunteer is on the desk"],
-    avl: "Also delivered here: camera, switching and streaming video, presentation and lyric playback for the tech team, and stage lighting that suits a band set and a traditional service equally." },
+    avl: [["Audio", "Line array and distributed speaker systems, wireless microphone systems, digital mixing consoles, in-ear monitor systems, feedback elimination through EQ and speaker placement, SMAART-verified system tuning"], ["Video", "PTZ cameras, multi-camera live switching, YouTube/Facebook streaming, OBS and encoder configuration, LED video walls, projection and screen systems, lyric and presentation software integration"], ["Lighting", "Stage and platform lighting, DMX programming, architectural and altar lighting, LED fixture installation, haze and effects for contemporary worship"], ["Acoustics", "RT60 measurement and reverberation control, acoustic panel design and installation, bass management, STI speech intelligibility verification"], ["Control", "Dante/AES67 audio networking, scheduled automation, single-operator simplified control interfaces"]], },
   { id: "auditoriums", label: "Auditoriums", Icon: Landmark,
     line: "One hall, many uses — speech, music and visiting productions.",
     pains: ["Speech wants a dry room, music wants a live one — tuned by instinct, it serves neither",
             "Visiting productions arrive with a technical rider the house system cannot meet",
             "Balconies and side blocks covered by hope rather than by design",
             "No documented house specification to put in front of a hirer"],
-    avl: "Also delivered here: projection and LED wall, stage and house lighting, and the control system that ties them together." },
+    avl: [["Audio", "Main hang and delay fill systems, stage monitoring, digital FOH consoles, broadcast mix feed, hearing assistance, delay calibration, feedback elimination"], ["Video", "FOH and stage confidence displays, multi-camera recording/streaming, LED video walls, projection, IMAG"], ["Lighting", "Front wash, follow spots, overhead grid, DMX programming, theatrical/concert lighting, house/emergency integration"], ["Acoustics", "Acoustic simulation against seating plan, RT60 targeting, panel/diffuser specification, background noise measurement"], ["Control", "Show control/cue systems, centralised AV control, remote management"]], },
   { id: "education", label: "Education", Icon: GraduationCap,
     line: "If the back row cannot follow the lecture, the room is the problem.",
     pains: ["Ceiling fans and split ACs sitting a few decibels below the teacher's voice",
             "Teachers pushing their voice all week and losing it by Wednesday",
             "A single front loudspeaker adding volume without adding clarity",
             "Recorded and hybrid lectures that sound like a tunnel"],
-    avl: "Also delivered here: lecture capture and streaming video, displays, and lighting for halls and lecture theatres." },
+    avl: [["Audio", "Lecture hall PA, ceiling speaker distribution, wireless mics for lecturers, conference/seminar audio, feedback elimination"], ["Video", "Laser projectors, interactive flat panels, lecture capture/recording, video conferencing, digital signage"], ["Lighting", "Energy-efficient LED, auditorium/multipurpose lighting, zoned control"], ["Acoustics", "Background noise assessment, speech clarity for learning, noise reduction between spaces"], ["Control", "One-touch interfaces for non-technical staff, scheduled automation"]], },
   { id: "corporate", label: "Corporate", Icon: Building2,
     line: "Video calls where the far end hears every word the first time.",
     pains: ["Glass-walled rooms with nothing in them to absorb a voice",
             "\"Camera problems\" and \"network problems\" that are room problems",
             "Town halls held in atriums and cafeterias never designed for speech",
             "Rooms certified on paper but never verified in practice"],
-    avl: "Also delivered here: conference cameras and displays, digital signage, and meeting room lighting control." },
+    avl: [["Audio", "Boardroom/conference audio, ceiling/surface speakers, beamforming/boundary mics, Teams/Zoom/Webex certified, all-hands PA, feedback elimination"], ["Video", "Video walls, large-format displays, video conferencing systems, wireless presentation, digital signage, hybrid meeting infrastructure"], ["Lighting", "Boardroom/presentation lighting, architectural/ambient, circadian-tuned LED, zoned scene control"], ["Acoustics", "Speech intelligibility in meeting rooms, acoustic privacy between spaces, reverberation control"], ["Control", "One-touch room control (Crestron/Q-SYS/AMX compatible), remote IT management, scheduled automation"]], },
   { id: "hospitality", label: "Hospitality", Icon: UtensilsCrossed,
     line: "Atmosphere without the shouting.",
     pains: ["The shouting spiral — guests raise their voices, so everyone else does too",
             "Polished concrete, brick, glass and steel: beautiful, acoustically hostile",
             "One volume for a bar that wants energy and a dining room that wants conversation",
             "Systems fitted during interior works by a contractor with no measurement kit"],
-    avl: "Also delivered here: display and menu screens, and lighting scenes that change with the time of day." },
+    avl: [["Audio", "Zoned background music, restaurant/lobby/poolside/ballroom audio, event PA, outdoor speakers, feedback elimination for event use"], ["Video", "Digital signage, ballroom projection/LED walls, outdoor displays, IP TV distribution"], ["Lighting", "Ambient/accent/event lighting, façade and landscape, DMX-controlled event lighting for banquets"], ["Acoustics", "Noise control between dining/event spaces, ambient level management, outdoor sound containment"], ["Control", "Property management integration, scheduled zone programming, staff-operable interfaces"]], },
   { id: "studios", label: "Studios", Icon: Mic,
     line: "Studios, control rooms and church production rooms, where small spaces are hardest to get right.",
     pains: ["In a small room the space colours everything you hear",
             "The mix does not translate to a car, headphones or the auditorium",
             "Production rooms assembled piece by piece, then failing mid service",
             "Audio, video and control traffic all fighting over one unmanaged switch"],
-    avl: "Also delivered here: camera, switching and streaming video, with key and background lighting designed for it." },
+    avl: [["Audio", "Studio monitor placement/calibration, recording chain design, talkback/headphone distribution, acoustic isolation, Dante-networked recording"], ["Video", "Multi-camera rigs, green screen/virtual production, streaming/broadcast output, video switching/recording"], ["Lighting", "Studio lighting for video, colour-accurate LED panels, DMX-controlled broadcast setups"], ["Acoustics", "Full acoustic design: absorption, diffusion, bass trapping, flutter echo elimination, RT60 targeting for recording vs podcast vs broadcast"], ["Control", "DAW integration, hardware/software routing, remote recording over network"]], },
   { id: "residential", label: "Residential", Icon: Clapperboard,
     line: "The performance you already paid for, out of the room you have.",
     pains: ["Bass overwhelming in one seat and absent in the next",
             "Dialogue you keep rewinding, because of reflections you cannot hear as reflections",
             "Seating placed for the furniture, not for the sound",
             "Cinema levels travelling through the rest of the house after nine at night"],
-    avl: "Also delivered here: projection or LED display, picture calibration, and cinema lighting scenes." },
+    avl: [["Audio", "Home theatre surround, whole-home multi-room audio, outdoor/poolside speakers, high-fidelity listening rooms"], ["Video", "Home theatre projection/screens, 4K display, media server/streaming integration"], ["Lighting", "Smart lighting control, home theatre scene lighting, landscape/architectural, home automation integration"], ["Acoustics", "Home theatre acoustic treatment, dedicated listening room design, soundproofing between spaces"], ["Control", "Single-app smart home (Control4/Savant/KNX compatible), voice control, scheduled scenes"]], },
 ];
 
 const PHASES = [
@@ -352,6 +352,8 @@ const FAQS = [
    "No. Your team knows your services, your musicians and your building, and none of that transfers. Our job is to give them a system that behaves the same way every week and documentation that survives a handover, then train them on it."],
   ["Where do you work?",
    "Based in Chennai and Bengaluru, we work across Tamil Nadu, Kerala and Karnataka, from the capital cities down through Coimbatore, Trichy, Madurai and the Nagercoil and Kanniyakumari belt, and across Kochi, Thiruvananthapuram and the wider Kerala coast. Andhra Pradesh, Telangana and Hyderabad are covered from Bengaluru. Projects elsewhere in India are taken on merit, as are Gulf projects. Travel and stay are quoted separately and openly."],
+  ["What if something fails before a service or event?",
+   "Call or WhatsApp +91 99622 32223 directly. We will diagnose the fault on the call and tell you within minutes whether it is fixable remotely. If we need to be on site, we will tell you honestly how fast we can get there. Audio failures before a Sunday service, a conference or a feast day are exactly what this number is for."],
 ];
 
 /* ------------------------------------------------------------------ page */
@@ -729,13 +731,46 @@ export default function Reverential() {
               ))}
             </ul>
             {active.avl && (
-              <p style={{ margin: "16px 0 0", paddingTop: 14, fontSize: 13.5, lineHeight: 1.6,
-                          color: C.muted, borderTop: `1px solid ${C.line}`, maxWidth: "62ch" }}>
-                {active.avl}
-              </p>
+              <div style={{ margin: "16px 0 0", paddingTop: 14, borderTop: `1px solid ${C.line}` }}>
+                <p className="uppercase" style={{ fontFamily: F.mono, fontSize: 10.5,
+                                                  letterSpacing: "0.09em", color: C.goldText, marginBottom: 10 }}>
+                  Also delivered here
+                </p>
+                {active.avl.map(([label, text]) => (
+                  <p key={label} style={{ margin: "0 0 8px", fontSize: 13.5, lineHeight: 1.6,
+                                          color: C.muted, maxWidth: "62ch" }}>
+                    <strong style={{ color: C.body, fontWeight: 600 }}>{label}:</strong> {text}
+                  </p>
+                ))}
+              </div>
             )}
           </div>
         </div>
+
+        {active.id === "churches" && (
+          <div className="mt-8" style={{ border: `1px solid ${C.line}`, borderRadius: 2,
+                                        background: C.ground, padding: 28 }}>
+            <Eyebrow>Why churches come first</Eyebrow>
+                <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
+                  I grew up in church. My father has been a church committee member my whole life, and I have been involved since I was old enough to carry a cable. I played drums and Roland SPD-30 in worship, picked up acoustic guitar and sang, served as head of the youth fellowship, and still do — and I am the technical support for my own church today.
+                </p>
+                <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
+                  I studied audio engineering in the first place to serve the church.
+                </p>
+                <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
+                  Church music is the genre I love most. The sanctuary is the room I know best after my own home.
+                </p>
+                <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
+                  I started Reverential because I watched churches being served by contractors who would walk in, sell you as much equipment as they could, move boxes, install without any real understanding of what a church needs or any conviction about why it matters — and walk away. No measurement. No accountability. No purpose behind the work beyond the invoice.
+                </p>
+                <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
+                  Every congregation deserves to be served — not sold to. We named this company Reverential because that is exactly what it means: a deep reverence toward God, toward the Church, and toward every person who walks through those doors to worship. That is not a positioning statement. It is the reason this work exists.
+                </p>
+            <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
+              — Thomas Jeffrin, Founder
+            </p>
+          </div>
+        )}
       </Section>
 
       {/* ---------------- method ---------------- */}
@@ -843,29 +878,26 @@ export default function Reverential() {
 
         <div className="rev-care mt-8">
           {[
-            ["Reverential Care", "Standard", "from ₹12,500 + GST a year", [
+            ["Reverential Care", "Standard", [
               "One annual measurement check, reverberation, gain structure and coverage compared against the handover figures",
               "Firmware and DSP updates applied and documented",
               "One remote support call each quarter",
               "Priority response when something fails",
             ]],
-            ["Reverential Care", "Extended", "from ₹22,500 + GST a year", [
+            ["Reverential Care", "Extended", [
               "Everything in Standard",
               "Two on site visits a year",
               "Retraining whenever your operating team changes",
               "Written equipment condition report with photographs",
             ]],
-          ].map(([brand, tier, price, points]) => (
+          ].map(([brand, tier, points]) => (
             <div key={tier} style={{ border: `1px solid ${C.line}`, borderRadius: 2, padding: 24 }}>
               <p className="uppercase" style={{ fontFamily: F.mono, fontSize: 10.5,
                                                 letterSpacing: "0.09em", color: C.goldText, margin: 0 }}>
                 {brand}
               </p>
               <h3 style={{ fontFamily: F.serif, fontWeight: 400, fontSize: "1.5rem",
-                           color: C.ink, margin: "6px 0 2px" }}>{tier}</h3>
-              <p style={{ fontFamily: F.mono, fontSize: 13, color: C.body, margin: "0 0 16px" }}>
-                {price}
-              </p>
+                           color: C.ink, margin: "6px 0 16px" }}>{tier}</h3>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {points.map((t) => (
                   <li key={t} className="flex" style={{ gap: 11, padding: "9px 0",
@@ -881,9 +913,13 @@ export default function Reverential() {
 
         <p className="mt-6" style={{ fontFamily: F.mono, fontSize: 12.5, lineHeight: 1.9,
                                      color: C.muted, maxWidth: "70ch" }}>
-          The final figure depends on the scale of the system and the travel involved. Ask about it
-          on the consultation call and we will put a number against your building rather than a
-          bracket.
+          Priced to the scale of the system. We quote each retainer against the actual system
+          installed. Ask on your consultation call.
+        </p>
+        <p className="mt-2" style={{ fontFamily: F.mono, fontSize: 12.5, lineHeight: 1.9,
+                                     color: C.muted, maxWidth: "70ch" }}>
+          Each Care client receives a dedicated support portal for fault logging, warranty tracking
+          and service history.
         </p>
       </Section>
 
@@ -1166,6 +1202,17 @@ export default function Reverential() {
           </div>
         </div>
       </footer>
+
+      <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer"
+         aria-label="Chat with us on WhatsApp"
+         title="We're here — day or night"
+         style={{ position: "fixed", bottom: 24, right: 24, zIndex: 60,
+                  width: 56, height: 56, borderRadius: "50%",
+                  background: C.dark, border: `2px solid ${C.gold}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: "0 4px 18px rgba(0,0,0,0.35)", textDecoration: "none" }}>
+        <MessageCircle size={26} strokeWidth={1.8} color="#FFFFFF" />
+      </a>
     </div>
   );
 }
