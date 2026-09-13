@@ -235,17 +235,18 @@ function DecayChart() {
 /* ------------------------------------------------------------------ data */
 const FAILURES = [
   { title: "The speech intelligibility gap",
-    body: "Sound builds up on tile, glass, concrete and plaster and arrives late, masking the consonants that carry meaning. Turning the system up feeds the same reflections. Clear at the front, unusable at the back — and no loudspeaker will fix it." },
+    body: "The instinctive response is to turn the system up. It only feeds the same reflections and leaves the back row no clearer. We prevent it by measuring the room's decay and coverage first, then treating and aiming the system for where people actually sit." },
   { title: "Over-specifying hardware to solve a room",
-    body: "When margin comes from equipment, the diagnosis is always that there was not enough of it. Organisations replace their system two or three times before anyone measures the room, and each replacement inherits the same problem." },
+    body: "When margin comes from equipment rather than measurement, the diagnosis is always that there was not enough of it — and each replacement inherits the same unmeasured room. We prevent it by designing to the room's measured behaviour first, so hardware is specified to solve the actual problem rather than to compensate for it." },
   { title: "Nobody measured anything",
-    body: "A proposal that names brands and quantities but cannot state the predicted clarity score at the back row is a shopping list, not a design. Ask any supplier for their coverage prediction before you sign." },
+    body: "A proposal that names brands and quantities but cannot state the predicted clarity score at the back row is a shopping list, not a design, so the client only finds out whether it works after paying for it and living with it. We prevent it by giving a coverage prediction before you sign, and a measured commissioning report before we hand over." },
   { title: "Operator knowledge that walks out of the building",
-    body: "An undocumented system lives in one person's head. When they travel or leave, the settings drift and the system degrades. Documentation is what makes a system survive a handover." },
+    body: "An undocumented system lives in one person's head, so when they travel or leave, the settings drift and the system quietly degrades until someone notices mid-service. We prevent it with written procedures, a training session on the system as installed, and documentation built to survive a change of operator." },
 ];
 
 const SECTORS = [
   { id: "churches", label: "Churches", Icon: Church,
+    img: "photos/churches-advent-hero.webp", imgAlt: "Digital mixing console in operation during a live church service",
     line: "From full contemporary worship bands to cathedral organs and hymns, the words have to reach the back row.",
     pains: ["The band is loud but the vocals get lost underneath it",
             "Clear in the front rows, echo at the back, whatever the equipment cost",
@@ -256,8 +257,9 @@ const SECTORS = [
             "The system only works when one particular volunteer is on the desk"],
     avl: [["Audio", "Line array and distributed speaker systems, wireless microphone systems, digital mixing consoles, in-ear monitor systems, feedback elimination through EQ and speaker placement, SMAART-verified system tuning"], ["Video", "PTZ cameras, multi-camera live switching, YouTube/Facebook streaming, OBS and encoder configuration, LED video walls, projection and screen systems, lyric and presentation software integration"], ["Lighting", "Stage and platform lighting, DMX programming, architectural and altar lighting, LED fixture installation, haze and effects for contemporary worship"], ["Acoustics", "RT60 measurement and reverberation control, acoustic panel design and installation, bass management, STI speech intelligibility verification"], ["Control", "Dante/AES67 audio networking, scheduled automation, single-operator simplified control interfaces"]], },
   { id: "auditoriums", label: "Auditoriums", Icon: Landmark,
-    line: "One hall, many uses — speech, music and visiting productions.",
-    pains: ["Speech wants a dry room, music wants a live one — tuned by instinct, it serves neither",
+    img: "photos/auditoriums-hall.webp", imgAlt: "A professionally designed auditorium with stage, seating and integrated line array system",
+    line: "One hall, many uses: speech, music and visiting productions.",
+    pains: ["Speech wants a dry room, music wants a live one. Tuned by instinct, it serves neither.",
             "Visiting productions arrive with a technical rider the house system cannot meet",
             "Balconies and side blocks covered by hope rather than by design",
             "No documented house specification to put in front of a hirer"],
@@ -270,6 +272,7 @@ const SECTORS = [
             "Recorded and hybrid lectures that sound like a tunnel"],
     avl: [["Audio", "Lecture hall PA, ceiling speaker distribution, wireless mics for lecturers, conference/seminar audio, feedback elimination"], ["Video", "Laser projectors, interactive flat panels, lecture capture/recording, video conferencing, digital signage"], ["Lighting", "Energy-efficient LED, auditorium/multipurpose lighting, zoned control"], ["Acoustics", "Background noise assessment, speech clarity for learning, noise reduction between spaces"], ["Control", "One-touch interfaces for non-technical staff, scheduled automation"]], },
   { id: "corporate", label: "Corporate", Icon: Building2,
+    img: "photos/corporate-boardroom.webp", imgAlt: "A fully equipped corporate boardroom with conference microphones and display system",
     line: "Video calls where the far end hears every word the first time.",
     pains: ["Glass-walled rooms with nothing in them to absorb a voice",
             "\"Camera problems\" and \"network problems\" that are room problems",
@@ -277,13 +280,15 @@ const SECTORS = [
             "Rooms certified on paper but never verified in practice"],
     avl: [["Audio", "Boardroom/conference audio, ceiling/surface speakers, beamforming/boundary mics, Teams/Zoom/Webex certified, all-hands PA, feedback elimination"], ["Video", "Video walls, large-format displays, video conferencing systems, wireless presentation, digital signage, hybrid meeting infrastructure"], ["Lighting", "Boardroom/presentation lighting, architectural/ambient, circadian-tuned LED, zoned scene control"], ["Acoustics", "Speech intelligibility in meeting rooms, acoustic privacy between spaces, reverberation control"], ["Control", "One-touch room control (Crestron/Q-SYS/AMX compatible), remote IT management, scheduled automation"]], },
   { id: "hospitality", label: "Hospitality", Icon: UtensilsCrossed,
+    img: "photos/hospitality-event-ballroom.webp", imgAlt: "A large hotel ballroom event with full audience and professional AV setup",
     line: "Atmosphere without the shouting.",
-    pains: ["The shouting spiral — guests raise their voices, so everyone else does too",
+    pains: ["The shouting spiral: guests raise their voices, so everyone else does too",
             "Polished concrete, brick, glass and steel: beautiful, acoustically hostile",
             "One volume for a bar that wants energy and a dining room that wants conversation",
             "Systems fitted during interior works by a contractor with no measurement kit"],
     avl: [["Audio", "Zoned background music, restaurant/lobby/poolside/ballroom audio, event PA, outdoor speakers, feedback elimination for event use"], ["Video", "Digital signage, ballroom projection/LED walls, outdoor displays, IP TV distribution"], ["Lighting", "Ambient/accent/event lighting, façade and landscape, DMX-controlled event lighting for banquets"], ["Acoustics", "Noise control between dining/event spaces, ambient level management, outdoor sound containment"], ["Control", "Property management integration, scheduled zone programming, staff-operable interfaces"]], },
   { id: "studios", label: "Studios", Icon: Mic,
+    img: "photos/studios-control-room.webp", imgAlt: "A studio engineer at a professional mixing and monitoring console",
     line: "Studios, control rooms and church production rooms, where small spaces are hardest to get right.",
     pains: ["In a small room the space colours everything you hear",
             "The mix does not translate to a car, headphones or the auditorium",
@@ -291,6 +296,7 @@ const SECTORS = [
             "Audio, video and control traffic all fighting over one unmanaged switch"],
     avl: [["Audio", "Studio monitor placement/calibration, recording chain design, talkback/headphone distribution, acoustic isolation, Dante-networked recording"], ["Video", "Multi-camera rigs, green screen/virtual production, streaming/broadcast output, video switching/recording"], ["Lighting", "Studio lighting for video, colour-accurate LED panels, DMX-controlled broadcast setups"], ["Acoustics", "Full acoustic design: absorption, diffusion, bass trapping, flutter echo elimination, RT60 targeting for recording vs podcast vs broadcast"], ["Control", "DAW integration, hardware/software routing, remote recording over network"]], },
   { id: "residential", label: "Residential", Icon: Clapperboard,
+    img: "photos/residential-home-theatre.webp", imgAlt: "A professionally designed home theatre with acoustic panels and tiered seating",
     line: "The performance you already paid for, out of the room you have.",
     pains: ["Bass overwhelming in one seat and absent in the next",
             "Dialogue you keep rewinding, because of reflections you cannot hear as reflections",
@@ -301,9 +307,11 @@ const SECTORS = [
 
 const PHASES = [
   { n: "01", title: "Measured assessment", Icon: Ruler,
+    img: "photos/method-phase1-assessment.webp", imgAlt: "Engineer reviewing measurement software on a laptop beside a mixing console",
     body: "We visit the space in use and again when it is empty, and listen from where your audience actually sits. Reverberation, speech clarity, background noise and the existing system's response are measured with calibrated equipment, so the cause is identified rather than guessed at.",
-    deliverable: "A written site survey report with annotated measurement graphs, prioritised recommendations and indicative budget ranges — yours to keep whether or not you continue." },
+    deliverable: "A written site survey report with annotated measurement graphs, prioritised recommendations and indicative budget ranges, yours to keep whether or not you continue." },
   { n: "02", title: "Acoustic simulation", Icon: Activity,
+    img: "photos/method-phase2-simulation.webp", imgAlt: "EASE Focus 3 acoustic coverage prediction showing SPL heatmap across seating plan",
     body: "Treatment and loudspeaker layout are modelled in EASE Focus 3 against your actual seating plan. We know what every seat will receive before a single box is ordered.",
     deliverable: "Coverage prediction across the seating plan, targeting a 3 dB spread from the front row to the back, with the acoustic treatment schedule that makes it achievable." },
   { n: "03", title: "System design", Icon: FileText,
@@ -313,11 +321,12 @@ const PHASES = [
     body: "Rigging, cabling, networking and installation, scheduled around your calendar. All overhead rigging is installed to load-rated standards with written load calculations. Existing equipment is reused wherever it is genuinely fit for purpose.",
     deliverable: "As-built cable schedule, rack elevations, rigging documentation and signal flow drawing matching what is actually in the building." },
   { n: "05", title: "Tuning and verification", Icon: Activity,
+    img: "photos/method-phase5-smaart.webp", imgAlt: "Smaart v9 transfer function measurement showing magnitude and phase response",
     body: "Time alignment, equalisation and gain structure set by measurement in Smaart v9, then verified at the seats. The room is measured again and compared against the prediction from stage two.",
     deliverable: "A commissioning report with before and after transfer functions and intelligibility figures. If the result falls short of the prediction and the cause is within our scope, correcting it is on us." },
   { n: "06", title: "Documentation and training", Icon: FileText,
     body: "Your own staff or volunteers are trained on the system as installed, not on a generic manual. Procedures are written for the people who will actually operate it.",
-    deliverable: "Operating manual, scene list, written procedures and a training session — so the system survives a change of operator." },
+    deliverable: "Operating manual, scene list, written procedures and a training session, so the system keeps working when the team changes." },
 ];
 
 const CREDENTIALS = [
@@ -326,7 +335,7 @@ const CREDENTIALS = [
    "Verified before-and-after transfer functions on every project. The credential that turns opinion into evidence."],
   ["Diploma in Audio Engineering and Music Production",
    "AAT College, Chennai (formerly SAE)",
-   "Formal grounding in signal flow, acoustics and production — the foundation the rest is built on."],
+   "Formal grounding in signal flow, acoustics and production: the foundation the rest is built on."],
   ["Architectural Acoustics",
    "SWAYAM / NPTEL · in progress, 2026",
    "The absorption, geometry and reverberation recommendations behind every survey report."],
@@ -572,13 +581,13 @@ export default function Reverential() {
               <h1 style={{ fontFamily: F.serif, fontWeight: 400, letterSpacing: "-0.015em",
                            fontSize: "clamp(2.1rem, 1.5rem + 3vw, 3.7rem)", lineHeight: 1.07,
                            color: C.ink, marginBottom: 20 }}>
-                They can hear the sound. They can’t understand the words.
+                When the sound fails, nothing else matters.
               </h1>
               <Lede>
-                We design and deploy audiovisual, acoustic and lighting systems. We measure the
-                space with calibrated instruments to find out what is actually going wrong, engineer
-                the solution that fixes it, and prove the finished system works before we hand it
-                over.
+                New spaces get one chance to be designed correctly. Existing ones rarely get the
+                measurements that would explain why they keep failing. Either way, the
+                starting point is the same: we measure the room, design to what we find,
+                and prove the result before we hand over.
               </Lede>
               <div className="flex flex-wrap mt-8" style={{ gap: 12 }}>
                 <Btn href="#book">Book a Free 20-Minute Consultation</Btn>
@@ -592,11 +601,16 @@ export default function Reverential() {
 
       {/* ---------------- disciplines ---------------- */}
       <Section>
+        <p style={{ fontFamily: F.serif, fontStyle: "italic",
+                    fontSize: "clamp(1rem, 0.85rem + 0.5vw, 1.15rem)",
+                    lineHeight: 1.55, color: C.muted, maxWidth: "56ch",
+                    marginBottom: "1.8rem" }}>
+          A poor picture with good sound: people stay. Good picture with bad sound:
+          people leave. Sound is the foundation everything else is built on.
+        </p>
         <H2>Audio, video, lighting and acoustics, as one system.</H2>
         <Lede>
-          We specialise in all four. They are designed together and delivered by one team, so the
-          picture, the light and the sound answer to the same room rather than to four separate
-          contracts.
+          Designed together, delivered by one team, so everything answers to the same room.
         </Lede>
         <div className="rev-avl mt-8">
           <div>
@@ -660,14 +674,31 @@ export default function Reverential() {
         </div>
         <p className="mt-6" style={{ color: C.body, maxWidth: "72ch" }}>
           At the back, the direct sound has faded but the reflections have not, so one word smears
-          into the next. Turning up the volume raises both together. The fix is in the room and in
-          the system design.
+          into the next. The fix is in the room and in the system design.
         </p>
       </Section>
 
       {/* ---------------- failure modes ---------------- */}
       <Section>
-        <H2>The equipment is rarely at fault.</H2>
+        <blockquote style={{
+          borderLeft: `3px solid ${C.gold}`,
+          margin: "0 0 2rem 0",
+          padding: "0.5rem 0 0.5rem 1.4rem",
+          fontFamily: F.serif,
+          fontStyle: "italic",
+          fontSize: "clamp(1.6rem, 1rem + 2.2vw, 2.8rem)",
+          lineHeight: 1.15,
+          color: C.ink,
+          maxWidth: "22ch"
+        }}>
+          They can hear the sound. They can’t understand the words.
+        </blockquote>
+        <h3 style={{ fontFamily: F.serif, fontWeight: 400,
+                     fontSize: "clamp(1.05rem, 0.85rem + 0.55vw, 1.25rem)",
+                     letterSpacing: "-0.01em", lineHeight: 1.3,
+                     color: C.muted, margin: "0 0 1rem 0" }}>
+          The equipment is rarely at fault.
+        </h3>
         <Lede>
           Most organisations replace their sound system two or three times before anyone measures
           the room. Each new system inherits the problem the old one had.
@@ -715,6 +746,11 @@ export default function Reverential() {
             <h3 className="mt-4" style={{ fontFamily: F.serif, fontWeight: 400, fontSize: "1.5rem",
                                           lineHeight: 1.25, color: C.ink }}>{active.label}</h3>
             <p className="mt-2" style={{ color: C.body, maxWidth: "34ch" }}>{active.line}</p>
+            {active.img && (
+              <img src={active.img} alt={active.imgAlt || active.label} loading="lazy"
+                   className="w-full h-auto mt-5"
+                   style={{ borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+            )}
           </div>
           <div className="rev-panel-r">
             <p className="uppercase" style={{ fontFamily: F.mono, fontSize: 10.5,
@@ -734,7 +770,7 @@ export default function Reverential() {
               <div style={{ margin: "16px 0 0", paddingTop: 14, borderTop: `1px solid ${C.line}` }}>
                 <p className="uppercase" style={{ fontFamily: F.mono, fontSize: 10.5,
                                                   letterSpacing: "0.09em", color: C.goldText, marginBottom: 10 }}>
-                  Also delivered here
+                  What we deploy in this space
                 </p>
                 {active.avl.map(([label, text]) => (
                   <p key={label} style={{ margin: "0 0 8px", fontSize: 13.5, lineHeight: 1.6,
@@ -751,8 +787,16 @@ export default function Reverential() {
           <div className="mt-8" style={{ border: `1px solid ${C.line}`, borderRadius: 2,
                                         background: C.ground, padding: 28 }}>
             <Eyebrow>Why churches come first</Eyebrow>
+            <div className="flex flex-wrap mt-5" style={{ gap: 14 }}>
+              <img src={"photos/churches-santhome-wide.webp"} alt="Interior of Santhome Cathedral Basilica, Chennai"
+                   loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: "auto",
+                   borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+              <img src={"photos/churches-advent-alt.webp"} alt="Digital mixing console during worship, alternate angle"
+                   loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: "auto",
+                   borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+            </div>
                 <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
-                  I grew up in church. My father has been a church committee member my whole life, and I have been involved since I was old enough to carry a cable. I played drums and Roland SPD-30 in worship, picked up acoustic guitar and sang, served as head of the youth fellowship, and still do — and I am the technical support for my own church today.
+                  I grew up in church. My father has served on the church committee for as long as I can remember, and I have been involved since I was old enough to carry a cable. I played drums and a Roland percussion pad in worship, picked up acoustic guitar and sang, served as head of the youth fellowship, and remain an active part of it, and I am the technical support for my own church today.
                 </p>
                 <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
                   I studied audio engineering in the first place to serve the church.
@@ -761,10 +805,10 @@ export default function Reverential() {
                   Church music is the genre I love most. The sanctuary is the room I know best after my own home.
                 </p>
                 <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
-                  I started Reverential because I watched churches being served by contractors who would walk in, sell you as much equipment as they could, move boxes, install without any real understanding of what a church needs or any conviction about why it matters — and walk away. No measurement. No accountability. No purpose behind the work beyond the invoice.
+                  I started Reverential because I watched churches being served by contractors who would walk in, sell you as much equipment as they could, move boxes, install without any real understanding of what a church needs or any conviction about why it matters, and walk away. No measurement. No accountability. No purpose behind the work beyond the invoice.
                 </p>
                 <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
-                  Every congregation deserves to be served — not sold to. We named this company Reverential because that is exactly what it means: a deep reverence toward God, toward the Church, and toward every person who walks through those doors to worship. That is not a positioning statement. It is the reason this work exists.
+                  Every congregation deserves to be served, not sold to. We named this company Reverential because that is exactly what it means: a deep reverence toward God, toward the Church, and toward every person who walks through those doors to worship. That is not a positioning statement. It is the reason this work exists.
                 </p>
             <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
               — Thomas Jeffrin, Founder
@@ -800,6 +844,11 @@ export default function Reverential() {
                 {open && (
                   <div className="rev-phase-body">
                     <p style={{ color: C.body }}>{p.body}</p>
+                    {p.img && (
+                      <img src={p.img} alt={p.imgAlt || p.title} loading="lazy"
+                           style={{ width: "100%", maxWidth: 480, height: "auto", marginTop: 14,
+                                    borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+                    )}
                     <div className="flex" style={{ gap: 10, marginTop: 14, padding: "14px 16px",
                                                    background: C.surface, borderRadius: 2,
                                                    borderLeft: `2px solid ${C.gold}` }}>
@@ -864,25 +913,51 @@ export default function Reverential() {
           judgement, held to a standard that has to last a decade and be run by people who were not
           there when it was built.
         </p>
+
+        <div className="flex flex-wrap mt-8" style={{ gap: 14 }}>
+          <img src={"photos/credentials-cl5-dusk.webp"} alt="Digital mixing console at a waterfront event at dusk, Dubai"
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+          <img src={"photos/credentials-vtx-rigging.webp"} alt="Line array speaker system being rigged on site"
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+          <img src={"photos/credentials-digico-selfie.webp"} alt="Engineer at a DiGiCo digital mixing console"
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+          <img src={"photos/hospitality-ballroom.webp"} alt="Line array speaker system at a ballroom event"
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+          <img src={"photos/auditoriums-arena.webp"} alt="Large arena interior with rigged line array and lighting"
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+          <img src={"photos/churches-santhome-altar.webp"} alt="Wooden altar interior with illuminated cross"
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+        </div>
       </Section>
 
       {/* ---------------- after handover ---------------- */}
       <Section id="care">
-        <Eyebrow>Optional · annual · cancel any time</Eyebrow>
+        <Eyebrow>After handover</Eyebrow>
         <H2>We do not disappear at handover.</H2>
         <Lede>
-          The person who signs the contract is rarely the person running the system on a Sunday
-          three years later. A system drifts, staff change, firmware moves on. If you want us to
-          stay involved, we offer two retainers. Neither is a condition of any project.
+          Every handover includes a written commission report, a trained operator, and a system
+          verified to work. After that, we are always reachable. Emergencies do not check what
+          plan you are on, and neither do we.
         </Lede>
 
+        <p className="mt-4" style={{ color: C.body, maxWidth: "66ch" }}>
+          Reverential Care is what we do between calls. Scheduled measurement checks,
+          firmware and DSP updates, warranty tracking, documentation kept current, running in the background while you run your organisation. You activate it
+          once, at any point after handover. After that, it works.
+        </p>
         <div className="rev-care mt-8">
           {[
             ["Reverential Care", "Standard", [
               "One annual measurement check, reverberation, gain structure and coverage compared against the handover figures",
               "Firmware and DSP updates applied and documented",
               "One remote support call each quarter",
-              "Priority response when something fails",
+              "Priority scheduling for site work and support requests",
             ]],
             ["Reverential Care", "Extended", [
               "Everything in Standard",
@@ -918,8 +993,16 @@ export default function Reverential() {
         </p>
         <p className="mt-2" style={{ fontFamily: F.mono, fontSize: 12.5, lineHeight: 1.9,
                                      color: C.muted, maxWidth: "70ch" }}>
-          Each Care client receives a dedicated support portal for fault logging, warranty tracking
-          and service history.
+          Care clients also receive a dedicated support portal: every fault logged, every
+          update documented, full service history available whenever you need it.
+        </p>
+        <p className="mt-4" style={{ fontFamily: F.mono, fontSize: 12.5,
+                                     lineHeight: 1.9, color: C.ink,
+                                     maxWidth: "70ch" }}>
+          When something fails, call +91 99622 32223. The diagnostic call is always
+          free. If the fault is fixable on the call, we fix it at no charge. Work
+          that needs a site visit or extended support is quoted and agreed before we
+          proceed. Care clients have that covered within their plan.
         </p>
       </Section>
 
@@ -1205,7 +1288,7 @@ export default function Reverential() {
 
       <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer"
          aria-label="Chat with us on WhatsApp"
-         title="We're here — day or night"
+         title="We're here, day or night"
          style={{ position: "fixed", bottom: 24, right: 24, zIndex: 60,
                   width: 56, height: 56, borderRadius: "50%",
                   background: C.dark, border: `2px solid ${C.gold}`,
