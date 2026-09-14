@@ -281,7 +281,7 @@ const SECTORS = [
             "Rooms certified on paper but never verified in practice"],
     avl: [["Audio", "Boardroom/conference audio, ceiling/surface speakers, beamforming/boundary mics, Teams/Zoom/Webex certified, all-hands PA, feedback elimination"], ["Video", "Video walls, large-format displays, video conferencing systems, wireless presentation, digital signage, hybrid meeting infrastructure"], ["Lighting", "Boardroom/presentation lighting, architectural/ambient, circadian-tuned LED, zoned scene control"], ["Acoustics", "Speech intelligibility in meeting rooms, acoustic privacy between spaces, reverberation control"], ["Control", "One-touch room control (Crestron/Q-SYS/AMX compatible), remote IT management, scheduled automation"]], },
   { id: "hospitality", label: "Hospitality", Icon: UtensilsCrossed,
-    img: "photos/hospitality-event-ballroom.webp", imgAlt: "A large hotel ballroom event with full audience and professional AV setup",
+    img: "photos/hospitality-green-decorated.webp", imgAlt: "A high-end hotel event space with decorated dining tables and floral centerpieces",
     line: "Atmosphere without the shouting.",
     pains: ["The shouting spiral: guests raise their voices, so everyone else does too",
             "Polished concrete, brick, glass and steel: beautiful, acoustically hostile",
@@ -312,6 +312,7 @@ const PHASES = [
     body: "We visit the space in use and again when it is empty, and listen from where your audience actually sits. Reverberation, speech clarity, background noise and the existing system's response are measured with calibrated equipment, so the cause is identified rather than guessed at.",
     deliverable: "A written site survey report with annotated measurement graphs, prioritised recommendations and indicative budget ranges, yours to keep whether or not you continue." },
   { n: "02", title: "Acoustic simulation", Icon: Activity,
+    img: "photos/method-phase2-simulation.webp", imgAlt: "EASE Focus 3 acoustic coverage prediction showing SPL heatmap across seating plan",
     body: "Treatment and loudspeaker layout are modelled in EASE Focus 3 against your actual seating plan. We know what every seat will receive before a single box is ordered.",
     deliverable: "Coverage prediction across the seating plan, targeting a 3 dB spread from the front row to the back, with the acoustic treatment schedule that makes it achievable." },
   { n: "03", title: "System design", Icon: FileText,
@@ -322,6 +323,7 @@ const PHASES = [
     body: "Rigging, cabling, networking and installation, scheduled around your calendar. All overhead rigging is installed to load-rated standards with written load calculations. Existing equipment is reused wherever it is genuinely fit for purpose.",
     deliverable: "As-built cable schedule, rack elevations, rigging documentation and signal flow drawing matching what is actually in the building." },
   { n: "05", title: "Tuning and verification", Icon: Activity,
+    img: "photos/method-phase5-smaart.webp", imgAlt: "Smaart v9 transfer function measurement showing magnitude and phase response",
     body: "Time alignment, equalisation and gain structure set by measurement in Smaart v9, then verified at the seats. The room is measured again and compared against the prediction from stage two.",
     deliverable: "A commissioning report with before and after transfer functions and intelligibility figures. If the result falls short of the prediction and the cause is within our scope, correcting it is on us." },
   { n: "06", title: "Documentation and training", Icon: FileText,
@@ -814,9 +816,12 @@ export default function Reverential() {
                                         background: C.ground, padding: 28 }}>
             <Eyebrow>Why churches come first</Eyebrow>
             <div className="flex flex-wrap mt-5" style={{ gap: 14 }}>
-              
-              
-            </div>
+              <img src={"photos/churches-advent-hero.webp"} alt="Digital mixing console in operation during a live church service"
+               loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: 220,
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
+              <img src={"photos/churches-why-console.webp"} alt="Audio engineer operating an Allen and Heath mixing console"
+               loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: 220,
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
                 <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
                   I grew up in church. My father has served on the church committee for as long as I can remember, and I have been involved since I was old enough to carry a cable. I played drums and a Roland percussion pad in worship, picked up acoustic guitar and sang, served as head of the youth fellowship, and remain an active part of it, and I am the technical support for my own church today.
                 </p>
@@ -835,6 +840,7 @@ export default function Reverential() {
             <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
               — Thomas Jeffrin, Founder
             </p>
+            </div>
           </div>
         )}
       </Section>
@@ -933,7 +939,7 @@ export default function Reverential() {
           <img src={"photos/credentials-cl5-dusk.webp"} alt="Digital mixing console at a waterfront event at dusk, Dubai"
                loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
                borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
-          <img src={"photos/credentials-vtx-rigging.webp"} alt="Line array speaker system being rigged on site"
+          <img src={"photos/auditoriums-arena.webp"} alt="Wide view of a large indoor arena with a full 360-degree line array rigged for full coverage"
                loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
                borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
           <img src={"photos/credentials-stadium-console.webp"} alt="Yamaha CL5 mixing console at cricket stadium with green field view"
