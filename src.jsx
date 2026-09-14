@@ -257,7 +257,7 @@ const SECTORS = [
             "The system only works when one particular volunteer is on the desk"],
     avl: [["Audio", "Line array and distributed speaker systems, wireless microphone systems, digital mixing consoles, in-ear monitor systems, feedback elimination through EQ and speaker placement, SMAART-verified system tuning"], ["Video", "PTZ cameras, multi-camera live switching, YouTube/Facebook streaming, OBS and encoder configuration, LED video walls, projection and screen systems, lyric and presentation software integration"], ["Lighting", "Stage and platform lighting, DMX programming, architectural and altar lighting, LED fixture installation, haze and effects for contemporary worship"], ["Acoustics", "RT60 measurement and reverberation control, acoustic panel design and installation, bass management, STI speech intelligibility verification"], ["Control", "Dante/AES67 audio networking, scheduled automation, single-operator simplified control interfaces"]], },
   { id: "auditoriums", label: "Auditoriums", Icon: Landmark,
-    img: "photos/auditoriums-arena.webp", imgAlt: "A large indoor arena with full line array system rigged for 360-degree coverage",
+    img: "photos/auditoriums-hall.webp", imgAlt: "A modern auditorium with stage, seating, and integrated line array system",
     line: "One hall, many uses: speech, music and visiting productions.",
     pains: ["Speech wants a dry room, music wants a live one. Tuned by instinct, it serves neither.",
             "Visiting productions arrive with a technical rider the house system cannot meet",
@@ -815,12 +815,8 @@ export default function Reverential() {
                                         background: C.ground, padding: 28 }}>
             <Eyebrow>Why churches come first</Eyebrow>
             <div className="flex flex-wrap mt-5" style={{ gap: 14 }}>
-              <img src={"photos/churches-santhome-wide.webp"} alt="Interior of Santhome Cathedral Basilica, Chennai"
-                   loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: 220,
-                   borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
-              <img src={"photos/churches-advent-alt.webp"} alt="Digital mixing console during worship, alternate angle"
-                   loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: 220,
-                   borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
+              
+              
             </div>
                 <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
                   I grew up in church. My father has served on the church committee for as long as I can remember, and I have been involved since I was old enough to carry a cable. I played drums and a Roland percussion pad in worship, picked up acoustic guitar and sang, served as head of the youth fellowship, and remain an active part of it, and I am the technical support for my own church today.
@@ -944,13 +940,13 @@ export default function Reverential() {
           <img src={"photos/credentials-digico-selfie.webp"} alt="Engineer at a DiGiCo digital mixing console"
                loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
                borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
-          <img src={"photos/hospitality-ballroom.webp"} alt="Line array speaker system at a ballroom event"
+          <img src={"photos/credentials-church-console.webp"} alt="Audio engineer at mixing console during church service"
                loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
                borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
-          <img src={"photos/auditoriums-hall.webp"} alt="A professionally designed auditorium with stage, seating and integrated line array system"
+          <img src={"photos/credentials-production-setup.webp"} alt="Complex multi-console production setup with multiple monitors and equipment"
                loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
                borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
-          <img src={"photos/churches-santhome-altar.webp"} alt="Wooden altar interior with illuminated cross"
+          <img src={"photos/credentials-live-performance.webp"} alt="Live band performance with professional stage lighting and sound system"
                loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
                borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
         </div>
