@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The 12-Point Sound System Check — Reverential</title>
+<meta name="description" content="A practical self-assessment for churches and auditoriums. Find out what is actually wrong before spending on equipment.">
+<link rel="canonical" href="https://www.reverentialav.in/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0B0B; --gold:#C6A13A; --gold-text:#856A20; --gold-light:#D6B355;
+  --ww:#F1F0EC; --surface:#E9E8E4; --hairline:#DFDEDA; --body:#4A4A4A; --muted:#6B6A67;
+  --slate:#4F6F9C; --pass:#41794E; --fail:#B14F45;
+  --serif:"Spectral",Georgia,serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ww);color:var(--body);font-family:var(--sans);
+  font-size:clamp(15px,14.5px+.12vw,16.5px);line-height:1.66;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.012em;margin:0;color:var(--black)}
+p{margin:0 0 .9rem;max-width:72ch}
+a{color:var(--gold-text);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%;display:block}
+
+.page{max-width:860px;margin-inline:auto;padding-inline:clamp(1.15rem,5vw,3rem)}
+
+/* cover */
+.cover{padding-block:clamp(2.4rem,5vw,4rem) clamp(1.6rem,3vw,2.4rem)}
+.cover img{height:clamp(34px,2.8vw,44px);width:auto;margin-bottom:1.9rem}
+.gold-rule{height:2px;background:var(--gold);width:72px;margin:0 0 1.6rem}
+.cover h1{font-size:clamp(1.9rem,1.4rem+2.5vw,3rem);line-height:1.08;margin-bottom:.6rem}
+.cover .sub{font-family:var(--serif);font-weight:300;font-size:clamp(1.05rem,1rem+.4vw,1.22rem);
+  line-height:1.52;color:var(--body);max-width:58ch;margin-bottom:1.1rem}
+.intro-block{margin-top:1.4rem;padding:1.4rem 1.6rem;background:var(--surface);border-radius:2px}
+.intro-block p{font-size:15px;line-height:1.65;margin-bottom:.7rem}
+.intro-block p:last-child{margin-bottom:0}
+.byline{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;margin-top:1.4rem;
+  padding-top:1.2rem;border-top:1px solid var(--hairline);font-family:var(--mono);
+  font-size:12px;color:var(--muted);line-height:1.8}
+.byline a{color:var(--gold-text)}
+
+/* section headings */
+.section-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold-text);margin:0 0 .6rem}
+.section-rule{border:0;border-top:1px solid var(--hairline);margin:0 0 1.4rem}
+
+/* checks */
+.checks{margin-top:2rem}
+.check{background:var(--ww);border:1px solid var(--hairline);border-radius:2px;
+  padding:clamp(1rem,2.2vw,1.4rem);margin-bottom:.85rem}
+.check-head{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:.75rem}
+.check-n{font-family:var(--serif);font-size:1.55rem;color:var(--gold);line-height:1;
+  flex-shrink:0;min-width:2.2rem}
+.check-title-wrap{flex:1}
+.check-title{font-size:clamp(1rem,.96rem+.25vw,1.14rem);color:var(--black);margin-bottom:.25rem}
+.check-sub{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--muted);margin:0}
+.score-box{width:28px;height:28px;border:1.5px solid var(--hairline);border-radius:2px;
+  flex-shrink:0;margin-top:3px;background:var(--surface)}
+.check-body{font-size:14.5px;line-height:1.65;color:var(--body);margin-bottom:.65rem}
+.check-listen{font-family:var(--sans);font-style:italic;font-size:13.5px;line-height:1.6;
+  color:var(--muted);margin-bottom:.6rem}
+.listen-label{font-style:normal;font-weight:600;color:var(--black)}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--gold-text)}
+
+/* scoring */
+.scoring{margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--hairline)}
+.score-band{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.1rem}
+.score-pip{width:5px;flex-shrink:0;margin-top:.3rem;border-radius:2px;min-height:52px}
+.score-label{font-family:var(--serif);font-size:1.06rem;color:var(--black);margin-bottom:.3rem}
+.score-text{font-size:14.5px;line-height:1.65;color:var(--body);margin:0}
+
+/* CTA */
+.cta{background:var(--black);color:#F1F0EC;margin-top:2.4rem;padding:clamp(1.4rem,3vw,2.2rem);
+  border-radius:2px}
+.cta h2{font-size:clamp(1.25rem,1.1rem+.7vw,1.6rem);color:#F1F0EC;margin-bottom:.6rem}
+.cta .sub2{color:#B4B0A6;font-family:var(--serif);font-weight:300;
+  font-size:clamp(1rem,1rem+.3vw,1.12rem);line-height:1.55;max-width:60ch;margin-bottom:1.1rem}
+.cta-links{font-family:var(--mono);font-size:13px;line-height:2.1}
+.cta-links a{color:var(--gold-light)}
+.cta-note{margin-top:.85rem;font-size:13px;color:var(--muted);font-style:italic;
+  border-top:1px solid #292927;padding-top:.75rem}
+
+/* footer */
+.foot{margin-top:2.4rem;padding-block:1.6rem 2.4rem;border-top:1px solid var(--hairline);
+  font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.9;text-align:center}
+.foot a{color:var(--gold-text)}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .check{border-color:#ccc;break-inside:avoid}
+  .cta{background:#000;color:#f0ede5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .score-pip{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .gold-rule{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{color:inherit;text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="cover">
+  <img src="data:image/png;base64,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" alt="Reverential — AV Acoustics Integration">
+  <div class="gold-rule"></div>
+  <h1>The 12-Point Sound System Check</h1>
+  <p class="sub">A self-assessment for churches, auditoriums and public gathering spaces.</p>
+  <p class="sub">Run this check at a rehearsal or during a quiet sound check, before committing to any equipment purchase or upgrade.</p>
+
+  <div class="intro-block">
+    <p>Audio problems in a building are almost always misdiagnosed. A system that is hard to understand is usually blamed on the loudspeakers or the desk. In most cases the real cause is the acoustic behaviour of the room itself, combined with a system that was specified without measuring it.</p>
+    <p>These twelve checks are designed to help you find the actual problems in your space, using only your ears and a small amount of time. Each one describes what to listen for in plain language. Score one point for each check your system passes.</p>
+  </div>
+
+  <div class="byline">
+    <span>Produced by Reverential AV Integration Private Limited</span>
+    <span><a href="mailto:hello@reverentialav.in">hello@reverentialav.in</a></span>
+    <span><a href="https://www.reverentialav.in">www.reverentialav.in</a></span>
+    <span>+91 99622 32223</span>
+  </div>
+</div>
+
+<p class="section-label">The checks — score one point for each that passes</p>
+<hr class="section-rule">
+
+<div class="checks">
+
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">01</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">Background noise level</h3>
+      <p class="check-sub">The room on its way to ruining your clarity, before anyone touches a fader.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 1"></div>
+  </div>
+  <p class="check-body">Sit in the middle of the empty space with no sound system running. No music, no ambient playback. Listen for one full minute. Can you clearly hear the air conditioning, the ceiling fans, or traffic from outside? Ask someone to speak at a normal conversational level from fifteen metres away while you sit at the back. If it is difficult to follow without concentrating, the background noise floor is already competing with speech.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> a continuous hiss, hum or rushing sound that does not stop when everyone goes quiet. That is your noise floor, and every decibel of it is a word the back row does not receive.</p>
+  <span class="tag">BACKGROUND NOISE</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">02</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">Speech clarity at the back row</h3>
+      <p class="check-sub">The test most systems fail, and the one that matters most.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 2"></div>
+  </div>
+  <p class="check-body">Have someone stand at the main speaking position — the pulpit, the lectern, the stage centre — and read a paragraph at normal sermon or presentation level, with the system on. You sit in the furthest seat in the house. No looking at lips. Can you follow every word without effort? Ask two or three other people to sit in different back-row positions and do the same test. If even one of them says they have to concentrate, you have a clarity problem, not a volume problem.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> words that blur into each other, consonants that disappear, an impression that the sound is present but the meaning is not. That is reflections covering the direct sound.</p>
+  <span class="tag">SPEECH INTELLIGIBILITY</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">03</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">The volume-clarity relationship</h3>
+      <p class="check-sub">Turning it up should help. In many rooms it makes things worse.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 3"></div>
+  </div>
+  <p class="check-body">Run the same speech test as point 2, then ask the operator to raise the main fader by 3 dB. Listen again from the back. If clarity improved, the system has headroom and coverage is the likely problem. If it got louder but not clearer, or if it actually became harder to follow, the room is adding too much reflected energy and more volume is feeding those reflections equally.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> the sensation that the room itself is getting louder, or that a ringing, echoey quality is amplified alongside the voice.</p>
+  <span class="tag">GAIN VS CLARITY</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">04</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">Coverage across the seating area</h3>
+      <p class="check-sub">The system should sound consistent wherever a person sits.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 4"></div>
+  </div>
+  <p class="check-body">Walk the entire seating area during a normal mix — every aisle, every balcony row, every seat behind a pillar. Note any position where the level drops noticeably or where the tone changes significantly. A well-designed system should deliver within roughly 3 dB across the whole area. Gaps of more than that are a design fault, not an operational one.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> seats where the sound is thin or distant even at high system levels, and seats directly below balconies or behind structural columns.</p>
+  <span class="tag">COVERAGE UNIFORMITY</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">05</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">Echo and reverberation tail</h3>
+      <p class="check-sub">The most common reason a church sounds worse after a new system.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 5"></div>
+  </div>
+  <p class="check-body">Ask the operator to play a single, loud hand clap through the system at high level, then cut it immediately. Listen in silence. In a well-treated room the sound should decay quickly and cleanly. In an untreated room you will hear a distinct tail — a ringing, metallic or washing sound lasting one to three seconds after the clap. That tail is sitting on top of every syllable of every sentence spoken in that room.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> a bloom or reverberant wash after the transient stops. Longer than about 1.2 seconds in a speech-primary space means treatment is needed.</p>
+  <span class="tag">REVERBERATION</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">06</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">Gain structure and headroom</h3>
+      <p class="check-sub">Where feedback comes from, and how much safety margin you actually have.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 6"></div>
+  </div>
+  <p class="check-body">With no music playing and only the main microphone open at normal gain, raise the fader incrementally from unity until the system first starts to ring. Note how far below that point the operator normally runs the service. A healthy system should have at least 6 dB of headroom between the working level and the feedback point. Less than that and any unexpected change — the pastor moves closer, an HVAC unit shuts off, a door opens — can cause a ring.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> a sustained tone at a specific pitch that builds when the fader is raised. That is a gain-before-feedback ceiling, not a problem with the microphone.</p>
+  <span class="tag">GAIN STRUCTURE</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">07</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">Microphone placement and pattern</h3>
+      <p class="check-sub">The microphone position changes the feedback threshold and the clarity of capture.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 7"></div>
+  </div>
+  <p class="check-body">For a fixed lectern or pulpit microphone: check that the capsule is pointed towards the mouth of the speaker at their normal standing position, not at the ceiling or the notes. The element should be within 30 to 60 cm of the mouth for a cardioid pattern, closer for omnidirectional. Check that the loudspeakers are not directly in front of the microphone. For wireless handheld or lapel microphones: confirm the capsule is not obstructed by clothing or a hand.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> a proximity effect bass boost when the speaker is very close, or a thin, distant sound when they are too far away.</p>
+  <span class="tag">MICROPHONE POSITION</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">08</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">Low-frequency buildup</h3>
+      <p class="check-sub">Especially relevant in contemporary worship spaces with a full band.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 8"></div>
+  </div>
+  <p class="check-body">During the band's sound check, stand in different parts of the room and listen specifically to the kick drum and bass guitar. Both should be audible and present, but neither should make the room feel pressurised or indistinct. In small to medium rooms, low frequencies accumulate in corners and along parallel walls. If the bass is overwhelming in some seats and missing in others, the room is setting the low-frequency response, not the mix.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> a booming, one-note quality from the bass, or a sensation of physical pressure in certain seats. Vocal clarity will always suffer in a room with uncontrolled low frequency.</p>
+  <span class="tag">LOW FREQUENCY</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">09</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">Time alignment</h3>
+      <p class="check-sub">Multiple loudspeakers that are not aligned in time arrive as two sounds, not one.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 9"></div>
+  </div>
+  <p class="check-body">If the system uses delay speakers — loudspeakers in the middle or rear of the space supplementing the main system — stand at a point where you can hear both the mains and the delays simultaneously. Speak or clap sharply. If the delay speakers are not timed to the speed of sound from the main cluster, you will hear the speech twice: once from the loudspeaker closer to you and once from the main system. This doubles the perceived reverb and destroys clarity.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> a distinct flutter or repeat on sharp transients, or a comb-filtered 'hollow' tone when standing under a delay loudspeaker.</p>
+  <span class="tag">TIME ALIGNMENT</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">10</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">Streaming and recording output</h3>
+      <p class="check-sub">What your online congregation and archived recordings actually hear.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 10"></div>
+  </div>
+  <p class="check-body">Play back a recent recording of a service or presentation on headphones, not on the room speakers. Listen critically to the vocal clarity, the background noise level, and whether the room reverb is prominent. A recording that sounds reverberant, distant or indistinct is usually taking a microphone or a room feed rather than a clean signal from the mixing console. Compare the playback to a spoken word podcast — the gap tells you what your online audience is experiencing.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> intelligibility that is clearly worse than being in the room, heavy room reverb, or the sense that the voice is competing with the space.</p>
+  <span class="tag">STREAMING QUALITY</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">11</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">System documentation and repeatability</h3>
+      <p class="check-sub">A system that only works when the right person is there is not a working system.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 11"></div>
+  </div>
+  <p class="check-body">Ask the following questions: Is there a written signal flow for the system? Are channel names and positions marked on the desk? Are there saved scenes or snapshots for different service types? If the regular operator was unavailable next week, could a capable volunteer get the system to roughly the same result using only what is written down? If the answer to any of these is no, the system is one departure away from a difficult Sunday.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> a printed or digital document that maps every input, output, and processing unit in the system. Without it, settings drift every time someone makes an adjustment.</p>
+  <span class="tag">DOCUMENTATION</span>
+</article>
+<article class="check">
+  <div class="check-head">
+    <span class="check-n">12</span>
+    <div class="check-title-wrap">
+      <h3 class="check-title">Equipment condition and connection integrity</h3>
+      <p class="check-sub">The simplest problems are the most embarrassing when they happen mid-service.</p>
+    </div>
+    <div class="score-box" aria-label="Score box for check 12"></div>
+  </div>
+  <p class="check-body">During setup and before any service, physically check the following: all cable connections at the desk, stage box and loudspeaker amplifiers; any cables that run through high-traffic areas for wear; wireless microphone battery level and RF signal strength on the receiver; loudspeaker grilles for damage that could indicate cone or driver issues; any digital network connections for the correct link speed. Check that standby equipment is actually functional, not just present.</p>
+  <p class="check-listen"><span class="listen-label">Listen for:</span> intermittent crackling on a channel, which is almost always a loose or failing XLR connection; dropout in a wireless receiver, which is RF interference or a failing battery.</p>
+  <span class="tag">EQUIPMENT CONDITION</span>
+</article>
+</div>
+
+<div class="scoring">
+  <p class="section-label">Your score</p>
+  <p style="font-size:14.5px;margin-bottom:1.2rem">Add one point for each check your system passed.</p>
+
+<div class="score-band">
+  <span class="score-pip" style="background:#41794E"></span>
+  <div>
+    <p class="score-label">10 to 12  —  Pass</p>
+    <p class="score-text">Your system is well set up and the fundamentals are sound. Review any individual checks that gave you pause. If any of the acoustic points raised concern, a site survey will quantify exactly how much room for improvement there is.</p>
+  </div>
+</div>
+<div class="score-band">
+  <span class="score-pip" style="background:#C6A13A"></span>
+  <div>
+    <p class="score-label">7 to 9  —  Some attention needed</p>
+    <p class="score-text">You have a functioning system with identifiable gaps. Some of the issues are operational and can be addressed immediately. Others may point to acoustic or design problems that are worth investigating with measurement before you invest further in equipment.</p>
+  </div>
+</div>
+<div class="score-band">
+  <span class="score-pip" style="background:#B14F45"></span>
+  <div>
+    <p class="score-label">4 to 6  —  Significant issues present</p>
+    <p class="score-text">Multiple checks have flagged real problems. Some of what you are experiencing as an equipment issue may be a room issue, and vice versa. A measured site survey will separate the two and tell you exactly where the budget will make the most difference.</p>
+  </div>
+</div>
+<div class="score-band">
+  <span class="score-pip" style="background:#B14F45"></span>
+  <div>
+    <p class="score-label">3 or below  —  Structural problems</p>
+    <p class="score-text">The problems are likely compounding each other. Addressing them one at a time without a clear picture of the whole system is how organisations spend money repeatedly without improvement. A site survey is the correct first step.</p>
+  </div>
+</div>
+</div>
+
+<div class="cta">
+  <h2>Found something that needs attention?</h2>
+  <p class="sub2">Every one of the problems in this checklist is measurable and solvable. A free twenty minute call with Reverential will tell you which of the issues you found are acoustic, which are system design, and which are operational, so that any budget you spend goes to the right place.</p>
+  <div class="cta-links">
+    <div>Book a free consultation: <a href="https://www.reverentialav.in">www.reverentialav.in</a></div>
+    <div>WhatsApp or call: <a href="https://wa.me/919962232223">+91 99622 32223</a></div>
+    <div>Email: <a href="mailto:hello@reverentialav.in">hello@reverentialav.in</a></div>
+  </div>
+  <p class="cta-note">If you found three or more checks that your system did not pass, a site survey is the most efficient next step. The survey fee is adjusted in full against any project that follows.</p>
+</div>
+
+<div class="foot">
+  <div>Reverential AV Integration Private Limited &nbsp;|&nbsp; Chennai and Bengaluru</div>
+  <div><a href="https://www.reverentialav.in">www.reverentialav.in</a> &nbsp;|&nbsp;
+       <a href="mailto:hello@reverentialav.in">hello@reverentialav.in</a> &nbsp;|&nbsp;
+       +91 99622 32223</div>
+  <div style="margin-top:.6rem">REVERENTIAL and REVERENTIAL AV are trade marks of Reverential AV Integration Private Limited. Trade mark applications pending in India.</div>
+</div>
+
+</div>
+</body>
+</html>
