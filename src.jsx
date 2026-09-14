@@ -257,14 +257,15 @@ const SECTORS = [
             "The system only works when one particular volunteer is on the desk"],
     avl: [["Audio", "Line array and distributed speaker systems, wireless microphone systems, digital mixing consoles, in-ear monitor systems, feedback elimination through EQ and speaker placement, SMAART-verified system tuning"], ["Video", "PTZ cameras, multi-camera live switching, YouTube/Facebook streaming, OBS and encoder configuration, LED video walls, projection and screen systems, lyric and presentation software integration"], ["Lighting", "Stage and platform lighting, DMX programming, architectural and altar lighting, LED fixture installation, haze and effects for contemporary worship"], ["Acoustics", "RT60 measurement and reverberation control, acoustic panel design and installation, bass management, STI speech intelligibility verification"], ["Control", "Dante/AES67 audio networking, scheduled automation, single-operator simplified control interfaces"]], },
   { id: "auditoriums", label: "Auditoriums", Icon: Landmark,
-    img: "photos/auditoriums-hall.webp", imgAlt: "A professionally designed auditorium with stage, seating and integrated line array system",
+    img: "photos/auditoriums-arena.webp", imgAlt: "A large indoor arena with full line array system rigged for 360-degree coverage",
     line: "One hall, many uses: speech, music and visiting productions.",
     pains: ["Speech wants a dry room, music wants a live one. Tuned by instinct, it serves neither.",
             "Visiting productions arrive with a technical rider the house system cannot meet",
             "Balconies and side blocks covered by hope rather than by design",
             "No documented house specification to put in front of a hirer"],
-    avl: [["Audio", "Main hang and delay fill systems, stage monitoring, digital FOH consoles, broadcast mix feed, hearing assistance, delay calibration, feedback elimination"], ["Video", "FOH and stage confidence displays, multi-camera recording/streaming, LED video walls, projection, IMAG"], ["Lighting", "Front wash, follow spots, overhead grid, DMX programming, theatrical/concert lighting, house/emergency integration"], ["Acoustics", "Acoustic simulation against seating plan, RT60 targeting, panel/diffuser specification, background noise measurement"], ["Control", "Show control/cue systems, centralised AV control, remote management"]], },
+    avl: [["Audio", "Main hang and delay fill systems, stage monitoring, digital FOH consoles, 360-degree and in-the-round system design, broadcast mix feed, hearing assistance, delay calibration, feedback elimination"], ["Video", "FOH and stage confidence displays, multi-camera recording/streaming, LED video walls, projection, IMAG"], ["Lighting", "Front wash, follow spots, overhead grid, DMX programming, theatrical/concert lighting, house/emergency integration"], ["Acoustics", "Acoustic simulation against seating plan, RT60 targeting, panel/diffuser specification, background noise measurement"], ["Control", "Show control/cue systems, centralised AV control, remote management"]], },
   { id: "education", label: "Education", Icon: GraduationCap,
+    img: "photos/education-lecture-hall.webp", imgAlt: "A tiered lecture hall with projection screen and teaching desk",
     line: "If the back row cannot follow the lecture, the room is the problem.",
     pains: ["Ceiling fans and split ACs sitting a few decibels below the teacher's voice",
             "Teachers pushing their voice all week and losing it by Wednesday",
@@ -748,8 +749,8 @@ export default function Reverential() {
             <p className="mt-2" style={{ color: C.body, maxWidth: "34ch" }}>{active.line}</p>
             {active.img && (
               <img src={active.img} alt={active.imgAlt || active.label} loading="lazy"
-                   className="w-full h-auto mt-5"
-                   style={{ borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+                   className="w-full mt-5"
+                   style={{ height: 240, borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
             )}
           </div>
           <div className="rev-panel-r">
@@ -789,11 +790,11 @@ export default function Reverential() {
             <Eyebrow>Why churches come first</Eyebrow>
             <div className="flex flex-wrap mt-5" style={{ gap: 14 }}>
               <img src={"photos/churches-santhome-wide.webp"} alt="Interior of Santhome Cathedral Basilica, Chennai"
-                   loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: "auto",
-                   borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+                   loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: 220,
+                   borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
               <img src={"photos/churches-advent-alt.webp"} alt="Digital mixing console during worship, alternate angle"
-                   loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: "auto",
-                   borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+                   loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: 220,
+                   borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
             </div>
                 <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
                   I grew up in church. My father has served on the church committee for as long as I can remember, and I have been involved since I was old enough to carry a cable. I played drums and a Roland percussion pad in worship, picked up acoustic guitar and sang, served as head of the youth fellowship, and remain an active part of it, and I am the technical support for my own church today.
@@ -846,8 +847,8 @@ export default function Reverential() {
                     <p style={{ color: C.body }}>{p.body}</p>
                     {p.img && (
                       <img src={p.img} alt={p.imgAlt || p.title} loading="lazy"
-                           style={{ width: "100%", maxWidth: 480, height: "auto", marginTop: 14,
-                                    borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+                           style={{ width: "100%", maxWidth: 480, height: 260, marginTop: 14,
+                                    borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
                     )}
                     <div className="flex" style={{ gap: 10, marginTop: 14, padding: "14px 16px",
                                                    background: C.surface, borderRadius: 2,
@@ -893,46 +894,39 @@ export default function Reverential() {
         </div>
 
         <p className="mt-8" style={{ color: C.body, maxWidth: "72ch" }}>
-          Before founding Reverential, that expertise was earned on large scale live sound systems
-          across three countries. It began on the Chennai club and band circuit, in intimate
-          acoustic sessions and in institutional annual day productions.
+          It started on the Chennai band circuit. Before founding Reverential, more than a decade
+          of live production had followed across India, Saudi Arabia and the UAE: churches, clubs,
+          festivals, hotel ballrooms, stadiums and open-air productions at every scale. Among them,
+          a four acre entertainment zone running a 250 tower distributed loudspeaker system over
+          Dante and RedNet.
         </p>
 
         <p className="mt-4" style={{ color: C.body, maxWidth: "72ch" }}>
-          It grew through multi-tier stadium audio for a regional cricket league in the UAE, brand
-          launches staged at a skydive drop zone, in open desert and at a waterfront island
-          development, and production audio in five star and above hotel properties. In Saudi
-          Arabia it reached a four acre open air entertainment zone running a 250 tower distributed
-          loudspeaker system over Dante and RedNet, and principal audio for a high profile
-          international economic forum.
-        </p>
-
-        <p className="mt-4" style={{ color: C.body, maxWidth: "72ch" }}>
-          A live sound system engineer walks into an unfamiliar room, measures it, aligns the system
-          to it and makes it work before doors open. A permanent installation asks for that same
-          judgement, held to a standard that has to last a decade and be run by people who were not
-          there when it was built.
+          A live sound engineer walks into an unfamiliar room, measures it, aligns the system and
+          makes it work before doors open. A permanent installation asks for that same judgement,
+          held to a standard that has to last a decade, by people who were not there when it was
+          built.
         </p>
 
         <div className="flex flex-wrap mt-8" style={{ gap: 14 }}>
           <img src={"photos/credentials-cl5-dusk.webp"} alt="Digital mixing console at a waterfront event at dusk, Dubai"
-               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
-               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
           <img src={"photos/credentials-vtx-rigging.webp"} alt="Line array speaker system being rigged on site"
-               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
-               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
           <img src={"photos/credentials-digico-selfie.webp"} alt="Engineer at a DiGiCo digital mixing console"
-               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
-               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
           <img src={"photos/hospitality-ballroom.webp"} alt="Line array speaker system at a ballroom event"
-               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
-               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
-          <img src={"photos/auditoriums-arena.webp"} alt="Large arena interior with rigged line array and lighting"
-               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
-               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
+          <img src={"photos/auditoriums-hall.webp"} alt="A professionally designed auditorium with stage, seating and integrated line array system"
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
           <img src={"photos/churches-santhome-altar.webp"} alt="Wooden altar interior with illuminated cross"
-               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: "auto",
-               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover" }} />
+               loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
+               borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
         </div>
       </Section>
 
