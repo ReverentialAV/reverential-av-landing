@@ -312,17 +312,16 @@ const PHASES = [
     body: "We visit the space in use and again when it is empty, and listen from where your audience actually sits. Reverberation, speech clarity, background noise and the existing system's response are measured with calibrated equipment, so the cause is identified rather than guessed at.",
     deliverable: "A written site survey report with annotated measurement graphs, prioritised recommendations and indicative budget ranges, yours to keep whether or not you continue." },
   { n: "02", title: "Acoustic simulation", Icon: Activity,
-    img: "photos/method-phase2-simulation.webp", imgAlt: "EASE Focus 3 acoustic coverage prediction showing SPL heatmap across seating plan",
     body: "Treatment and loudspeaker layout are modelled in EASE Focus 3 against your actual seating plan. We know what every seat will receive before a single box is ordered.",
     deliverable: "Coverage prediction across the seating plan, targeting a 3 dB spread from the front row to the back, with the acoustic treatment schedule that makes it achievable." },
   { n: "03", title: "System design", Icon: FileText,
+    img: "photos/method-phase3-design.webp", imgAlt: "Yamaha DSR115 speaker system design showing placement layout and frequency response analysis",
     body: "The design is written down: loudspeaker selection and positions, signal chain, network topology, control layout, and the predicted performance figures we intend to hit.",
     deliverable: "A full system design, itemised budget, signal flow drawing and a scope of work with predicted performance written into it." },
   { n: "04", title: "Physical integration", Icon: Building2,
     body: "Rigging, cabling, networking and installation, scheduled around your calendar. All overhead rigging is installed to load-rated standards with written load calculations. Existing equipment is reused wherever it is genuinely fit for purpose.",
     deliverable: "As-built cable schedule, rack elevations, rigging documentation and signal flow drawing matching what is actually in the building." },
   { n: "05", title: "Tuning and verification", Icon: Activity,
-    img: "photos/method-phase5-smaart.webp", imgAlt: "Smaart v9 transfer function measurement showing magnitude and phase response",
     body: "Time alignment, equalisation and gain structure set by measurement in Smaart v9, then verified at the seats. The room is measured again and compared against the prediction from stage two.",
     deliverable: "A commissioning report with before and after transfer functions and intelligibility figures. If the result falls short of the prediction and the cause is within our scope, correcting it is on us." },
   { n: "06", title: "Documentation and training", Icon: FileText,
@@ -937,7 +936,7 @@ export default function Reverential() {
           <img src={"photos/credentials-vtx-rigging.webp"} alt="Line array speaker system being rigged on site"
                loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
                borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
-          <img src={"photos/credentials-digico-selfie.webp"} alt="Engineer at a DiGiCo digital mixing console"
+          <img src={"photos/credentials-stadium-console.webp"} alt="Yamaha CL5 mixing console at cricket stadium with green field view"
                loading="lazy" style={{ flex: "1 1 220px", maxWidth: 300, height: 200,
                borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
           <img src={"photos/credentials-church-console.webp"} alt="Audio engineer at mixing console during church service"
