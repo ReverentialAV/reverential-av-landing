@@ -461,6 +461,7 @@ export default function Reverential() {
     setChecklistAttempted(true);
     if (checklistError) return;
     // Option A — immediate browser download (no network dependency)
+    window.gtag && window.gtag("event","lead_magnet",{event_category:"checklist",event_label:"checklist_requested"});
     triggerPdfDownload();
     // Option B + lead capture — fire in parallel, don't block UI on either
     Promise.allSettled([
@@ -597,7 +598,7 @@ export default function Reverential() {
             ))}
           </nav>
           <div className="ml-auto lg:ml-0">
-            <Btn href="#book">Book a Free Consultation</Btn>
+            <Btn href="#book">Book a Free AV Audit</Btn>
           </div>
         </div>
       </header>
@@ -607,7 +608,7 @@ export default function Reverential() {
         <div className="rev-wrap rev-band">
           <div className="rev-hero">
             <div>
-              <Eyebrow>Reverential™ — Audio, Video, Lighting &amp; Acoustics</Eyebrow>
+              <Eyebrow>Sound, AV &amp; Acoustics for Churches, Auditoriums &amp; Corporate Spaces — Chennai &amp; Bengaluru</Eyebrow>
               <h1 style={{ fontFamily: F.serif, fontWeight: 400, letterSpacing: "-0.015em",
                            fontSize: "clamp(2.1rem, 1.5rem + 3vw, 3.7rem)", lineHeight: 1.07,
                            color: C.ink, marginBottom: 20 }}>
@@ -620,11 +621,39 @@ export default function Reverential() {
                 and prove the result before we hand over.
               </Lede>
               <div className="flex flex-wrap mt-8" style={{ gap: 12 }}>
-                <Btn href="#book">Book a Free 20-Minute Consultation</Btn>
-                <Btn href="#method" variant="ghost">See How We Work</Btn>
+                <Btn href="#book" onClick={() => window.gtag && window.gtag("event","cta_click",{event_category:"hero",event_label:"book_audit"})}>Book a Free 20-Minute AV Audit</Btn>
+                <Btn href="#method" variant="ghost" onClick={() => window.gtag && window.gtag("event","cta_click",{event_category:"hero",event_label:"see_how_we_work"})}>See How We Work</Btn>
               </div>
             </div>
-            <div><DecayChart /></div>
+            <div style={{ position: "relative" }}>
+              <img
+                src="photos/hero-thomas-console.webp"
+                alt="Thomas Jeffrin working at a digital mixing console during a live production"
+                loading="eager"
+                style={{
+                  width: "100%",
+                  height: "clamp(320px, 45vw, 560px)",
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                  borderRadius: 2,
+                  display: "block",
+                  border: `1px solid ${C.line}`,
+                }}
+              />
+              <div style={{
+                position: "absolute",
+                bottom: 16, left: 16,
+                background: "rgba(11,11,11,0.82)",
+                backdropFilter: "blur(4px)",
+                padding: "8px 14px",
+                borderRadius: 2,
+                borderLeft: `2px solid ${C.gold}`,
+              }}>
+                <span style={{ fontFamily: F.mono, fontSize: 11, color: C.gold, letterSpacing: "0.5px" }}>
+                  THOMAS JEFFRIN — FOUNDER
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -706,6 +735,9 @@ export default function Reverential() {
           At the back, the direct sound has faded but the reflections have not, so one word smears
           into the next. The fix is in the room and in the system design.
         </p>
+        <div className="mt-8">
+          <DecayChart />
+        </div>
       </Section>
 
       {/* ---------------- failure modes ---------------- */}
@@ -1136,10 +1168,11 @@ export default function Reverential() {
               </div>
 
               <div className="flex flex-wrap items-center mt-5" style={{ gap: 12 }}>
-                <Btn onDark onClick={submitConsultation} disabled={sending || (attempted && hasErrors)}>
+                <Btn onDark onClick={() => { window.gtag && window.gtag("event","cta_click",{event_category:"form",event_label:"submit_consultation"}); submitConsultation(); }} disabled={sending || (attempted && hasErrors)}>
                   {sending ? "Sending..." : sent ? "Request received" : "Request my free consultation"}
                 </Btn>
-                <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hello Reverential, I'd like to book the free 20 minute consultation.")}`}
+                <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hello Reverential, I'd like to book the free 20-minute AV audit.")}`}
+                   onClick={() => window.gtag && window.gtag("event","whatsapp_click",{event_category:"contact",event_label:"booking_section"})}
                    target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
                   <span className="inline-flex items-center"
                         style={{ gap: 8, fontFamily: F.sans, fontSize: 14, fontWeight: 500,
@@ -1191,7 +1224,7 @@ export default function Reverential() {
                     {checklistAttempted && checklistError && <p style={errStyle}>{checklistError}</p>}
                   </div>
                   <div><Btn onDark variant="ghost" onClick={submitChecklist}>
-                    {checklistSent ? "On its way" : "Send me the checklist"}
+                    {checklistSent ? "On its way" : "Get the Free Checklist"}
                   </Btn></div>
                 </div>
               </div>
@@ -1259,7 +1292,7 @@ export default function Reverential() {
                 Contact
               </h4>
               <p style={{ fontSize: 13.5, margin: "0 0 5px" }}>
-                <a href={`tel:+${WHATSAPP}`} style={{ color: "#B4B0A6", textDecoration: "none" }}>
+                <a href={`tel:+${WHATSAPP}`} onClick={() => window.gtag && window.gtag("event","phone_click",{event_category:"contact",event_label:"footer"})} style={{ color: "#B4B0A6", textDecoration: "none" }}>
                   {PHONE_DISPLAY}
                 </a>
               </p>
@@ -1310,6 +1343,7 @@ export default function Reverential() {
       </footer>
 
       <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer"
+         onClick={() => window.gtag && window.gtag("event","whatsapp_click",{event_category:"contact",event_label:"floating_button"})}
          aria-label="Chat with us on WhatsApp"
          title="We're here, day or night"
          style={{ position: "fixed", bottom: 24, right: 24, zIndex: 60,
