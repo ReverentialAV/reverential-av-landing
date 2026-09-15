@@ -109,6 +109,220 @@ const xFor = (t) => PX.x0 + (t / PX.tMax) * (PX.x1 - PX.x0);
 const yFor = (db) => PX.y0 + (-db / PX.dbMax) * (PX.y1 - PX.y0);
 const levelAt = (t, rt) => Math.max(-60, (-60 * t) / rt);
 
+function AcousticDiagram() {
+  /* Acoustic physics — verified:
+     Source S(173,292) | Listener L(760,299) | Ceiling at y=72
+     Image method: S'(173,−148). Line S'→L hits ceiling at x=462.
+     Angle of incidence = angle of reflection = 52.71° ✓
+     Reflected path 25.7% longer than direct → ~15ms delay in a 20m church */
+  return (
+    <svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg"
+         style={{ width:"100%", display:"block", borderRadius:2 }}
+         role="img"
+         aria-label="Architectural cross-section diagram of a Gothic church showing direct sound traveling straight from the lectern to a listener at the back, and reflected sound bouncing off the vault ceiling before arriving late at the same listener">
+      <defs>
+        {/* Arrow markers */}
+        <marker id="ad-ga" viewBox="0 0 10 10" refX="8" refY="5"
+                markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1.5 L 8.5 5 L 0 8.5 Z" fill="#C6A13A"/>
+        </marker>
+        <marker id="ad-ca" viewBox="0 0 10 10" refX="8" refY="5"
+                markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1.5 L 8.5 5 L 0 8.5 Z" fill="#DDD8CE"/>
+        </marker>
+        {/* Subtle gold glow */}
+        <filter id="ad-glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.8" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="ad-cglow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="1.6" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      {/* ── BACKGROUND ──────────────────────────────── */}
+      <rect width="900" height="440" fill="#0B0B0B"/>
+
+      {/* ── CHURCH ARCHITECTURE — quiet linework ──── */}
+
+      {/* Outer walls */}
+      <line x1="48" y1="58" x2="48" y2="398" stroke="#1F1F1F" strokeWidth="1.5"/>
+      <line x1="852" y1="58" x2="852" y2="398" stroke="#1F1F1F" strokeWidth="1.5"/>
+      {/* Ceiling plane */}
+      <line x1="48" y1="58" x2="852" y2="58" stroke="#191919" strokeWidth="1"/>
+      {/* Floor */}
+      <line x1="48" y1="398" x2="852" y2="398" stroke="#232323" strokeWidth="1.5"/>
+
+      {/* ── MASONRY HINTS ─────────────────────────── */}
+      <line x1="48" y1="100" x2="80" y2="100" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="48" y1="130" x2="80" y2="130" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="48" y1="160" x2="80" y2="160" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="48" y1="190" x2="80" y2="190" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="48" y1="220" x2="80" y2="220" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="48" y1="250" x2="80" y2="250" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="48" y1="280" x2="80" y2="280" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="48" y1="310" x2="80" y2="310" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="48" y1="340" x2="80" y2="340" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="48" y1="370" x2="80" y2="370" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="820" y1="100" x2="852" y2="100" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="820" y1="130" x2="852" y2="130" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="820" y1="160" x2="852" y2="160" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="820" y1="190" x2="852" y2="190" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="820" y1="220" x2="852" y2="220" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="820" y1="250" x2="852" y2="250" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="820" y1="280" x2="852" y2="280" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="820" y1="310" x2="852" y2="310" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="820" y1="340" x2="852" y2="340" stroke="#171717" strokeWidth="0.6"/>
+      <line x1="820" y1="370" x2="852" y2="370" stroke="#171717" strokeWidth="0.6"/>
+
+      {/* Nave columns / pillars: x = 300, 500, 700 */}
+      <line x1="300" y1="398" x2="300" y2="116" stroke="#202020" strokeWidth="2.2"/>
+      <line x1="500" y1="398" x2="500" y2="96"  stroke="#202020" strokeWidth="2.2"/>
+      <line x1="700" y1="398" x2="700" y2="116" stroke="#202020" strokeWidth="2.2"/>
+      {/* Pillar capitals (small horizontal cap) */}
+      <line x1="292" y1="116" x2="308" y2="116" stroke="#222" strokeWidth="2"/>
+      <line x1="492" y1="96"  x2="508" y2="96"  stroke="#222" strokeWidth="2"/>
+      <line x1="692" y1="116" x2="708" y2="116" stroke="#222" strokeWidth="2"/>
+
+      {/* Gothic pointed arches — 4 bays */}
+      {/* Arch 1: wall(48,116) to pillar(300,116) — apex at (174,68) */}
+      <path d="M 48,116 C 48,80  164,66  174,66 C 184,66  300,80  300,116"
+            stroke="#1D1D1D" strokeWidth="1.2" fill="none"/>
+      {/* Arch 2: pillar(300,116) to pillar(500,96) — apex at (400,58) */}
+      <path d="M 300,116 C 300,72  392,56  400,56 C 408,56  500,72  500,96"
+            stroke="#1D1D1D" strokeWidth="1.2" fill="none"/>
+      {/* Arch 3: pillar(500,96) to pillar(700,116) — apex at (600,58) */}
+      <path d="M 500,96  C 500,72  592,56  600,56 C 608,56  700,72  700,116"
+            stroke="#1D1D1D" strokeWidth="1.2" fill="none"/>
+      {/* Arch 4: pillar(700,116) to wall(852,116) — apex at (776,68) */}
+      <path d="M 700,116 C 700,80  766,66  776,66 C 786,66  852,80  852,116"
+            stroke="#1D1D1D" strokeWidth="1.2" fill="none"/>
+      {/* Secondary vault ribs (diagonal) */}
+      <path d="M 300,116 C 330,84  375,68  400,56"  stroke="#181818" strokeWidth="0.7" fill="none"/>
+      <path d="M 500,96  C 470,72  430,60  400,56"  stroke="#181818" strokeWidth="0.7" fill="none"/>
+      <path d="M 500,96  C 530,72  570,62  600,56"  stroke="#181818" strokeWidth="0.7" fill="none"/>
+      <path d="M 700,116 C 668,82  628,62  600,56"  stroke="#181818" strokeWidth="0.7" fill="none"/>
+
+      {/* Clerestory window — right wall, narrow pointed arch */}
+      <path d="M 820,165 L 820,210 C 820,225 840,225 840,210 L 840,165 C 840,152 830,146 830,146 C 830,146 820,152 820,165"
+            stroke="#1A1A1A" strokeWidth="1" fill="#0D0D0D"/>
+
+      {/* ── STAGE / CHANCEL ───────────────────────── */}
+      {/* Platform */}
+      <rect x="48" y="368" width="248" height="30" fill="#131313" stroke="#202020" strokeWidth="1"/>
+      {/* Step up to platform */}
+      <rect x="296" y="382" width="24" height="16" fill="#151515" stroke="#202020" strokeWidth="1"/>
+
+      {/* Lectern */}
+      <polygon points="126,338 158,338 160,368 124,368" fill="#191919" stroke="#262626" strokeWidth="1"/>
+      {/* Lectern top surface */}
+      <rect x="124" y="328" width="36" height="12" rx="1" fill="#1E1E1E" stroke="#282828" strokeWidth="0.8"/>
+      {/* Microphone stand */}
+      <line x1="142" y1="294" x2="142" y2="328" stroke="#252525" strokeWidth="1.2"/>
+      <ellipse cx="142" cy="292" rx="3.5" ry="5" fill="#252525" stroke="#2E2E2E" strokeWidth="0.8"/>
+
+      {/* ── PEWS — congregation ───────────────────── */}
+      <rect x="490" y="368" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="490" y="368" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="580" y="368" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="580" y="368" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="670" y="368" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="670" y="368" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="750" y="368" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="750" y="368" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="490" y="340" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="490" y="340" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="580" y="340" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="580" y="340" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="670" y="340" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="670" y="340" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="750" y="340" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="750" y="340" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="490" y="312" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="490" y="312" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="580" y="312" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="580" y="312" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="670" y="312" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="670" y="312" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+      <rect x="750" y="312" width="72" height="18" rx="1" fill="#141414" stroke="#1E1E1E" strokeWidth="0.8"/><rect x="750" y="312" width="72" height="6" rx="1" fill="#181818" stroke="#222" strokeWidth="0.5"/>
+
+      {/* ── SPEAKER SILHOUETTE ── standing at lectern */}
+      {/* Head */}
+      <circle cx="155" cy="294" r="13" fill="#282828"/>
+      {/* Torso */}
+      <path d="M 140,307 Q 155,304 170,307 L 167,368 L 143,368 Z" fill="#282828"/>
+      {/* Left arm — raised, gesturing */}
+      <path d="M 140,318 Q 126,330 120,342 Q 118,350 122,354" stroke="#282828" strokeWidth="9" strokeLinecap="round" fill="none"/>
+      {/* Right arm — resting toward lectern */}
+      <path d="M 170,318 Q 162,336 158,346" stroke="#282828" strokeWidth="9" strokeLinecap="round" fill="none"/>
+      {/* Legs */}
+      <line x1="148" y1="368" x2="148" y2="398" stroke="#282828" strokeWidth="8" strokeLinecap="round"/>
+      <line x1="162" y1="368" x2="162" y2="398" stroke="#282828" strokeWidth="8" strokeLinecap="round"/>
+
+      {/* ── LISTENER SILHOUETTE ── seated, back pew */}
+      {/* Head */}
+      <circle cx="778" cy="298" r="12" fill="#282828"/>
+      {/* Neck + torso */}
+      <path d="M 765,310 Q 778,307 791,310 L 789,354 L 767,354 Z" fill="#282828"/>
+      {/* Upper legs — horizontal (seated) */}
+      <line x1="770" y1="354" x2="762" y2="368" stroke="#282828" strokeWidth="8" strokeLinecap="round"/>
+      <line x1="786" y1="354" x2="794" y2="368" stroke="#282828" strokeWidth="8" strokeLinecap="round"/>
+      {/* Lower legs — vertical */}
+      <line x1="762" y1="368" x2="760" y2="398" stroke="#282828" strokeWidth="7" strokeLinecap="round"/>
+      <line x1="794" y1="368" x2="796" y2="398" stroke="#282828" strokeWidth="7" strokeLinecap="round"/>
+
+      {/* ── ACOUSTIC PATHS ───────────────────────── */}
+      {/* Source: speaker mouth at mic, S = (173, 292) */}
+      {/* Listener ear, L = (766, 299)               */}
+      {/* Reflection point on vault, R = (462, 72)   */}
+
+      {/* Source pulse */}
+      <circle cx="173" cy="292" r="3.5" fill="#C6A13A" opacity="0.9"
+              filter="url(#ad-glow)"/>
+
+      {/* ── DIRECT SOUND — single gold arrow ── */}
+      <line x1="177" y1="292" x2="760" y2="299"
+            stroke="#C6A13A" strokeWidth="2.2"
+            markerEnd="url(#ad-ga)"
+            filter="url(#ad-glow)"/>
+
+      {/* ── REFLECTED SOUND — two cream segments ── */}
+      {/* Segment 1: S → R (going up to vault) */}
+      <line x1="177" y1="292" x2="460" y2="74"
+            stroke="#DDD8CE" strokeWidth="1.6" opacity="0.82"/>
+      {/* Segment 2: R → L (coming down to listener) */}
+      <line x1="462" y1="74" x2="762" y2="299"
+            stroke="#DDD8CE" strokeWidth="1.6" opacity="0.82"
+            markerEnd="url(#ad-ca)"
+            filter="url(#ad-cglow)"/>
+
+      {/* Reflection point on vault ceiling */}
+      <circle cx="462" cy="73" r="5" fill="none"
+              stroke="#DDD8CE" strokeWidth="1.2" opacity="0.65"/>
+      <circle cx="462" cy="73" r="2" fill="#DDD8CE" opacity="0.65"/>
+      {/* Normal line at reflection point — verifies equal angles */}
+      <line x1="462" y1="58" x2="462" y2="92"
+            stroke="#2C2C2C" strokeWidth="0.8" strokeDasharray="2,3"/>
+
+      {/* ── LABELS ─────────────────────────────── */}
+
+      {/* Direct sound label — below the gold arrow */}
+      <text x="464" y="326" fill="#C6A13A" fontSize="12.5"
+            fontFamily="IBM Plex Sans, sans-serif" fontWeight="500"
+            textAnchor="middle">Direct sound</text>
+      <text x="464" y="341" fill="#454545" fontSize="10.5"
+            fontFamily="IBM Plex Sans, sans-serif" textAnchor="middle">
+        Shortest path — arrives first — carries the words
+      </text>
+
+      {/* Reflected sound label — upper right */}
+      <text x="656" y="160" fill="#DDD8CE" fontSize="12.5"
+            fontFamily="IBM Plex Sans, sans-serif" fontWeight="500"
+            textAnchor="middle" opacity="0.85">Reflected sound</text>
+      <text x="656" y="175" fill="#454545" fontSize="10.5"
+            fontFamily="IBM Plex Sans, sans-serif" textAnchor="middle">
+        Longer path — arrives ~15 ms late — smears the syllable
+      </text>
+
+      {/* Caption */}
+      <text x="52" y="428" fill="#2E2E2E" fontSize="9.5"
+            fontFamily="IBM Plex Mono, monospace" letterSpacing="0.4">
+        ACOUSTIC PROPAGATION — UNTREATED CHURCH CROSS-SECTION · ANGLE OF INCIDENCE = ANGLE OF REFLECTION
+      </text>
+    </svg>
+  );
+}
+
 function DecayChart() {
   const [view, setView] = useState("both");
   const [cursor, setCursor] = useState(null);
@@ -598,63 +812,118 @@ export default function Reverential() {
             ))}
           </nav>
           <div className="ml-auto lg:ml-0">
-            <Btn href="#book">Book a Free AV Audit</Btn>
+            <Btn href="#book">Book a Free Consultation</Btn>
           </div>
         </div>
       </header>
 
       {/* ---------------- hero ---------------- */}
-      <section id="top" style={{ background: C.ground, scrollMarginTop: 78 }}>
-        <div className="rev-wrap rev-band">
-          <div className="rev-hero">
-            <div>
-              <Eyebrow>Sound, AV &amp; Acoustics for Churches, Auditoriums &amp; Corporate Spaces — Chennai &amp; Bengaluru</Eyebrow>
-              <h1 style={{ fontFamily: F.serif, fontWeight: 400, letterSpacing: "-0.015em",
-                           fontSize: "clamp(2.1rem, 1.5rem + 3vw, 3.7rem)", lineHeight: 1.07,
-                           color: C.ink, marginBottom: 20 }}>
-                When the sound fails, nothing else matters.
-              </h1>
-              <Lede>
-                New spaces get one chance to be designed correctly. Existing ones rarely get the
-                measurements that would explain why they keep failing. Either way, the
-                starting point is the same: we measure the room, design to what we find,
-                and prove the result before we hand over.
-              </Lede>
-              <div className="flex flex-wrap mt-8" style={{ gap: 12 }}>
-                <Btn href="#book" onClick={() => window.gtag && window.gtag("event","cta_click",{event_category:"hero",event_label:"book_audit"})}>Book a Free 20-Minute AV Audit</Btn>
-                <Btn href="#method" variant="ghost" onClick={() => window.gtag && window.gtag("event","cta_click",{event_category:"hero",event_label:"see_how_we_work"})}>See How We Work</Btn>
-              </div>
-            </div>
-            <div style={{ position: "relative" }}>
-              <img
-                src="photos/hero-thomas-console.webp"
-                alt="Thomas Jeffrin working at a digital mixing console during a live production"
-                loading="eager"
-                style={{
-                  width: "100%",
-                  height: "clamp(320px, 45vw, 560px)",
-                  objectFit: "cover",
-                  objectPosition: "center top",
-                  borderRadius: 2,
-                  display: "block",
-                  border: `1px solid ${C.line}`,
-                }}
-              />
-              <div style={{
-                position: "absolute",
-                bottom: 16, left: 16,
-                background: "rgba(11,11,11,0.82)",
-                backdropFilter: "blur(4px)",
-                padding: "8px 14px",
-                borderRadius: 2,
-                borderLeft: `2px solid ${C.gold}`,
-              }}>
-                <span style={{ fontFamily: F.mono, fontSize: 11, color: C.gold, letterSpacing: "0.5px" }}>
-                  THOMAS JEFFRIN — FOUNDER
-                </span>
-              </div>
-            </div>
+      <section id="top" className="rv-hero-split" style={{
+        scrollMarginTop: 56,
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "row",
+        overflow: "hidden",
+        background: C.ground,
+        position: "relative",
+      }}>
+        <style>{`
+          @media (max-width: 860px) {
+            .rv-hero-split { flex-direction: column !important; min-height: auto !important; }
+            .rv-hero-text  { padding: 52px 24px 36px 24px !important; flex: none !important;
+                             width: 100% !important; box-sizing: border-box !important; }
+            .rv-hero-img   { flex: none !important; width: 100% !important;
+                             height: 68vw !important; min-height: 260px; max-height: 440px; }
+            .rv-hero-img img { width: 100% !important; height: 100% !important;
+                               min-height: unset !important; object-position: 55% 50% !important; }
+          }
+        `}</style>
+
+        {/* LEFT — text */}
+        <div className="rv-hero-text" style={{
+          flex: "0 0 46%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "clamp(80px,10vh,130px) clamp(28px,4.5vw,72px) clamp(48px,6vh,80px) clamp(28px,5.5vw,88px)",
+          position: "relative",
+          zIndex: 2,
+        }}>
+          <Eyebrow>Sound, AV &amp; Acoustics for Churches, Auditoriums &amp; Corporate Spaces</Eyebrow>
+          <h1 style={{
+            fontFamily: F.serif,
+            fontWeight: 400,
+            letterSpacing: "-0.02em",
+            fontSize: "clamp(2.2rem, 1.4rem + 3.2vw, 4.2rem)",
+            lineHeight: 1.04,
+            color: C.ink,
+            marginBottom: 24,
+            marginTop: 16,
+            maxWidth: "16ch",
+          }}>
+            When the sound fails, nothing else matters.
+          </h1>
+          <Lede>
+            New spaces get one chance to be designed correctly. Existing ones rarely get the
+            measurements that would explain why they keep failing. Either way, the
+            starting point is the same: we measure the room, design to what we find,
+            and prove the result before we hand over.
+          </Lede>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 36 }}>
+            <Btn href="#book" onClick={() => window.gtag && window.gtag("event","cta_click",{event_category:"hero",event_label:"book_audit"})}>Book a Free 20-Minute Consultation</Btn>
+            <Btn href="#method" variant="ghost" onClick={() => window.gtag && window.gtag("event","cta_click",{event_category:"hero",event_label:"see_how_we_work"})}>See How We Work</Btn>
           </div>
+          {/* Location tags */}
+          <div style={{ display:"flex", gap:20, marginTop:36 }}>
+            {["Chennai", "Bengaluru"].map(city => (
+              <span key={city} style={{ display:"flex", alignItems:"center", gap:6,
+                          fontSize:12, color:C.muted, fontFamily:F.mono, letterSpacing:"0.3px" }}>
+                <span style={{ width:5, height:5, borderRadius:"50%", background:C.gold,
+                               display:"inline-block", flexShrink:0 }}/>
+                {city}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* RIGHT — full-bleed image, no border, no radius */}
+        <div className="rv-hero-img" style={{
+          flex: "1 1 54%",
+          position: "relative",
+          overflow: "hidden",
+        }}>
+          {/* Gradient bridge: cream background bleeds into the image — creates seamless join */}
+          <div style={{
+            position: "absolute",
+            top: 0, bottom: 0, left: 0,
+            width: 100,
+            background: `linear-gradient(to right, ${C.ground} 0%, transparent 100%)`,
+            zIndex: 2,
+            pointerEvents: "none",
+          }}/>
+          {/* Subtle bottom vignette — darkens the lower image edge */}
+          <div style={{
+            position: "absolute",
+            bottom: 0, left: 0, right: 0,
+            height: 140,
+            background: `linear-gradient(to top, rgba(11,11,11,0.28) 0%, transparent 100%)`,
+            zIndex: 2,
+            pointerEvents: "none",
+          }}/>
+          <img
+            src="photos/hero-thomas-console.webp"
+            alt="Audio engineer working at a professional digital mixing console"
+            loading="eager"
+            fetchpriority="high"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "52% 55%",
+              display: "block",
+              minHeight: "100vh",
+            }}
+          />
         </div>
       </section>
 
@@ -735,6 +1004,9 @@ export default function Reverential() {
           At the back, the direct sound has faded but the reflections have not, so one word smears
           into the next. The fix is in the room and in the system design.
         </p>
+        <div className="mt-8">
+          <AcousticDiagram />
+        </div>
         <div className="mt-8">
           <DecayChart />
         </div>
@@ -1171,7 +1443,7 @@ export default function Reverential() {
                 <Btn onDark onClick={() => { window.gtag && window.gtag("event","cta_click",{event_category:"form",event_label:"submit_consultation"}); submitConsultation(); }} disabled={sending || (attempted && hasErrors)}>
                   {sending ? "Sending..." : sent ? "Request received" : "Request my free consultation"}
                 </Btn>
-                <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hello Reverential, I'd like to book the free 20-minute AV audit.")}`}
+                <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hello Reverential, I'd like to book the free 20-minute consultation.")}`}
                    onClick={() => window.gtag && window.gtag("event","whatsapp_click",{event_category:"contact",event_label:"booking_section"})}
                    target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
                   <span className="inline-flex items-center"
