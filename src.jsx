@@ -372,6 +372,13 @@ export default function Reverential() {
   const [sector, setSector] = useState("churches");
   const [phase, setPhase] = useState(0);
   const [faq, setFaq] = useState(0);
+  const [cookieConsent, setCookieConsent] = useState(() => {
+    try { return localStorage.getItem("rv_cookie_consent") === "yes"; } catch { return false; }
+  });
+  const acceptCookies = () => {
+    try { localStorage.setItem("rv_cookie_consent", "yes"); } catch {}
+    setCookieConsent(true);
+  };
   const [form, setForm] = useState({
     name: "", org: "", space: "Church or house of worship", phone: "", email: "", message: "",
   });
@@ -1312,6 +1319,38 @@ export default function Reverential() {
                   boxShadow: "0 4px 18px rgba(0,0,0,0.35)", textDecoration: "none" }}>
         <MessageCircle size={26} strokeWidth={1.8} color="#FFFFFF" />
       </a>
+
+      {/* Cookie Consent Banner */}
+      {!cookieConsent && (
+        <div role="dialog" aria-label="Cookie consent" style={{
+          position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 999,
+          background: C.dark, borderTop: `2px solid ${C.gold}`,
+          padding: "16px 24px", display: "flex", flexWrap: "wrap",
+          alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+          <p style={{ color: "#ccc", fontSize: 13, margin: 0, maxWidth: "70ch", lineHeight: 1.6 }}>
+            This site uses Google Analytics to understand how visitors find and use it.
+            No personal data is sold or shared.{" "}
+            <a href="/privacy-policy.html" style={{ color: C.gold, textDecoration: "underline" }}>
+              Privacy Policy
+            </a>
+          </p>
+          <div style={{ display: "flex", gap: 10, flexShrink: 0 }}>
+            <button onClick={acceptCookies}
+              style={{ background: C.gold, color: C.dark, border: "none",
+                       padding: "9px 22px", fontSize: 13, fontWeight: 600,
+                       cursor: "pointer", borderRadius: 2, fontFamily: F.sans }}>
+              Accept
+            </button>
+            <button onClick={acceptCookies}
+              style={{ background: "transparent", color: "#888",
+                       border: "1px solid #444", padding: "9px 16px",
+                       fontSize: 13, cursor: "pointer", borderRadius: 2,
+                       fontFamily: F.sans }}>
+              Decline
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
