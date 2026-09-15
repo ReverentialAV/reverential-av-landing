@@ -281,7 +281,7 @@ const SECTORS = [
             "Rooms certified on paper but never verified in practice"],
     avl: [["Audio", "Boardroom/conference audio, ceiling/surface speakers, beamforming/boundary mics, Teams/Zoom/Webex certified, all-hands PA, feedback elimination"], ["Video", "Video walls, large-format displays, video conferencing systems, wireless presentation, digital signage, hybrid meeting infrastructure"], ["Lighting", "Boardroom/presentation lighting, architectural/ambient, circadian-tuned LED, zoned scene control"], ["Acoustics", "Speech intelligibility in meeting rooms, acoustic privacy between spaces, reverberation control"], ["Control", "One-touch room control (Crestron/Q-SYS/AMX compatible), remote IT management, scheduled automation"]], },
   { id: "hospitality", label: "Hospitality", Icon: UtensilsCrossed,
-    img: "photos/hospitality-green-decorated.webp", imgAlt: "A high-end hotel event space with decorated dining tables and floral centerpieces",
+    img: "photos/hospitality-event-ballroom.webp", imgAlt: "A high-end hotel event space with decorated dining tables and floral centerpieces",
     line: "Atmosphere without the shouting.",
     pains: ["The shouting spiral: guests raise their voices, so everyone else does too",
             "Polished concrete, brick, glass and steel: beautiful, acoustically hostile",
@@ -434,20 +434,15 @@ export default function Reverential() {
   };
 
   const triggerPdfDownload = () => {
-    const a = document.createElement("a");
-    a.href = "/reverential-sound-check.pdf";
-    a.download = "Reverential-12-Point-Sound-System-Check.pdf";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    // Opens the checklist HTML in a new tab — cleaner than forced download for HTML files
+    // Browser security blocks <a download> on same-origin HTML; new tab works reliably
+    window.open("/12-point-sound-check.html", "_blank");
   };
 
   const sendChecklistEmail = async (email) => {
-    // EmailJS — replace SERVICE_ID and TEMPLATE_ID with your values from emailjs.com
-    // Template variables used: {{to_email}}, {{pdf_url}}
     const EMAILJS_SERVICE_ID  = "service_b7xr4us";
     const EMAILJS_TEMPLATE_ID = "template_w7ycuzl";
-    const PDF_URL = "https://www.reverentialav.in/reverential-sound-check.pdf";
+    const PDF_URL = "https://www.reverentialav.in/12-point-sound-check.html";
     if (!window.emailjs) return;
     await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       to_email: email,
