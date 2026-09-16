@@ -982,6 +982,9 @@ export default function Reverential() {
         <Lede>
           Nearly every speech problem in a room comes down to the balance between them.
         </Lede>
+        <div className="mt-8">
+          <AcousticDiagram />
+        </div>
         <div className="rev-two mt-8">
           <div>
             <span style={{ fontFamily: F.serif, fontSize: "1.12rem", color: C.ink,
@@ -1004,9 +1007,6 @@ export default function Reverential() {
           At the back, the direct sound has faded but the reflections have not, so one word smears
           into the next. The fix is in the room and in the system design.
         </p>
-        <div className="mt-8">
-          <AcousticDiagram />
-        </div>
         <div className="mt-8">
           <DecayChart />
         </div>
@@ -1121,32 +1121,46 @@ export default function Reverential() {
           <div className="mt-8" style={{ border: `1px solid ${C.line}`, borderRadius: 2,
                                         background: C.ground, padding: 28 }}>
             <Eyebrow>Why churches come first</Eyebrow>
-            <div className="flex flex-wrap mt-5" style={{ gap: 14 }}>
+
+            {/* Pull line — before images */}
+            <p style={{ fontFamily: F.serif, fontStyle: "italic",
+                        fontSize: "clamp(1rem, 0.85rem + 0.5vw, 1.18rem)",
+                        lineHeight: 1.55, color: C.body, maxWidth: "52ch",
+                        margin: "16px 0 20px 0",
+                        paddingLeft: 16,
+                        borderLeft: `3px solid ${C.gold}` }}>
+              I studied audio engineering in the first place to serve the church.
+            </p>
+
+            {/* Images */}
+            <div className="flex flex-wrap mt-2" style={{ gap: 14 }}>
               <img src={"photos/churches-advent-hero.webp"} alt="Digital mixing console in operation during a live church service"
                loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: 220,
                borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
               <img src={"photos/churches-why-console.webp"} alt="Audio engineer operating an Allen and Heath mixing console"
                loading="lazy" style={{ flex: "1 1 260px", maxWidth: 340, height: 220,
                borderRadius: 2, border: `1px solid ${C.line}`, objectFit: "cover", objectPosition: "center" }} />
-                <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
-                  I grew up in church. My father has served on the church committee for as long as I can remember, and I have been involved since I was old enough to carry a cable. I played drums and a Roland percussion pad in worship, picked up acoustic guitar and sang, served as head of the youth fellowship, and remain an active part of it, and I am the technical support for my own church today.
-                </p>
-                <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
-                  I studied audio engineering in the first place to serve the church.
-                </p>
-                <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
-                  Church music is the genre I love most. The sanctuary is the room I know best after my own home.
-                </p>
-                <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
-                  I started Reverential because I watched churches being served by contractors who would walk in, sell you as much equipment as they could, move boxes, install without any real understanding of what a church needs or any conviction about why it matters, and walk away. No measurement. No accountability. No purpose behind the work beyond the invoice.
-                </p>
-                <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
-                  Every congregation deserves to be served, not sold to. We named this company Reverential because that is exactly what it means: a deep reverence toward God, toward the Church, and toward every person who walks through those doors to worship. That is not a positioning statement. It is the reason this work exists.
-                </p>
+            </div>
+
+            {/* Body copy — pull line removed from here */}
             <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
+              I grew up in church. My father has served on the church committee for as long as I can remember, and I have been involved since I was old enough to carry a cable. I played drums and a Roland percussion pad in worship, picked up acoustic guitar and sang, served as head of the youth fellowship, and remain an active part of it, and I am the technical support for my own church today.
+            </p>
+            <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
+              Church music is the genre I love most. The sanctuary is the room I know best after my own home.
+            </p>
+            <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
+              I started Reverential because I watched churches being served by contractors who would walk in, sell you as much equipment as they could, move boxes, install without any real understanding of what a church needs or any conviction about why it matters, and walk away. No measurement. No accountability. No purpose behind the work beyond the invoice.
+            </p>
+            <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
+              Every congregation deserves to be served, not sold to. We named this company Reverential because that is exactly what it means: a deep reverence toward God, toward the Church, and toward every person who walks through those doors to worship. That is not a positioning statement. It is the reason this work exists.
+            </p>
+
+            {/* Attribution — anchored at bottom, outside the flex container */}
+            <p style={{ color: C.muted, fontSize: 13, marginTop: 20,
+                        fontFamily: F.mono, letterSpacing: "0.3px" }}>
               — Thomas Jeffrin, Founder
             </p>
-            </div>
           </div>
         )}
       </Section>
