@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ═══════════════════════════════════════════════
+       FILL IN BEFORE UPLOADING:
+       1. <title>          — Post title + | Reverential AV
+       2. meta description — 140–160 characters
+       3. og:title         — Same as <title>
+       4. og:description   — Same as meta description
+       5. og:image         — Full URL to post image (1200×630)
+       6. og:url           — Full post URL
+       7. article:published_time — ISO date
+       8. JSON-LD fields   — headline, datePublished, image, description
+       ═══════════════════════════════════════════════ -->
+
+  <title>POST TITLE HERE | Reverential AV Integration</title>
+  <meta name="description" content="POST META DESCRIPTION — 140–160 characters summarising what the reader will learn.">
+  <meta name="author" content="Thomas Jeffrin">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.reverentialav.in/blog/POST-SLUG-HERE.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Reverential AV Integration">
+  <meta property="og:title" content="POST TITLE HERE | Reverential AV Integration">
+  <meta property="og:description" content="POST META DESCRIPTION.">
+  <meta property="og:image" content="https://www.reverentialav.in/og-image.jpg">
+  <meta property="og:url" content="https://www.reverentialav.in/blog/POST-SLUG-HERE.html">
+  <meta property="article:published_time" content="2026-09-20T00:00:00+05:30">
+  <meta property="article:author" content="Thomas Jeffrin">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="POST TITLE HERE | Reverential AV Integration">
+  <meta name="twitter:description" content="POST META DESCRIPTION.">
+  <meta name="twitter:image" content="https://www.reverentialav.in/og-image.jpg">
+
+  <!-- JSON-LD Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "POST TITLE HERE",
+    "description": "POST META DESCRIPTION.",
+    "image": "https://www.reverentialav.in/og-image.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "Thomas Jeffrin",
+      "url": "https://www.reverentialav.in/#credentials"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Reverential AV Integration Private Limited",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.reverentialav.in/og-image.jpg"
+      }
+    },
+    "datePublished": "2026-09-20",
+    "dateModified": "2026-09-20",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.reverentialav.in/blog/POST-SLUG-HERE.html"
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56624Y1GCD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-56624Y1GCD');
+  </script>
+
+  <style>
+    :root {
+      --dark:  #0B0B0B;
+      --cream: #F1F0EC;
+      --gold:  #C6A13A;
+      --body:  #4A4A4A;
+      --muted: #8A8580;
+      --line:  #E0DCD3;
+      --serif: 'Spectral', Georgia, serif;
+      --sans:  'IBM Plex Sans', system-ui, sans-serif;
+      --mono:  'IBM Plex Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--body);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── NAV ─────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+      padding: 0 clamp(20px, 5vw, 80px);
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px;
+                text-decoration: none; }
+    .nav-logo-text { font-size: 13px; font-weight: 600;
+                     letter-spacing: 0.4px; color: var(--dark); }
+    .nav-logo-sub { font-size: 9px; letter-spacing: 1.2px;
+                    text-transform: uppercase; color: var(--gold);
+                    display: block; margin-top: 1px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-links a.active { color: var(--gold); }
+    .nav-cta {
+      background: var(--dark); color: #fff !important;
+      padding: 8px 18px; border-radius: 2px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.2px;
+    }
+    .nav-cta:hover { background: #222 !important; }
+    @media (max-width: 640px) {
+      .nav-links span, .nav-links a:not(.nav-cta) { display: none; }
+    }
+
+    /* ── ARTICLE LAYOUT ──────────────────────────── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px clamp(20px, 5vw, 40px) 96px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--muted); letter-spacing: 0.3px;
+      margin-bottom: 32px;
+    }
+    .breadcrumb a { color: var(--gold); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* Category / tag */
+    .article-tag {
+      display: inline-block;
+      font-family: var(--mono); font-size: 10px;
+      font-weight: 500; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--gold);
+      border: 1px solid rgba(198,161,58,0.35);
+      padding: 3px 10px; border-radius: 2px;
+      margin-bottom: 16px;
+    }
+
+    /* Headline */
+    h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(1.8rem, 5vw, 2.75rem);
+      line-height: 1.1; letter-spacing: -0.015em;
+      color: var(--dark); margin-bottom: 20px;
+    }
+
+    /* Deck / lede */
+    .article-lede {
+      font-family: var(--serif); font-size: 1.15rem;
+      font-style: italic; color: var(--muted);
+      line-height: 1.6; margin-bottom: 28px;
+      max-width: 60ch;
+    }
+
+    /* Meta bar */
+    .article-meta {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 40px;
+      font-size: 12.5px; color: var(--muted);
+      font-family: var(--mono);
+    }
+    .meta-author { color: var(--dark); font-weight: 500; }
+    .meta-dot { width: 3px; height: 3px; border-radius: 50%;
+                background: var(--muted); flex-shrink: 0; }
+
+    /* Featured image */
+    .featured-image {
+      width: 100%; border-radius: 2px;
+      margin-bottom: 40px;
+      border: 1px solid var(--line);
+      display: block;
+    }
+
+    /* Article body typography */
+    .article-body h2 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: 1.5rem; color: var(--dark);
+      margin: 48px 0 16px; letter-spacing: -0.01em;
+    }
+    .article-body h3 {
+      font-family: var(--sans); font-weight: 600;
+      font-size: 1rem; color: var(--dark);
+      margin: 32px 0 10px;
+    }
+    .article-body p {
+      font-size: 1rem; line-height: 1.78;
+      color: var(--body); margin-bottom: 20px;
+      max-width: 68ch;
+    }
+    .article-body strong { color: var(--dark); font-weight: 600; }
+    .article-body em { font-style: italic; }
+    .article-body a { color: var(--gold); text-decoration: underline;
+                      text-underline-offset: 3px; }
+    .article-body ul, .article-body ol {
+      margin: 8px 0 20px 20px; max-width: 62ch;
+    }
+    .article-body li { margin-bottom: 8px; line-height: 1.6; }
+
+    /* Pull quote */
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      padding: 6px 0 6px 20px;
+      margin: 36px 0;
+    }
+    .pull-quote p {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.18rem; line-height: 1.55;
+      color: var(--dark); margin: 0;
+    }
+
+    /* Inline callout box */
+    .callout {
+      background: #fff; border: 1px solid var(--line);
+      border-left: 3px solid var(--gold);
+      padding: 20px 24px; border-radius: 0 2px 2px 0;
+      margin: 32px 0;
+    }
+    .callout-label {
+      font-family: var(--mono); font-size: 10px;
+      font-weight: 500; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .callout p { font-size: 14px; color: var(--body); margin: 0; }
+
+    /* Code / technical term */
+    code {
+      font-family: var(--mono); font-size: 13px;
+      background: rgba(0,0,0,0.05); padding: 2px 6px;
+      border-radius: 2px; color: var(--dark);
+    }
+
+    /* Article image within body */
+    .article-img {
+      width: 100%; border-radius: 2px; margin: 32px 0;
+      border: 1px solid var(--line); display: block;
+    }
+    .article-img-caption {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--muted); margin: -24px 0 32px;
+    }
+
+    /* Divider */
+    .article-divider {
+      border: none; border-top: 1px solid var(--line);
+      margin: 48px 0;
+    }
+
+    /* ── AUTHOR BOX ───────────────────────────────── */
+    .author-box {
+      display: flex; gap: 20px; align-items: flex-start;
+      background: #fff; border: 1px solid var(--line);
+      padding: 24px; border-radius: 2px; margin-top: 56px;
+    }
+    .author-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--dark); border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 20px; color: var(--gold);
+      flex-shrink: 0;
+    }
+    .author-name { font-size: 14px; font-weight: 600;
+                   color: var(--dark); margin-bottom: 2px; }
+    .author-title { font-family: var(--mono); font-size: 11px;
+                    color: var(--gold); letter-spacing: 0.5px;
+                    margin-bottom: 8px; }
+    .author-bio { font-size: 13.5px; color: var(--muted);
+                  line-height: 1.6; }
+
+    /* ── CTA BLOCK ───────────────────────────────── */
+    .article-cta {
+      background: var(--dark); color: #fff;
+      padding: 36px 40px; border-radius: 2px;
+      margin-top: 48px;
+      border-left: 4px solid var(--gold);
+    }
+    .article-cta h3 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: 1.35rem; color: #F1F0EC;
+      margin-bottom: 10px;
+    }
+    .article-cta p {
+      font-size: 14px; color: #999; margin-bottom: 20px;
+    }
+    .cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--dark);
+      padding: 10px 22px; border-radius: 2px;
+      font-size: 13.5px; font-weight: 600;
+      text-decoration: none; display: inline-block;
+      font-family: var(--sans);
+    }
+    .btn-ghost {
+      background: transparent; color: #ccc;
+      border: 1px solid #333; padding: 10px 22px;
+      border-radius: 2px; font-size: 13.5px;
+      text-decoration: none; display: inline-block;
+      font-family: var(--sans);
+    }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--dark); color: #666;
+      padding: 32px clamp(20px, 5vw, 80px);
+      font-size: 12px; font-family: var(--mono);
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.reverentialav.in" class="nav-logo">
+    <div>
+      <span class="nav-logo-text">REVERENTIAL™</span>
+      <span class="nav-logo-sub">AV Acoustics Integration</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="https://www.reverentialav.in">Home</a>
+    <a href="https://www.reverentialav.in/blog/index.html" class="active">Blog</a>
+    <a href="https://www.reverentialav.in/#book" class="nav-cta">Book a Consultation</a>
+  </div>
+</nav>
+
+<!-- ARTICLE -->
+<article class="article-wrap">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="https://www.reverentialav.in">reverentialav.in</a>
+    &nbsp;/&nbsp;
+    <a href="https://www.reverentialav.in/blog/index.html">Blog</a>
+    &nbsp;/&nbsp;
+    POST TITLE SHORT
+  </div>
+
+  <!-- Tag -->
+  <span class="article-tag">TAG — e.g. Church Acoustics</span>
+
+  <!-- Headline -->
+  <h1>POST TITLE — WRITE THE FULL HEADLINE HERE</h1>
+
+  <!-- Lede / deck -->
+  <p class="article-lede">
+    One or two sentences that expand on the headline. Tell the reader what they
+    will know by the end of this article that they don't know now.
+  </p>
+
+  <!-- Meta bar -->
+  <div class="article-meta">
+    <span class="meta-author">Thomas Jeffrin</span>
+    <span class="meta-dot"></span>
+    <span>Founder, Reverential AV Integration</span>
+    <span class="meta-dot"></span>
+    <span>20 September 2026</span>
+    <span class="meta-dot"></span>
+    <span>6 min read</span>
+  </div>
+
+  <!-- Featured image (optional — delete if no image) -->
+  <img class="featured-image"
+       src="https://www.reverentialav.in/photos/POST-IMAGE.webp"
+       alt="DESCRIPTIVE ALT TEXT FOR THE IMAGE"
+       loading="eager">
+
+  <!-- ARTICLE BODY — replace with your content -->
+  <div class="article-body">
+
+    <p>
+      Opening paragraph. Should state the problem clearly and immediately. No
+      preamble. The reader already knows why they're here — confirm it and move forward.
+    </p>
+
+    <h2>Section Heading</h2>
+
+    <p>
+      Body paragraph. Write in plain English. Avoid jargon unless you immediately
+      explain it. Short sentences. Active voice. One idea per paragraph.
+    </p>
+
+    <div class="pull-quote">
+      <p>
+        Pull quote — a sentence from the article that is so good it deserves
+        to stand alone. Usually the most important insight in the section.
+      </p>
+    </div>
+
+    <p>
+      Continue the section. Add evidence, example, or explanation that supports
+      the pull quote above.
+    </p>
+
+    <h2>Second Section</h2>
+
+    <p>
+      Continue the article. Each section should answer one specific question
+      the reader is likely to have at this point.
+    </p>
+
+    <ul>
+      <li>First item — specific, not vague</li>
+      <li>Second item — concrete and actionable</li>
+      <li>Third item — connects to Reverential's approach</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-label">What this means in practice</div>
+      <p>
+        Use callout boxes to flag the practical takeaway from a technical point.
+        "What this means for your church: ..."
+      </p>
+    </div>
+
+    <h2>What To Do Next</h2>
+
+    <p>
+      Every article should end with clear direction. What should the reader do
+      with this information? Don't leave them hanging.
+    </p>
+
+    <p>
+      If their sound system has the issues described above, the first step is not
+      buying new equipment. The first step is measurement — understanding what the
+      room is actually doing before deciding what it needs.
+    </p>
+
+  </div>
+
+  <hr class="article-divider">
+
+  <!-- Author bio -->
+  <div class="author-box">
+    <div class="author-avatar">T</div>
+    <div>
+      <div class="author-name">Thomas Jeffrin</div>
+      <div class="author-title">Founder · Reverential AV Integration · Smaart v9 Certified</div>
+      <p class="author-bio">
+        A decade of live sound across India, Saudi Arabia and the UAE before founding
+        Reverential. Now working full-time in acoustic design and AV system deployment
+        for churches, auditoriums and corporate spaces in Chennai and Bengaluru.
+      </p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="article-cta">
+    <h3>If this sounds like your space, let's measure it.</h3>
+    <p>
+      A free 20-minute call will tell you whether the problems you're experiencing
+      are acoustic, system design, or operational — and what to do about each.
+    </p>
+    <div class="cta-btns">
+      <a href="https://www.reverentialav.in/#book" class="btn-primary">Book a Free Consultation</a>
+      <a href="https://wa.me/919962232223?text=Hi%20Reverential%2C%20I%20read%20your%20article%20and%20have%20a%20question."
+         target="_blank" rel="noopener" class="btn-ghost">WhatsApp Thomas</a>
+    </div>
+  </div>
+
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <span>
+    © 2026 Reverential AV Integration Private Limited ·
+    <a href="https://www.reverentialav.in">reverentialav.in</a>
+  </span>
+  <span>
+    <a href="https://www.reverentialav.in/privacy-policy.html">Privacy</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.reverentialav.in/terms.html">Terms</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.reverentialav.in/blog/index.html">All articles</a>
+  </span>
+</footer>
+
+</body>
+</html>

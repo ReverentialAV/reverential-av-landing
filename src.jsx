@@ -803,13 +803,32 @@ export default function Reverential() {
             <img src={LOGO_HEADER} alt="Reverential — AV Acoustics Integration"
                  style={{ height: 38, width: "auto", display: "block" }} />
           </a>
-          <nav className="rev-nav ml-auto hidden lg:flex items-center" style={{ gap: 22 }}>
+          <nav className="rev-nav ml-auto hidden lg:flex items-center" style={{ gap: 20 }}>
             {SECTORS.map((s) => (
               <a key={s.id} href="#sectors" onClick={(e) => pickSector(e, s.id)}
-                 style={{ fontSize: 14, color: C.body, textDecoration: "none", cursor: "pointer" }}>
+                 style={{ fontSize: 13, color: C.body, textDecoration: "none",
+                          cursor: "pointer", whiteSpace: "nowrap",
+                          transition: "color .15s" }}>
                 {s.label}
               </a>
             ))}
+            <a href="/blog/"
+               style={{ fontSize: 13, color: C.gold, textDecoration: "none",
+                        fontWeight: 500, whiteSpace: "nowrap" }}>
+              Blog
+            </a>
+            <a href="/login.html"
+               style={{ fontSize: 12, color: C.body, textDecoration: "none",
+                        border: `1px solid ${C.line}`, borderRadius: 2,
+                        padding: "4px 12px", whiteSpace: "nowrap",
+                        display: "flex", alignItems: "center", gap: 5 }}>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+              </svg>
+              Client Login
+            </a>
           </nav>
           <div className="ml-auto lg:ml-0">
             <Btn href="#book">Book a Free Consultation</Btn>
@@ -982,10 +1001,11 @@ export default function Reverential() {
         <Lede>
           Nearly every speech problem in a room comes down to the balance between them.
         </Lede>
-        <div className="mt-8">
+        <div style={{ maxWidth: 820, marginLeft: "auto", marginRight: "auto",
+                      marginTop: "3.5rem" }}>
           <AcousticDiagram />
         </div>
-        <div className="rev-two mt-8">
+        <div className="rev-two" style={{ marginTop: "3rem" }}>
           <div>
             <span style={{ fontFamily: F.serif, fontSize: "1.12rem", color: C.ink,
                            display: "block", marginBottom: 6 }}>Direct sound</span>
@@ -1003,11 +1023,12 @@ export default function Reverential() {
             </p>
           </div>
         </div>
-        <p className="mt-6" style={{ color: C.body, maxWidth: "72ch" }}>
+        <p style={{ color: C.body, maxWidth: "72ch", marginTop: "2rem" }}>
           At the back, the direct sound has faded but the reflections have not, so one word smears
           into the next. The fix is in the room and in the system design.
         </p>
-        <div className="mt-8">
+        <div style={{ maxWidth: 820, marginLeft: "auto", marginRight: "auto",
+                      marginTop: "3.5rem" }}>
           <DecayChart />
         </div>
       </Section>
@@ -1144,7 +1165,7 @@ export default function Reverential() {
 
             {/* Body copy — pull line removed from here */}
             <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
-              I grew up in church. My father has served on the church committee for as long as I can remember, and I have been involved since I was old enough to carry a cable. I played drums and a Roland percussion pad in worship, picked up acoustic guitar and sang, served as head of the youth fellowship, and remain an active part of it, and I am the technical support for my own church today.
+              I grew up in church. My father has served on the church committee for as long as I can remember, and I have been involved since I was old enough to carry a cable. I played drums and a Roland percussion pad in worship, picked up acoustic guitar and sang, served as head of the youth fellowship, and remain an active part of it, and I am the technical support for our church today.
             </p>
             <p className="mt-4" style={{ color: C.body, maxWidth: "70ch" }}>
               Church music is the genre I love most. The sanctuary is the room I know best after my own home.

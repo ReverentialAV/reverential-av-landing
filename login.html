@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care Member Portal — Reverential AV</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dark:  #0B0B0B;
+      --cream: #F1F0EC;
+      --gold:  #C6A13A;
+      --body:  #4A4A4A;
+      --line:  #E0DCD3;
+      --error: #C0392B;
+    }
+    body {
+      min-height: 100vh;
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+
+    /* LEFT PANEL */
+    .left-panel {
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 56px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: var(--gold);
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-logo-mark {
+      width: 36px;
+      height: 36px;
+    }
+    .brand-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #F1F0EC;
+      letter-spacing: 0.5px;
+    }
+    .brand-sub {
+      font-size: 10px;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-top: 1px;
+    }
+    .left-hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 0;
+    }
+    .portal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(198,161,58,0.12);
+      border: 1px solid rgba(198,161,58,0.3);
+      border-radius: 20px;
+      padding: 5px 14px;
+      margin-bottom: 32px;
+      width: fit-content;
+    }
+    .portal-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .portal-badge span {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.8px;
+      font-weight: 500;
+    }
+    .left-heading {
+      font-family: 'Spectral', serif;
+      font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: #F1F0EC;
+      margin-bottom: 20px;
+    }
+    .left-heading em {
+      color: var(--gold);
+      font-style: italic;
+    }
+    .left-desc {
+      font-size: 15px;
+      color: #888;
+      line-height: 1.7;
+      max-width: 38ch;
+    }
+    .left-features {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .feature-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .feature-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .feature-text {
+      font-size: 13px;
+      color: #999;
+    }
+    .left-footer {
+      font-size: 12px;
+      color: #555;
+    }
+    .left-footer a { color: var(--gold); text-decoration: none; }
+
+    /* RIGHT PANEL */
+    .right-panel {
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 56px 64px;
+    }
+    .form-header { margin-bottom: 36px; }
+    .form-title {
+      font-family: 'Spectral', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .form-subtitle {
+      font-size: 14px;
+      color: var(--body);
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--dark);
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+    .form-input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--line);
+      border-radius: 2px;
+      font-size: 15px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: #fff;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-input:focus { border-color: var(--gold); }
+    .form-input::placeholder { color: #bbb; }
+    .form-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .remember-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--body);
+      cursor: pointer;
+    }
+    .remember-label input { accent-color: var(--gold); }
+    .forgot-link {
+      font-size: 13px;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .btn-signin {
+      width: 100%;
+      padding: 14px;
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'IBM Plex Sans', sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: background 0.2s;
+      margin-bottom: 14px;
+    }
+    .btn-signin:hover { background: #222; }
+    .divider {
+      text-align: center;
+      font-size: 12px;
+      color: #bbb;
+      margin: 16px 0;
+      position: relative;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 42%;
+      height: 1px;
+      background: var(--line);
+    }
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+    .btn-whatsapp {
+      width: 100%;
+      padding: 13px;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'IBM Plex Sans', sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-whatsapp:hover { background: #1fb855; }
+    .form-note {
+      margin-top: 28px;
+      padding: 16px;
+      background: rgba(198,161,58,0.08);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 2px 2px 0;
+      font-size: 13px;
+      color: var(--body);
+      line-height: 1.6;
+    }
+    .form-note strong { color: var(--dark); }
+    .back-link {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--body);
+    }
+    .back-link a { color: var(--gold); text-decoration: none; }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      body { grid-template-columns: 1fr; }
+      .left-panel { display: none; }
+      .right-panel { padding: 40px 28px; min-height: 100vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <a href="/" class="brand-logo">
+      <svg class="brand-logo-mark" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="17" stroke="#C6A13A" stroke-width="1.2"/>
+        <path d="M11 24 L18 12 L25 24" stroke="#C6A13A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13.5 20 L22.5 20" stroke="#C6A13A" stroke-width="1" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <span class="brand-name">REVERENTIAL™</span>
+        <span class="brand-sub">AV Acoustics Integration</span>
+      </div>
+    </a>
+
+    <div class="left-hero">
+      <div class="portal-badge">
+        <div class="portal-badge-dot"></div>
+        <span>CARE MEMBER PORTAL</span>
+      </div>
+      <h1 class="left-heading">
+        Your system,<br>
+        <em>fully visible.</em>
+      </h1>
+      <p class="left-desc">
+        Everything about your AV installation — service records, fault history,
+        documentation, and equipment reports — in one place.
+      </p>
+      <div class="left-features">
+        <div class="feature-row">
+          <div class="feature-dot"></div>
+          <span class="feature-text">Complete service history and visit log</span>
+        </div>
+        <div class="feature-row">
+          <div class="feature-dot"></div>
+          <span class="feature-text">Raise and track support tickets</span>
+        </div>
+        <div class="feature-row">
+          <div class="feature-dot"></div>
+          <span class="feature-text">System documentation and signal flow</span>
+        </div>
+        <div class="feature-row">
+          <div class="feature-dot"></div>
+          <span class="feature-text">Invoices and payment records</span>
+        </div>
+        <div class="feature-row">
+          <div class="feature-dot"></div>
+          <span class="feature-text">Equipment condition reports</span>
+        </div>
+        <div class="feature-row">
+          <div class="feature-dot"></div>
+          <span class="feature-text">Direct emergency hotline access</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="left-footer">
+      <a href="/privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="/terms.html">Terms</a> &nbsp;·&nbsp;
+      reverentialav.in
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="form-header">
+      <h2 class="form-title">Sign in to your account</h2>
+      <p class="form-subtitle">Use the credentials sent to you when your Care plan was activated.</p>
+    </div>
+
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label" for="email">Email address</label>
+        <input class="form-input" type="email" id="email" name="email"
+               placeholder="you@organisation.com" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input class="form-input" type="password" id="password" name="password"
+               placeholder="Enter your password" required autocomplete="current-password">
+      </div>
+      <div class="form-row">
+        <label class="remember-label">
+          <input type="checkbox" name="remember"> Remember me
+        </label>
+        <a href="#" class="forgot-link">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn-signin">Sign in to Portal</button>
+    </form>
+
+    <div class="divider">or contact us directly</div>
+
+    <a href="https://wa.me/919962232223?text=Hi%20Reverential%2C%20I%20need%20help%20with%20my%20Care%20portal%20login."
+       target="_blank" rel="noopener" class="btn-whatsapp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.553 4.12 1.519 5.853L.057 23.944l6.264-1.44A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.83 0-3.55-.487-5.046-1.338l-.362-.213-3.73.857.878-3.63-.236-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      </svg>
+      WhatsApp Hotline — +91 99622 32223
+    </a>
+
+    <div class="form-note">
+      <strong>Don't have an account?</strong> Care portal access is included with
+      Reverential Care Standard and Care Extended plans. Contact us at
+      <a href="mailto:hello@reverentialav.in" style="color:#C6A13A;">hello@reverentialav.in</a>
+      to get your credentials.
+    </div>
+
+    <div class="back-link">
+      <a href="/">← Back to reverentialav.in</a>
+    </div>
+  </div>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      // Placeholder — connect to Supabase/Firebase auth later
+      window.location.href = 'portal.html';
+    }
+  </script>
+</body>
+</html>
