@@ -21,9 +21,9 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:var(--sans);background:var(--cream);color:var(--body);line-height:1.7;}
     nav{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--line);padding:0 clamp(20px,5vw,80px);height:56px;display:flex;align-items:center;justify-content:space-between;}
-    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-    .nav-logo-text{font-size:13px;font-weight:600;letter-spacing:.4px;color:var(--dark);}
-    .nav-logo-sub{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);display:block;margin-top:1px;}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    
+    
     .nav-links{display:flex;align-items:center;gap:24px;}
     .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;}
     .nav-links a:hover{color:var(--dark);}
@@ -35,7 +35,7 @@
     .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--dark);line-height:1.1;margin-bottom:14px;}
     .hero p{font-size:15px;color:var(--muted);max-width:56ch;}
     .posts-wrap{max-width:1100px;margin:0 auto;padding:48px clamp(20px,5vw,80px) 96px;}
-    .posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
+    .posts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:24px;}
     .post-card{background:#fff;border:1px solid var(--line);border-radius:2px;overflow:hidden;text-decoration:none;display:block;transition:border-color .15s,box-shadow .15s;}
     .post-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.07);}
     .card-img{width:100%;height:200px;object-fit:cover;display:block;background:var(--dark);}
@@ -54,10 +54,8 @@
 
 <nav>
   <a href="https://www.reverentialav.in" class="nav-logo">
-    <div>
-      <span class="nav-logo-text">REVERENTIAL™</span>
-      <span class="nav-logo-sub">AV Acoustics Integration</span>
-    </div>
+    <img src="/logo.png" alt="Reverential AV Integration"
+         style="height:34px;width:auto;display:block;">
   </a>
   <div class="nav-links">
     <a href="https://www.reverentialav.in">Home</a>
@@ -85,7 +83,7 @@
 
     <a href="why-church-sound-systems-fail.html" class="post-card">
       <img class="card-img"
-           src="https://www.reverentialav.in/photos/churches-advent-hero.webp"
+           src="/photos/churches-advent-hero.webp"
            alt="Church mixing console in operation during a live service"
            loading="lazy">
       <div class="card-body">

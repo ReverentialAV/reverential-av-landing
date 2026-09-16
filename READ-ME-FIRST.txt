@@ -1,72 +1,26 @@
 REVERENTIAL AV — COMPLETE DEPLOY PACKAGE
 =========================================
-Upload everything below to the root of your GitHub repo: reverential-av-landing
-
-FOLDER STRUCTURE:
------------------
 
   index.html                  ← MAIN WEBSITE (reverentialav.in/)
-  shell.html                  ← Build template (needed to rebuild src.jsx)
-  src.jsx                     ← Source code (edit this, then rebuild)
-  robots.txt                  ← SEO: search engine crawl rules
-  sitemap.xml                 ← SEO: page index for Google
-  _headers                    ← Security: CSP, HSTS, X-Frame headers (Cloudflare)
-  og-image.jpg                ← Social sharing preview image (1200×630)
-  12-point-sound-check.html   ← The 12-point checklist page
-  privacy-policy.html         ← Privacy policy
-  terms.html                  ← Terms of service
-  login.html                  ← Care member login page (portal entry)
-  portal.html                 ← Care member dashboard UI (portal interior)
+  logo.png                    ← Logo image — used in blog header nav
+  logo-white.png              ← White logo — for dark backgrounds
+  og-image.jpg                ← Social sharing preview (1200x630)
+  shell.html                  ← Build template
+  src.jsx                     ← Source code
+  robots.txt / sitemap.xml / _headers
+  12-point-sound-check.html / privacy-policy.html / terms.html
+  login.html / portal.html
 
   blog/
-    index.html                ← BLOG LISTING PAGE (reverentialav.in/blog/)
-                                 NOTE: Must stay named index.html for clean URL
-    why-church-sound-systems-fail.html   ← First published article
-    blog-post-template.html   ← Copy this to create new blog posts
+    index.html                ← BLOG LISTING (reverentialav.in/blog/)
+                                 NOTE: Must be named index.html for clean URL
+    why-church-sound-systems-fail.html
+    blog-post-template.html   ← Copy to create future posts
 
   photos/
-    hero-thomas-console.webp              Hero section — founder at console
-    churches-advent-hero.webp             Churches sector tab
-    churches-why-console.webp             Why churches section (Allen & Heath)
-    auditoriums-hall.webp                 Auditoriums sector tab
-    auditoriums-arena.webp                Credentials strip — large arena
-    education-lecture-hall.webp           Education sector tab
-    corporate-boardroom.webp              Corporate sector tab
-    hospitality-event-ballroom.webp       Hospitality sector tab
-    studios-control-room.webp             Studios sector tab
-    residential-home-theatre.webp         Residential sector tab
-    method-phase1-assessment.webp         Method Phase 01
-    method-phase2-simulation.webp         Method Phase 02
-    method-phase3-design.webp             Method Phase 03
-    method-phase5-smaart.webp             Method Phase 05
-    credentials-cl5-dusk.webp             Credentials strip — stadium FOH
-    credentials-stadium-console.webp      Credentials strip — CL5 console
-    credentials-church-console.webp       Credentials strip — church engineer
-    credentials-production-setup.webp     Credentials strip — multi-console
-    credentials-live-performance.webp     Credentials strip — live band
-    two-sounds-diagram.webp               (Legacy — not in use)
+    [19 WebP image files]
 
-GITHUB UPLOAD ORDER:
---------------------
-1. Upload photos/ folder
-2. Upload blog/ folder
-3. Replace/upload all root files
-4. Cloudflare auto-deploys in ~60 seconds
-
-BLOG WORKFLOW — adding a new post:
------------------------------------
-1. Copy blog/blog-post-template.html
-2. Rename: blog/your-post-title-here.html
-3. Fill in the 8 marked fields at the top (title, date, URL etc.)
-4. Write the article body
-5. Add a card to blog/index.html (copy the existing card block)
-6. Add one line to sitemap.xml
-7. Upload blog/your-post-title-here.html and blog/index.html to GitHub
-8. Cloudflare deploys in 60 seconds — live
-
-WHY TWO FILES ARE NAMED index.html:
--------------------------------------
-  /index.html       serves reverentialav.in/         (main website)
-  /blog/index.html  serves reverentialav.in/blog/    (blog listing)
-These are DIFFERENT files in DIFFERENT folders. GitHub and Cloudflare
-treat them as separate pages. The naming is correct web convention.
+WHY TWO INDEX.HTML FILES:
+  /index.html       → reverentialav.in/       (main website)
+  /blog/index.html  → reverentialav.in/blog/  (blog listing)
+  These are separate files in separate folders. Cloudflare handles this correctly.

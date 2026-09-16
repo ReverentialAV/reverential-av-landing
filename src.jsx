@@ -712,6 +712,8 @@ export default function Reverential() {
         * { box-sizing: border-box; }
         input:focus, textarea:focus, select:focus { border-color: ${C.gold} !important; }
         .rev-nav a:hover { color: ${C.goldText} !important; }
+        .rev-mobile-strip { display: none; }
+        @media (max-width: 1023px) { .rev-mobile-strip { display: flex; align-items: center; gap: 20px; } }
         .rev-social:hover { border-color: ${C.gold} !important; color: ${C.goldLight} !important; }
 
         /* fluid container: padding and width scale with the viewport */
@@ -833,6 +835,30 @@ export default function Reverential() {
           <div className="ml-auto lg:ml-0">
             <Btn href="#book">Book a Free Consultation</Btn>
           </div>
+        </div>
+
+        {/* ── Mobile-only secondary nav: Blog + Client Login ── */}
+        <div className="rev-mobile-strip"
+             style={{ borderTop: `1px solid ${C.line}`,
+                      padding: "8px clamp(16px,5vw,32px)",
+                      background: "rgba(241,240,236,0.97)" }}>
+          <a href="/blog/"
+             style={{ fontSize: 13, color: C.gold, textDecoration: "none",
+                      fontWeight: 500 }}>
+            Blog
+          </a>
+          <a href="/login.html"
+             style={{ fontSize: 12, color: C.body, textDecoration: "none",
+                      border: `1px solid ${C.line}`, borderRadius: 2,
+                      padding: "4px 12px", display: "flex",
+                      alignItems: "center", gap: 5 }}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            Client Login
+          </a>
         </div>
       </header>
 
