@@ -820,7 +820,7 @@ export default function Reverential() {
       {/* ---------------- hero ---------------- */}
       <section id="top" className="rv-hero-split" style={{
         scrollMarginTop: 56,
-        minHeight: "100vh",
+        minHeight: "88vh",
         display: "flex",
         flexDirection: "row",
         overflow: "hidden",
@@ -849,7 +849,7 @@ export default function Reverential() {
           position: "relative",
           zIndex: 2,
         }}>
-          <Eyebrow>Sound, AV &amp; Acoustics for Churches, Auditoriums &amp; Corporate Spaces</Eyebrow>
+          <Eyebrow>Audio, Video, Lighting &amp; Acoustics — Churches, Auditoriums &amp; Corporate Spaces</Eyebrow>
           <h1 style={{
             fontFamily: F.serif,
             fontWeight: 400,
@@ -921,7 +921,7 @@ export default function Reverential() {
               objectFit: "cover",
               objectPosition: "52% 55%",
               display: "block",
-              minHeight: "100vh",
+              minHeight: "88vh",
             }}
           />
         </div>
