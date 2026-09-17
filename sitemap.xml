@@ -36,4 +36,34 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://www.reverentialav.in/blog/rt60-the-one-number-that-explains-acoustic-problems.html</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.reverentialav.in/blog/how-to-read-an-av-proposal.html</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.reverentialav.in/blog/acoustic-treatment-vs-new-speakers.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.reverentialav.in/blog/why-wireless-microphone-drops-out.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.reverentialav.in/blog/what-measured-commissioning-actually-changes.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
