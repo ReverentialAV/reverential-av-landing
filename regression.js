@@ -48,7 +48,7 @@ SENTINELS.forEach((s) => check(`sentinel present: "${s.slice(0, 40)}..."`, conta
 
 // ---- Change 1: Testimony panel ----
 check("testimony: 'Why churches come first' eyebrow", contains("Why churches come first"));
-check("testimony: father church committee line", contains("church committee member my whole life"));
+check("testimony: father church committee line", contains("has served on the church committee for as long as I can remember"));
 check("testimony: 'Every congregation deserves to be served'", contains("Every congregation deserves to be served"));
 check("testimony: byline present", contains("Thomas Jeffrin, Founder"));
 
@@ -69,7 +69,7 @@ check("AVL: hearing loop is NOT present anywhere", !contains("hearing loop") && 
 check("Care: ₹12,500 removed", !contains("12,500"));
 check("Care: ₹22,500 removed", !contains("22,500"));
 check("Care: new pricing line present", contains("Priced to the scale of the system"));
-check("Care: support portal line present", contains("dedicated support portal for fault logging"));
+check("Care: support portal line present", contains("dedicated support portal: every fault logged"));
 
 // ---- Change 4: Emergency FAQ entry ----
 check("FAQ: emergency question present", contains("What if something fails before a service or event?"));
