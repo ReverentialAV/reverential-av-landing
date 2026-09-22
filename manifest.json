@@ -1,0 +1,23 @@
+{
+  "name": "Reverential AV Integration",
+  "short_name": "Reverential",
+  "description": "AV integration and acoustic design for churches, auditoriums and corporate spaces. Measured. Designed. Proven.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F1F0EC",
+  "theme_color": "#0B0B0B",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
