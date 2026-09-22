@@ -494,7 +494,7 @@ export default function Reverential() {
   return (
     <div style={{ background: C.ground, color: C.body, fontFamily: F.sans, lineHeight: 1.65 }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
         * { box-sizing: border-box; }
         input:focus, textarea:focus, select:focus { border-color: ${C.gold} !important; }
         .rev-nav a:hover { color: ${C.goldText} !important; }
