@@ -69,7 +69,23 @@
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sound system design and installation" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Video and streaming integration" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stage and architectural lighting" } }
-  ]
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Thomas Jeffrin",
+    "jobTitle": "Founder & Lead Systems Designer",
+    "url": "https://www.reverentialav.in/"
+  },
+  "sameAs": [
+    "https://www.instagram.com/reverential_av",
+    "https://www.linkedin.com/company/reverential_av/",
+    "https://youtube.com/@reverentialav",
+    "https://wa.me/919962232223"
+  ],
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".hero-section h1", ".hero-section p", "h2", "[data-speakable]"]
+  }
 }
 </script>
 
@@ -97,15 +113,6 @@ __UTILITIES__
     page_title: document.title,
     send_page_view: true
   });
-</script>
-<!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-        integrity="sha384-YEteyAKbjYSLDrpbBY0aFgK1CrQHo0Erb5XT/MU5FYvkb3SmPSZSisW7LOYTKvTx"
-        crossorigin="anonymous"></script>
-<script>
-  (function(){
-    if (window.emailjs) emailjs.init({ publicKey: "PBHIOdZCdFM5vyZ9d" });
-  })();
 </script>
 <style>
 /* Self-hosted fonts — latin subset only; served by Cloudflare CDN with 1-year cache */
@@ -255,12 +262,23 @@ __UTILITIES__
 </script>
 <noscript>
   <div style="max-width:640px;margin:14vh auto;padding:0 24px;font-family:Georgia,serif;color:#4A4A4A">
-    <h1 style="font-size:1.6rem;color:#0B0B0B">Reverential AV Integration</h1>
+    <h1 style="font-size:1.6rem;color:#0B0B0B;font-weight:700;margin:0 0 8px">When the sound fails, nothing else matters.</h1>
+    <p style="color:#4A4A4A;margin:0 0 16px">AV integration and acoustic design for churches, auditoriums and corporate spaces. Measured before installation, proven before handover.</p>
     <p>This site needs JavaScript enabled. You can reach us directly:</p>
     <p><a href="tel:+919962232223" style="color:#856A20">+91 99622 32223</a><br>
        <a href="mailto:hello@reverentialav.in" style="color:#856A20">hello@reverentialav.in</a></p>
   </div>
 </noscript>
+<!-- EmailJS SDK — loaded after page is interactive to avoid render-blocking -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+        integrity="sha384-YEteyAKbjYSLDrpbBY0aFgK1CrQHo0Erb5XT/MU5FYvkb3SmPSZSisW7LOYTKvTx"
+        crossorigin="anonymous"
+        defer></script>
+<script defer>
+  document.addEventListener('DOMContentLoaded', function(){
+    if (window.emailjs) emailjs.init({ publicKey: "PBHIOdZCdFM5vyZ9d" });
+  });
+</script>
 <script data-cfasync="false">__BUNDLE__</script>
 </body>
 </html>
