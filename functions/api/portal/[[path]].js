@@ -1,347 +1,106 @@
-import {
-  json, error, redirect,
-  parseCookies, setCookie, clearCookie,
-  requireAdminSession, AuthError,
-  ADMIN_COOKIE_NAME, SESSION_DAYS,
-  sendEmail, inviteEmail, resetEmail, generateToken
-} from '../../_utils.js';
+// All /api/portal/* routes — self-contained, no imports
 
-// ── Admin Router ─────────────────────────────────────────────
-// All /api/admin/* routes.
-// Login and logout are public; everything else requires admin session.
+const COOKIE_NAME = 'rev_session';
 
-export async function onRequest(context) {
-  const { request, env, params } = context;
+function parseCookies(request) {
+  const header = request.headers.get('Cookie') || '';
+  return Object.fromEntries(header.split(';').map(c => {
+    const [k, ...v] = c.trim().split('='); return [k, v.join('=')];
+  }));
+}
+
+function ok(data) { return new Response(JSON.stringify(data), { status:200, headers:{'Content-Type':'application/json'} }); }
+function err(msg, status=400) { return new Response(JSON.stringify({ error:msg }), { status, headers:{'Content-Type':'application/json'} }); }
+
+async function getSession(request, env) {
+  const sid = parseCookies(request)[COOKIE_NAME];
+  if (!sid) return null;
+  return await env.DB.prepare(
+    `SELECT s.client_id, c.name AS client_name, c.email, c.plan, c.contact_name
+     FROM sessions s JOIN clients c ON c.id = s.client_id
+     WHERE s.id = ? AND s.type = 'client' AND s.expires_at > datetime('now') AND c.active = 1`
+  ).bind(sid).first() || null;
+}
+
+export async function onRequest({ request, env, params }) {
   const path   = (params.path || []).join('/');
   const method = request.method;
+  const siteUrl = env.SITE_URL || 'https://www.reverentialav.in';
 
-  // ── POST /api/admin/login ─────────────────────────────────
-  if (path === 'login' && method === 'POST') {
-    const { secret } = await request.json();
-    if (!secret || secret !== env.ADMIN_SECRET) {
-      return error('Invalid credentials', 401);
-    }
-    const sessionId = crypto.randomUUID();
-    const expiresAt = new Date(Date.now() + 1 * 864e5).toISOString(); // 1 day
-    // Admin sessions stored under a dummy client_id we never use
-    await env.DB.prepare(
-      `INSERT INTO sessions (id, client_id, type, expires_at)
-       VALUES (?, 'admin', 'admin', ?)`
-    ).bind(sessionId, expiresAt).run();
-
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Set-Cookie':   setCookie(ADMIN_COOKIE_NAME, sessionId, 1),
-      },
-    });
+  const session = await getSession(request, env);
+  if (!session) {
+    if ((request.headers.get('Accept') || '').includes('text/html'))
+      return Response.redirect(`${siteUrl}/login.html?error=session`, 302);
+    return err('Session expired. Please sign in again.', 401);
   }
 
-  // ── POST /api/admin/logout ────────────────────────────────
-  if (path === 'logout' && method === 'POST') {
-    const cookies = parseCookies(request);
-    const sid     = cookies[ADMIN_COOKIE_NAME];
-    if (sid) await env.DB.prepare("DELETE FROM sessions WHERE id = ? AND type = 'admin'").bind(sid).run();
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Set-Cookie':   clearCookie(ADMIN_COOKIE_NAME),
-      },
-    });
-  }
-
-  // All other routes require admin session
-  try {
-    await requireAdminSession(request, env);
-  } catch (e) {
-    return error('Admin access required. Please sign in.', 401);
-  }
+  const cid = session.client_id;
 
   try {
-
-    // ══════════════════════════════════════════════════════════
-    // CLIENTS
-    // ══════════════════════════════════════════════════════════
-
-    // GET /api/admin/clients
-    if (path === 'clients' && method === 'GET') {
-      const { results } = await env.DB.prepare(
-        `SELECT c.*,
-           (SELECT COUNT(*) FROM tickets t WHERE t.client_id = c.id AND t.status != 'resolved') AS open_tickets,
-           (SELECT COUNT(*) FROM invoices i WHERE i.client_id = c.id AND i.status = 'unpaid') AS unpaid_invoices,
-           (SELECT visit_date FROM service_visits v WHERE v.client_id = c.id ORDER BY visit_date DESC LIMIT 1) AS last_visit
-         FROM clients c ORDER BY c.name`
-      ).all();
-      return json({ clients: results });
-    }
-
-    // POST /api/admin/clients — create client + send invite
-    if (path === 'clients' && method === 'POST') {
-      const { name, email, contact_name, phone, plan, address, city, notes } = await request.json();
-      if (!name || !email) return error('name and email are required');
-
-      const id = crypto.randomUUID();
-      await env.DB.prepare(
-        `INSERT INTO clients (id, name, email, contact_name, phone, plan, address, city, notes)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
-      ).bind(id, name, email.toLowerCase().trim(), contact_name || null,
-             phone || null, plan || 'standard', address || null, city || null, notes || null).run();
-
-      // Send magic link invite
-      const token     = generateToken(32);
-      const expiresAt = new Date(Date.now() + 48 * 3600 * 1000).toISOString(); // 48h for first invite
-      await env.DB.prepare(
-        'INSERT INTO auth_tokens (id, client_id, token, expires_at) VALUES (?, ?, ?, ?)'
-      ).bind(crypto.randomUUID(), id, token, expiresAt).run();
-
-      const siteUrl  = env.SITE_URL || 'https://www.reverentialav.in';
-      const inviteUrl = `${siteUrl}/set-password.html?token=${token}&mode=invite`;
-      await sendEmail(env, {
-        to:      email,
-        subject: 'Welcome to your Reverential Care Portal — set your password',
-        html:    inviteEmail(contact_name || name, inviteUrl),
-      });
-
-      return json({ success: true, id }, 201);
-    }
-
-    // GET /api/admin/clients/:id — full client detail
-    if (path.match(/^clients\/[^/]+$/) && method === 'GET') {
-      const clientId = path.split('/')[1];
-      const [client, visits, tickets, docs, invoices, equipment] = await Promise.all([
-        env.DB.prepare('SELECT * FROM clients WHERE id = ?').bind(clientId).first(),
-        env.DB.prepare('SELECT * FROM service_visits WHERE client_id = ? ORDER BY visit_date DESC').bind(clientId).all(),
-        env.DB.prepare('SELECT * FROM tickets WHERE client_id = ? ORDER BY created_at DESC').bind(clientId).all(),
-        env.DB.prepare('SELECT id, name, doc_type, size_bytes, uploaded_at FROM documents WHERE client_id = ? ORDER BY uploaded_at DESC').bind(clientId).all(),
-        env.DB.prepare('SELECT * FROM invoices WHERE client_id = ? ORDER BY issued_date DESC').bind(clientId).all(),
-        env.DB.prepare('SELECT * FROM equipment WHERE client_id = ? ORDER BY category').bind(clientId).all(),
+    if (path === 'dashboard' && method === 'GET') {
+      const [client, openTickets, nextVisit, unpaidInv] = await Promise.all([
+        env.DB.prepare('SELECT * FROM clients WHERE id = ?').bind(cid).first(),
+        env.DB.prepare("SELECT COUNT(*) AS n FROM tickets WHERE client_id = ? AND status != 'resolved'").bind(cid).first(),
+        env.DB.prepare("SELECT next_visit FROM service_visits WHERE client_id = ? AND next_visit >= date('now') ORDER BY next_visit ASC LIMIT 1").bind(cid).first(),
+        env.DB.prepare("SELECT COUNT(*) AS n, SUM(amount_inr+gst_inr) AS total FROM invoices WHERE client_id = ? AND status='unpaid'").bind(cid).first(),
       ]);
-      if (!client) return error('Client not found', 404);
-      return json({ client, visits: visits.results, tickets: tickets.results, documents: docs.results, invoices: invoices.results, equipment: equipment.results });
+      return ok({ client, stats:{ openTickets:openTickets?.n||0, nextVisit:nextVisit?.next_visit||null, unpaidInvoices:unpaidInv?.n||0, unpaidAmount:unpaidInv?.total||0 } });
     }
 
-    // PUT /api/admin/clients/:id — update client
-    if (path.match(/^clients\/[^/]+$/) && method === 'PUT') {
-      const clientId = path.split('/')[1];
-      const { name, contact_name, phone, plan, address, city, notes, active } = await request.json();
-      await env.DB.prepare(
-        `UPDATE clients SET name=?, contact_name=?, phone=?, plan=?, address=?, city=?, notes=?, active=?
-         WHERE id=?`
-      ).bind(name, contact_name||null, phone||null, plan||'standard',
-             address||null, city||null, notes||null, active===false?0:1, clientId).run();
-      return json({ success: true });
+    if (path === 'history' && method === 'GET') {
+      const { results } = await env.DB.prepare('SELECT * FROM service_visits WHERE client_id = ? ORDER BY visit_date DESC').bind(cid).all();
+      return ok({ visits:results });
     }
 
-    // POST /api/admin/clients/:id/invite — resend magic link
-    if (path.match(/^clients\/[^/]+\/invite$/) && method === 'POST') {
-      const clientId = path.split('/')[1];
-      const client   = await env.DB.prepare('SELECT * FROM clients WHERE id = ? AND active = 1').bind(clientId).first();
-      if (!client) return error('Client not found', 404);
-
-      await env.DB.prepare('UPDATE auth_tokens SET used = 1 WHERE client_id = ? AND used = 0').bind(clientId).run();
-      const token     = generateToken(32);
-      const expiresAt = new Date(Date.now() + 15 * 60 * 1000).toISOString();
-      await env.DB.prepare('INSERT INTO auth_tokens (id, client_id, token, expires_at) VALUES (?, ?, ?, ?)').bind(crypto.randomUUID(), clientId, token, expiresAt).run();
-
-      const siteUrl  = env.SITE_URL || 'https://www.reverentialav.in';
-      const inviteUrl = `${siteUrl}/set-password.html?token=${token}&mode=invite`;
-      await sendEmail(env, {
-        to:      client.email,
-        subject: 'Set up your Reverential Care Portal',
-        html:    inviteEmail(client.contact_name || client.name, inviteUrl),
-      });
-      return json({ success: true });
-    }
-
-    // ══════════════════════════════════════════════════════════
-    // SERVICE VISITS
-    // ══════════════════════════════════════════════════════════
-
-    // POST /api/admin/clients/:id/visits
-    if (path.match(/^clients\/[^/]+\/visits$/) && method === 'POST') {
-      const clientId = path.split('/')[1];
-      const { visit_date, visit_type, engineer, summary, work_done, duration_hours, next_visit } = await request.json();
-      if (!visit_date) return error('visit_date is required');
-
-      const id = crypto.randomUUID();
-      await env.DB.prepare(
-        `INSERT INTO service_visits (id, client_id, visit_date, visit_type, engineer, summary, work_done, duration_hours, next_visit)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
-      ).bind(id, clientId, visit_date, visit_type||'preventive',
-             engineer||'Thomas Jeffrin', summary||null, work_done||null,
-             duration_hours||null, next_visit||null).run();
-      return json({ success: true, id }, 201);
-    }
-
-    // ══════════════════════════════════════════════════════════
-    // TICKETS
-    // ══════════════════════════════════════════════════════════
-
-    // GET /api/admin/tickets — all open tickets
     if (path === 'tickets' && method === 'GET') {
-      const { results } = await env.DB.prepare(
-        `SELECT t.*, c.name AS client_name FROM tickets t
-         JOIN clients c ON c.id = t.client_id
-         ORDER BY t.created_at DESC`
-      ).all();
-      return json({ tickets: results });
+      const { results } = await env.DB.prepare('SELECT * FROM tickets WHERE client_id = ? ORDER BY created_at DESC').bind(cid).all();
+      return ok({ tickets:results });
     }
 
-    // PUT /api/admin/tickets/:id — update status/resolution
-    if (path.match(/^tickets\/[^/]+$/) && method === 'PUT') {
-      const ticketId = path.split('/')[1];
-      const { status, resolution } = await request.json();
-      const resolvedAt = status === 'resolved' ? new Date().toISOString() : null;
-      await env.DB.prepare(
-        `UPDATE tickets SET status=?, resolution=?, resolved_at=?, updated_at=datetime('now') WHERE id=?`
-      ).bind(status, resolution||null, resolvedAt, ticketId).run();
-      return json({ success: true });
-    }
-
-    // ══════════════════════════════════════════════════════════
-    // DOCUMENTS (upload to R2)
-    // ══════════════════════════════════════════════════════════
-
-    // POST /api/admin/clients/:id/documents
-    if (path.match(/^clients\/[^/]+\/documents$/) && method === 'POST') {
-      const clientId = path.split('/')[1];
-      const form     = await request.formData();
-      const file     = form.get('file');
-      const name     = form.get('name') || file.name;
-      const docType  = form.get('doc_type') || 'general';
-
-      if (!file) return error('No file uploaded');
-
-      const ext    = file.name.split('.').pop() || 'pdf';
-      const r2Key  = `documents/${clientId}/${crypto.randomUUID()}.${ext}`;
-      const bytes  = await file.arrayBuffer();
-
-      await env.R2_BUCKET.put(r2Key, bytes, {
-        httpMetadata: { contentType: file.type || 'application/pdf' },
-      });
-
+    if (path === 'tickets' && method === 'POST') {
+      const { title, description, priority='normal' } = await request.json();
+      if (!title) return err('Title is required');
       const id = crypto.randomUUID();
-      await env.DB.prepare(
-        `INSERT INTO documents (id, client_id, name, doc_type, r2_key, size_bytes, mime_type)
-         VALUES (?, ?, ?, ?, ?, ?, ?)`
-      ).bind(id, clientId, name, docType, r2Key, bytes.byteLength, file.type || 'application/pdf').run();
-
-      return json({ success: true, id }, 201);
+      await env.DB.prepare('INSERT INTO tickets (id, client_id, title, description, priority) VALUES (?, ?, ?, ?, ?)')
+        .bind(id, cid, title, description||null, priority).run();
+      return new Response(JSON.stringify({ success:true, id }), { status:201, headers:{'Content-Type':'application/json'} });
     }
 
-    // DELETE /api/admin/documents/:id
-    if (path.match(/^documents\/[^/]+$/) && method === 'DELETE') {
+    if (path === 'documents' && method === 'GET') {
+      const { results } = await env.DB.prepare('SELECT id, name, doc_type, size_bytes, uploaded_at FROM documents WHERE client_id = ? ORDER BY uploaded_at DESC').bind(cid).all();
+      return ok({ documents:results });
+    }
+
+    if (path.startsWith('documents/') && path.endsWith('/download') && method === 'GET') {
       const docId = path.split('/')[1];
-      const doc   = await env.DB.prepare('SELECT r2_key FROM documents WHERE id = ?').bind(docId).first();
-      if (!doc) return error('Not found', 404);
-      await env.R2_BUCKET.delete(doc.r2_key);
-      await env.DB.prepare('DELETE FROM documents WHERE id = ?').bind(docId).run();
-      return json({ success: true });
+      const doc   = await env.DB.prepare('SELECT * FROM documents WHERE id = ? AND client_id = ?').bind(docId, cid).first();
+      if (!doc) return err('Not found', 404);
+      const obj = await env.R2_BUCKET.get(doc.r2_key);
+      if (!obj) return err('File not available', 404);
+      return new Response(obj.body, { headers:{ 'Content-Type':doc.mime_type||'application/pdf', 'Content-Disposition':`attachment; filename="${doc.name}"`, 'Cache-Control':'private,no-store' } });
     }
 
-    // ══════════════════════════════════════════════════════════
-    // INVOICES
-    // ══════════════════════════════════════════════════════════
-
-    // POST /api/admin/clients/:id/invoices
-    if (path.match(/^clients\/[^/]+\/invoices$/) && method === 'POST') {
-      const clientId = path.split('/')[1];
-      const form     = await request.formData();
-      const file     = form.get('file'); // optional PDF
-      const invoice_number = form.get('invoice_number');
-      const amount_inr     = parseFloat(form.get('amount_inr') || 0);
-      const gst_inr        = parseFloat(form.get('gst_inr') || 0);
-      const status         = form.get('status') || 'unpaid';
-      const description    = form.get('description') || null;
-      const issued_date    = form.get('issued_date');
-      const due_date       = form.get('due_date') || null;
-
-      if (!invoice_number || !issued_date) return error('invoice_number and issued_date are required');
-
-      let r2Key = null;
-      if (file && file.size > 0) {
-        r2Key     = `invoices/${clientId}/${invoice_number}.pdf`;
-        const bytes = await file.arrayBuffer();
-        await env.R2_BUCKET.put(r2Key, bytes, {
-          httpMetadata: { contentType: 'application/pdf' },
-        });
-      }
-
-      const id = crypto.randomUUID();
-      await env.DB.prepare(
-        `INSERT INTO invoices (id, client_id, invoice_number, amount_inr, gst_inr, status, description, issued_date, due_date, r2_key)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-      ).bind(id, clientId, invoice_number, amount_inr, gst_inr, status, description, issued_date, due_date, r2Key).run();
-
-      return json({ success: true, id }, 201);
+    if (path === 'invoices' && method === 'GET') {
+      const { results } = await env.DB.prepare('SELECT id,invoice_number,amount_inr,gst_inr,status,description,issued_date,due_date,paid_date FROM invoices WHERE client_id = ? ORDER BY issued_date DESC').bind(cid).all();
+      return ok({ invoices:results });
     }
 
-    // PUT /api/admin/invoices/:id — mark paid etc
-    if (path.match(/^invoices\/[^/]+$/) && method === 'PUT') {
-      const invId             = path.split('/')[1];
-      const { status, paid_date } = await request.json();
-      await env.DB.prepare(
-        'UPDATE invoices SET status=?, paid_date=? WHERE id=?'
-      ).bind(status, paid_date||null, invId).run();
-      return json({ success: true });
+    if (path.startsWith('invoices/') && path.endsWith('/download') && method === 'GET') {
+      const inv = await env.DB.prepare('SELECT * FROM invoices WHERE id = ? AND client_id = ? AND r2_key IS NOT NULL').bind(path.split('/')[1], cid).first();
+      if (!inv) return err('Not found', 404);
+      const obj = await env.R2_BUCKET.get(inv.r2_key);
+      if (!obj) return err('File not found', 404);
+      return new Response(obj.body, { headers:{ 'Content-Type':'application/pdf', 'Content-Disposition':`attachment; filename="Invoice-${inv.invoice_number}.pdf"`, 'Cache-Control':'private,no-store' } });
     }
 
-    // ══════════════════════════════════════════════════════════
-    // EQUIPMENT
-    // ══════════════════════════════════════════════════════════
-
-    // POST /api/admin/clients/:id/equipment
-    if (path.match(/^clients\/[^/]+\/equipment$/) && method === 'POST') {
-      const clientId = path.split('/')[1];
-      const { category, make, model, serial_number, install_date, warranty_expiry, condition, location, notes } = await request.json();
-      if (!model) return error('model is required');
-      const id = crypto.randomUUID();
-      await env.DB.prepare(
-        `INSERT INTO equipment (id, client_id, category, make, model, serial_number, install_date, warranty_expiry, condition, location, notes)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-      ).bind(id, clientId, category||'audio', make||null, model, serial_number||null,
-             install_date||null, warranty_expiry||null, condition||'good', location||null, notes||null).run();
-      return json({ success: true, id }, 201);
+    if (path === 'equipment' && method === 'GET') {
+      const { results } = await env.DB.prepare('SELECT * FROM equipment WHERE client_id = ? ORDER BY category,make,model').bind(cid).all();
+      return ok({ equipment:results });
     }
 
-    // PUT /api/admin/equipment/:id
-    if (path.match(/^equipment\/[^/]+$/) && method === 'PUT') {
-      const eqId = path.split('/')[1];
-      const { condition, notes, warranty_expiry } = await request.json();
-      await env.DB.prepare(
-        'UPDATE equipment SET condition=?, notes=?, warranty_expiry=? WHERE id=?'
-      ).bind(condition, notes||null, warranty_expiry||null, eqId).run();
-      return json({ success: true });
-    }
-
-    // ══════════════════════════════════════════════════════════
-    // STATS
-    // ══════════════════════════════════════════════════════════
-
-    // GET /api/admin/stats
-    if (path === 'stats' && method === 'GET') {
-      const [clients, openTickets, unpaidInvoices, recentVisits] = await Promise.all([
-        env.DB.prepare('SELECT COUNT(*) AS n FROM clients WHERE active = 1').first(),
-        env.DB.prepare("SELECT COUNT(*) AS n FROM tickets WHERE status != 'resolved'").first(),
-        env.DB.prepare("SELECT COUNT(*) AS n, SUM(amount_inr+gst_inr) AS total FROM invoices WHERE status='unpaid'").first(),
-        env.DB.prepare("SELECT v.*, c.name AS client_name FROM service_visits v JOIN clients c ON c.id=v.client_id ORDER BY v.visit_date DESC LIMIT 5").all(),
-      ]);
-      return json({
-        activeClients:  clients?.n || 0,
-        openTickets:    openTickets?.n || 0,
-        unpaidInvoices: unpaidInvoices?.n || 0,
-        unpaidAmount:   unpaidInvoices?.total || 0,
-        recentVisits:   recentVisits.results,
-      });
-    }
-
-    return error('Not found', 404);
-
-  } catch (e) {
-    if (e instanceof AuthError) return error(e.message, e.status);
-    console.error('Admin API error:', e.message, e.stack);
-    return error('Server error — check console for details', 500);
+    return err('Not found', 404);
+  } catch(e) {
+    console.error('Portal error:', e.message);
+    return err('Server error', 500);
   }
 }
